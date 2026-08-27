@@ -64,10 +64,10 @@ const footerLinks: FooterSection[] = [
 
 export function Footer() {
   return (
-    <footer className="relative w-full max-w-6xl mx-auto flex flex-col items-center justify-center rounded-t-3xl border-t border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-950/50 px-6 py-12 lg:py-16 mt-12 backdrop-blur-xl">
+    <footer className="relative w-full border-t border-zinc-200 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-950/80 px-4 sm:px-6 lg:px-8 py-12 lg:py-16 mt-16 backdrop-blur-xl">
       <div className="bg-indigo-500/30 absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur-sm" />
 
-      <div className="grid w-full gap-8 xl:grid-cols-3 xl:gap-8">
+      <div className="max-w-7xl mx-auto grid w-full gap-8 xl:grid-cols-3 xl:gap-12">
         <AnimatedContainer className="space-y-4">
           <a
             href="#"

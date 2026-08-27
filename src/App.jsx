@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import MagicBento from './components/MagicBento/MagicBento'
+import { Footer } from '@/components/ui/footer-section'
 import {
   Download, ChevronDown, Github, Linkedin, Mail,
   Copy, Check, Play, Eye, ExternalLink, Sparkles, Terminal, X,
@@ -610,16 +611,8 @@ export default function App() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="py-8 border-t border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-zinc-500 dark:text-zinc-400">
-          <p>&copy; {new Date().getFullYear()} Pawarit Pansing. All rights reserved.</p>
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>Open for Opportunities • Bangkok, Thailand</span>
-          </div>
-        </div>
-      </footer>
+      {/* SHADCN FOOTER SECTION */}
+      <Footer />
 
       {/* TAILWIND PROJECT DETAIL MODAL DIALOG */}
       {selectedProject && (

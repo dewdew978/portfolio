@@ -1,0 +1,113 @@
+.magic-bento-container {
+  position: relative;
+  width: 100%;
+}
+
+.magic-bento-spotlight-layer {
+  position: absolute;
+  inset: -20px;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.2s ease;
+}
+
+.magic-bento-card {
+  position: relative;
+  border-radius: 1.5rem;
+  padding: 2px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(228, 228, 231, 0.8);
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.05);
+  transform-style: preserve-3d;
+  will-change: transform;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+:root[data-theme="dark"] .magic-bento-card,
+.dark .magic-bento-card {
+  background: rgba(24, 24, 27, 0.65);
+  border: 1px solid rgba(39, 39, 42, 0.8);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.magic-bento-card-inner {
+  position: relative;
+  z-index: 2;
+  border-radius: 1.4rem;
+  padding: 1.75rem;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: background 0.3s ease;
+}
+
+:root[data-theme="dark"] .magic-bento-card-inner,
+.dark .magic-bento-card-inner {
+  background: #111114;
+}
+
+/* Border Glow */
+.magic-bento-border-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: 1.5rem;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+/* Stars particles */
+.magic-bento-stars-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.magic-bento-star {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.4;
+  animation: starTwinkle infinite alternate ease-in-out;
+}
+
+@keyframes starTwinkle {
+  0% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 0.9;
+    transform: scale(1.4);
+  }
+}
+
+/* Click Ripple */
+.magic-bento-ripple {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: none;
+  z-index: 3;
+  animation: rippleExpand 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes rippleExpand {
+  0% {
+    transform: translate(-50%, -50%) scale(0.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(18);
+    opacity: 0;
+  }
+}

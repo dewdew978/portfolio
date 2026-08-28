@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Sun, Moon, Menu, X, Download, Sparkles } from 'lucide-react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Sun, Moon, Menu, X, Download, Sparkles, Activity } from 'lucide-react'
 
 const navLinks = [
   { id: 'about', label: 'เกี่ยวกับ' },
@@ -13,6 +14,8 @@ export default function Navbar({ theme, setTheme }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('')
   const [isScrolled, setIsScrolled] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,6 +43,22 @@ export default function Navbar({ theme, setTheme }) {
 
   const scrollToSection = (id) => {
     setMenuOpen(false)
+    if (location.pathname !== '/') {
+      navigate('/')
+      setTimeout(() => {
+        const element = document.getElementById(id)
+        if (element) {
+          const navHeight = 90
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+          window.scrollTo({
+            top: elementPosition - navHeight,
+            behavior: 'smooth'
+          })
+        }
+      }, 150)
+      return
+    }
+
     const element = document.getElementById(id)
     if (element) {
       const navHeight = 90
@@ -61,14 +80,18 @@ export default function Navbar({ theme, setTheme }) {
         }`}
       >
         {/* Brand Logo */}
-        <a
-          href="#"
-          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          className="flex items-center gap-2.5 text-lg font-extrabold tracking-tight text-zinc-900 dark:text-white hover:opacity-85 transition-opacity"
+        <button
+          onClick={() => {
+            if (location.pathname !== '/') {
+              navigate('/')
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          className="flex items-center gap-2.5 text-lg font-extrabold tracking-tight text-zinc-900 dark:text-white hover:opacity-85 transition-opacity cursor-pointer"
         >
           <span className="w-2.5 h-2.5 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 shadow-sm shadow-indigo-500 animate-pulse"></span>
           <span>Pawarit.</span>
-        </a>
+        </button>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden md:flex items-center">
@@ -79,7 +102,7 @@ export default function Navbar({ theme, setTheme }) {
                 <li key={link.id}>
                   <button
                     onClick={() => scrollToSection(link.id)}
-                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer ${
                       isActive
                         ? 'bg-white dark:bg-zinc-900 text-zinc-950 dark:text-white font-semibold shadow-sm'
                         : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-200/50 dark:hover:bg-zinc-700/50'
@@ -95,12 +118,22 @@ export default function Navbar({ theme, setTheme }) {
 
         {/* Right Actions */}
         <div className="flex items-center gap-2">
+          {/* Athletics / Activities Page Link */}
+          <Link
+            to="/athletics"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-[#FC5200] bg-orange-50 dark:bg-orange-950/50 border border-orange-200 dark:border-orange-900/60 hover:bg-orange-100 dark:hover:bg-orange-900/80 hover:-translate-y-0.5 transition-all shadow-xs"
+            title="ดูกิจกรรมวิ่ง (activities)"
+          >
+            <Activity size={13} className="text-[#FC5200]" />
+            <span className="capitalize">activities</span>
+          </Link>
+
           {/* Theme Switcher Button */}
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             title={theme === 'dark' ? 'เปลี่ยนเป็นโหมดสว่าง' : 'เปลี่ยนเป็นโหมดมืด'}
             aria-label="สลับโหมดมืด/สว่าง"
-            className="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:scale-105 transition-all duration-200"
+            className="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:scale-105 transition-all duration-200 cursor-pointer"
           >
             {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
           </button>
@@ -149,6 +182,16 @@ export default function Navbar({ theme, setTheme }) {
               </button>
             </li>
           ))}
+          <li className="pt-1">
+            <Link
+              to="/athletics"
+              onClick={() => setMenuOpen(false)}
+              className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-base font-medium text-[#FC5200] hover:bg-orange-50 dark:hover:bg-orange-950/40 transition-colors"
+            >
+              <span>activities</span>
+              <Activity size={16} />
+            </Link>
+          </li>
           <li className="mt-2 pt-3 border-t border-zinc-200 dark:border-zinc-800">
             <a
               href="/assets/CV.pdf"

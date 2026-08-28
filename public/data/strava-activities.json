@@ -1,0 +1,91 @@
+{
+  "athlete": {
+    "name": "Dew .",
+    "username": "dewdew978",
+    "location": "Bangkok, Thailand",
+    "profileUrl": "https://www.strava.com/athletes/195893006",
+    "lastSynced": "2026-08-28T12:06:12.933Z"
+  },
+  "summary": {
+    "year": 2026,
+    "totalDistanceKm": 26.3,
+    "totalActivities": 5,
+    "longestRunKm": 6.1,
+    "avgPace": "9'30\" /km",
+    "totalElevationGainM": 45,
+    "totalMovingTimeHours": 4.5
+  },
+  "activities": [
+    {
+      "id": "19921555320",
+      "title": "Evening Run",
+      "timeOfDay": "evening",
+      "date": "Thursday, August 27, 2026",
+      "distanceKm": 6,
+      "movingTime": "55:46",
+      "avgPace": "9'18\" /km",
+      "elevationGainM": 7,
+      "calories": 390,
+      "cadence": 156,
+      "tag": "Latest Run 🏃",
+      "mapImageUrl": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/XMQHJFXA3JIN3PLQVF3ZZF6OUR5SR2A4RITDDW2UUHJOQUHDOJZRR6CNREO3GNHTQYIWYDHLNQYNGZSED66IOJHI6ES6MX4MHYYU5FQ=",
+      "stravaUrl": "https://www.strava.com/activities/19921555320"
+    },
+    {
+      "id": "19876935884",
+      "title": "Afternoon Run",
+      "timeOfDay": "afternoon",
+      "date": "Monday, August 24, 2026",
+      "distanceKm": 6.1,
+      "movingTime": "59:15",
+      "avgPace": "9'43\" /km",
+      "elevationGainM": 4,
+      "calories": 397,
+      "cadence": 156,
+      "mapImageUrl": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/R55BQSSXOC5NCHCMFQIQFGLPENOS2MDQKMAZ3SBT2ESPCRJVJW6DE37VFKF25CCX5F333Q7PSG2JYV7IZMRBKLVRUGIO6VHCATA4M===",
+      "stravaUrl": "https://www.strava.com/activities/19876935884"
+    },
+    {
+      "id": "19703556501",
+      "title": "Morning Run",
+      "timeOfDay": "morning",
+      "date": "Wednesday, August 12, 2026",
+      "distanceKm": 3,
+      "movingTime": "29:13",
+      "avgPace": "9'44\" /km",
+      "elevationGainM": 15,
+      "calories": 195,
+      "cadence": 156,
+      "mapImageUrl": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/AI63RHLRKKPANSFCTP5WF3IWDVITXLFKXEQVTPZR5JUK35Y62CJDWZYTJJSSH5EBJJYTYFVBCGSFFY3DNSMQOC3QWQBUC7UR4VO3NLA=",
+      "stravaUrl": "https://www.strava.com/activities/19703556501"
+    },
+    {
+      "id": "19628922629",
+      "title": "Evening Run",
+      "timeOfDay": "evening",
+      "date": "Thursday, August 6, 2026",
+      "distanceKm": 5.2,
+      "movingTime": "1:06:35",
+      "avgPace": "12'48\" /km",
+      "elevationGainM": 17,
+      "calories": 338,
+      "cadence": 156,
+      "mapImageUrl": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/WGUYUEWYI5O6XEEB2AGL7NQQ5GOBBDIXE2AFWQKUMNR2E3ITU5GUOMQFCRFSOKQ4R5AT657BAJE575JHYBYAF6XAZUMVAILP3SX5W===",
+      "stravaUrl": "https://www.strava.com/activities/19628922629"
+    },
+    {
+      "id": "19582236001",
+      "title": "Evening Run",
+      "timeOfDay": "evening",
+      "date": "Monday, August 3, 2026",
+      "distanceKm": 6,
+      "movingTime": "57:21",
+      "avgPace": "9'34\" /km",
+      "elevationGainM": 2,
+      "calories": 390,
+      "cadence": 156,
+      "mapImageUrl": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/CHYMSFDOQ475KIMSA5K6TJARZ2ZRJGLMZWY26LKWZZA7AZWTAYQWYNMB2XIUDBVBHQFNKHWI3WNEZ2EP4WO4AFZTU7CIB7G5BO4A4===",
+      "stravaUrl": "https://www.strava.com/activities/19582236001"
+    }
+  ]
+}

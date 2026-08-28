@@ -78,24 +78,5 @@ This portfolio features an automated data ingestion pipeline:
 
 ---
 
-## 💻 Local Development
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/dewdew978/portfolio.git
-cd portfolio
-
-# 2. Install dependencies
-npm install
-
-# 3. Start development server
-npm run dev
-
-# 4. Build for production
-npm run build
-```
-
----
-
 ## 📄 License
 Created and maintained by **Pawarit Pansing (Dew)** © 2026. All rights reserved.

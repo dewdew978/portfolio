@@ -14,27 +14,6 @@ import {
   GraduationCap, Briefcase, Award, ArrowUpRight, Activity
 } from 'lucide-react'
 
-const profileCode = `from dataclasses import dataclass, field
-
-@dataclass
-class PawaritPansing:
-    role: str = "Data Analyst & Business Analyst"
-    education: str = "KMITL • B.Sc. in Data Science & Business Analytics (2027)"
-    specialties: list = field(default_factory=lambda: [
-        "AI Agent & Multi-Stage BI Pipelines (Google ADK)",
-        "Business Strategy & Market Analysis (CMCC 2025)",
-        "Text-to-SQL & Automated Data Sanitization",
-        "Prescriptive Analytics & Interactive Dashboards"
-    ])
-    technical_stack: list = field(default_factory=lambda: [
-        "Python", "SQL Server", "Google ADK", "Pandas", "Altair", "Gradio", "Recharts"
-    ])
-    core_mission: str = "Transforming complex data into actionable, high-impact business decisions."
-
-# Initialize Agent
-agent = PawaritPansing()
-print(f"Ready to drive growth: {agent.core_mission}")`
-
 const projectsData = {
   examhub: {
     title: 'ExamHub — Online Examination Platform',
@@ -97,40 +76,10 @@ const projectsData = {
 
 function PortfolioHome({ theme, setTheme }) {
   const [copiedEmail, setCopiedEmail] = useState(false)
-  const [copiedCode, setCopiedCode] = useState(false)
-
-  // CodeBlock Typewriter Streaming
-  const [streamedText, setStreamedText] = useState('')
-  const [isGenerating, setIsGenerating] = useState(true)
 
   // Filter Tabs & Modal
   const [activeFilter, setActiveFilter] = useState('all')
   const [selectedProject, setSelectedProject] = useState(null)
-
-  const startStream = () => {
-    setIsGenerating(true)
-    setStreamedText('')
-    let idx = 0
-    const interval = setInterval(() => {
-      if (idx < profileCode.length) {
-        setStreamedText((prev) => prev + profileCode.charAt(idx))
-        idx++
-      } else {
-        clearInterval(interval)
-        setIsGenerating(false)
-      }
-    }, 12)
-  }
-
-  useEffect(() => {
-    startStream()
-  }, [])
-
-  const handleCopyCode = () => {
-    navigator.clipboard.writeText(profileCode)
-    setCopiedCode(true)
-    setTimeout(() => setCopiedCode(false), 2000)
-  }
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText('pawaritpansing@gmail.com')
@@ -325,52 +274,6 @@ function PortfolioHome({ theme, setTheme }) {
               <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
                 พัฒนาแพลตฟอร์ม ExamHub รองรับ 20+ สาขาวิชา พร้อมระบบ Score Analytics และ Interactive Dashboard ด้วย Altair, Gradio, และ Recharts
               </p>
-            </div>
-          </div>
-        </FadeInSection>
-
-        {/* ReUI Interactive CodeBlock */}
-        <FadeInSection direction="up" delay={250}>
-          <div className="rounded-2xl overflow-hidden border border-zinc-800 bg-[#0d1117] shadow-2xl max-w-4xl mx-auto">
-            {/* Header */}
-            <div className="flex items-center justify-between px-4 py-3 bg-[#161b22] border-b border-zinc-800">
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-red-500/80"></span>
-                <span className="w-3 h-3 rounded-full bg-yellow-500/80"></span>
-                <span className="w-3 h-3 rounded-full bg-green-500/80"></span>
-                <span className="text-xs font-mono text-zinc-400 ml-2">analyst_agent.py</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 rounded text-xs font-mono bg-zinc-800 text-zinc-300">Python 3.11</span>
-                <span className={`px-2 py-0.5 rounded text-xs font-semibold ${isGenerating ? 'bg-amber-500/20 text-amber-300 animate-pulse' : 'bg-emerald-500/20 text-emerald-300'}`}>
-                  {isGenerating ? 'Generating...' : 'Complete'}
-                </span>
-                <button
-                  onClick={startStream}
-                  className="flex items-center gap-1 px-2.5 py-1 rounded text-xs font-medium bg-zinc-800 hover:bg-zinc-700 text-zinc-200 transition-colors"
-                  title="พิมพ์ใหม่"
-                >
-                  <Play size={12} />
-                  <span>Replay</span>
-                </button>
-                <button
-                  onClick={handleCopyCode}
-                  className="flex items-center gap-1 px-2.5 py-1 rounded text-xs font-medium bg-zinc-800 hover:bg-zinc-700 text-zinc-200 transition-colors"
-                  title="คัดลอกโค้ด"
-                >
-                  {copiedCode ? <Check size={12} className="text-emerald-400" /> : <Copy size={12} />}
-                  <span>{copiedCode ? 'Copied!' : 'Copy'}</span>
-                </button>
-              </div>
-            </div>
-            {/* Code Body */}
-            <div className="p-5 font-mono text-sm sm:text-base leading-relaxed text-zinc-200 overflow-x-auto">
-              <pre className="whitespace-pre">
-                <code>
-                  {streamedText}
-                  {isGenerating && <span className="inline-block w-2 h-4 ml-1 bg-indigo-500 animate-pulse"></span>}
-                </code>
-              </pre>
             </div>
           </div>
         </FadeInSection>

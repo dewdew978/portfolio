@@ -5,7 +5,6 @@ import { Footer } from '@/components/ui/footer-section'
 
 export default function AthleticsPage() {
   const [activitiesData, setActivitiesData] = useState(null)
-  const [activeFilter, setActiveFilter] = useState('all')
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
@@ -15,7 +14,6 @@ export default function AthleticsPage() {
       .catch((err) => console.error('Error loading strava data:', err))
   }, [])
 
-  const activities = activitiesData?.activities || []
   const summary = activitiesData?.summary || {
     totalDistanceKm: 26.3,
     totalActivities: 5,
@@ -23,11 +21,6 @@ export default function AthleticsPage() {
     avgPace: "9'30\" /km",
     totalMovingTimeHours: 4.5
   }
-
-  const filteredActivities = activities.filter((act) => {
-    if (activeFilter === 'all') return true
-    return act.timeOfDay === activeFilter
-  })
 
   return (
     <div className="min-h-screen bg-black text-white font-sans selection:bg-[#FC5200] selection:text-white relative overflow-x-hidden antialiased">
@@ -66,12 +59,6 @@ export default function AthleticsPage() {
               className="hidden sm:inline-block text-zinc-400 hover:text-white transition-colors"
             >
               Live Telemetry
-            </a>
-            <a
-              href="#activities"
-              className="hidden sm:inline-block text-zinc-400 hover:text-white transition-colors"
-            >
-              Recent Runs
             </a>
             <a
               href="https://www.strava.com/athletes/195893006"
@@ -266,181 +253,6 @@ export default function AthleticsPage() {
                 </a>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* APPLE CARDS: RECENT RUNS ACTIVITY STREAM */}
-        <section id="activities" className="mb-24 sm:mb-32">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-6">
-            <div>
-              <div className="text-xs font-mono uppercase tracking-widest text-[#FC5200] mb-2">
-                ACTIVITY STREAM
-              </div>
-              <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-white">
-                Recent Runs.
-              </h2>
-            </div>
-
-            {/* Apple Style Segmented Pill Controls */}
-            <div className="inline-flex p-1 rounded-full bg-zinc-900/80 border border-white/10 self-start sm:self-auto backdrop-blur-xl">
-              <button
-                onClick={() => setActiveFilter('all')}
-                className={`px-4 py-1.5 rounded-full text-xs font-mono font-medium transition-all ${
-                  activeFilter === 'all'
-                    ? 'bg-white text-black font-bold shadow-md'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                All ({activities.length})
-              </button>
-              <button
-                onClick={() => setActiveFilter('evening')}
-                className={`px-4 py-1.5 rounded-full text-xs font-mono font-medium transition-all ${
-                  activeFilter === 'evening'
-                    ? 'bg-white text-black font-bold shadow-md'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                Evening (3)
-              </button>
-              <button
-                onClick={() => setActiveFilter('afternoon')}
-                className={`px-4 py-1.5 rounded-full text-xs font-mono font-medium transition-all ${
-                  activeFilter === 'afternoon'
-                    ? 'bg-white text-black font-bold shadow-md'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                Afternoon (1)
-              </button>
-              <button
-                onClick={() => setActiveFilter('morning')}
-                className={`px-4 py-1.5 rounded-full text-xs font-mono font-medium transition-all ${
-                  activeFilter === 'morning'
-                    ? 'bg-white text-black font-bold shadow-md'
-                    : 'text-zinc-400 hover:text-white'
-                }`}
-              >
-                Morning (1)
-              </button>
-            </div>
-          </div>
-
-          {/* Activity Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredActivities.map((act) => {
-              return (
-                <div
-                  key={act.id}
-                  className="group rounded-[30px] bg-zinc-900/30 border border-white/10 hover:border-white/25 hover:bg-zinc-900/50 transition-all duration-500 p-6 sm:p-7 flex flex-col justify-between backdrop-blur-xl shadow-xl hover:-translate-y-1"
-                >
-                  <div>
-                    {/* Header */}
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="text-lg font-bold text-white group-hover:text-[#FC5200] transition-colors tracking-tight">
-                          {act.title}
-                        </h3>
-                        <p className="text-xs font-mono text-zinc-400 mt-0.5">
-                          {act.date}
-                        </p>
-                      </div>
-
-                      {act.tag && (
-                        <span className="px-3 py-1 rounded-full text-[10px] font-mono uppercase bg-zinc-800/80 border border-white/10 text-zinc-300">
-                          {act.tag.replace(/[\u{1F300}-\u{1F9FF}]/gu, '').trim()}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* GPS Map Route Image */}
-                    {act.mapImageUrl && (
-                      <div className="relative rounded-2xl overflow-hidden mb-6 bg-black aspect-[16/9] border border-white/10">
-                        <img
-                          src={act.mapImageUrl}
-                          alt={act.title}
-                          className="w-full h-full object-cover opacity-85 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                          loading="lazy"
-                        />
-                        <div className="absolute bottom-2.5 left-2.5 px-2.5 py-0.5 rounded-md bg-black/80 backdrop-blur-md text-[10px] font-mono text-zinc-300 border border-white/10">
-                          GPS ROUTE
-                        </div>
-                      </div>
-                    )}
-
-                    {/* Big Distance Display */}
-                    <div className="mb-6 pb-4 border-b border-white/10">
-                      <div className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider mb-1">
-                        Distance
-                      </div>
-                      <div className="text-4xl sm:text-5xl font-bold font-mono tracking-tight text-white flex items-baseline gap-1.5">
-                        <span>{act.distanceKm.toFixed(1)}</span>
-                        <span className="text-base font-bold text-[#FC5200]">km</span>
-                      </div>
-                    </div>
-
-                    {/* 3 Metrics: Time, Pace, Elevation */}
-                    <div className="grid grid-cols-3 gap-2 text-left mb-4">
-                      <div>
-                        <div className="text-[10px] font-mono text-zinc-400 uppercase mb-0.5">
-                          Time
-                        </div>
-                        <div className="text-sm font-mono font-bold text-white">
-                          {act.movingTime}
-                        </div>
-                      </div>
-
-                      <div>
-                        <div className="text-[10px] font-mono text-zinc-400 uppercase mb-0.5">
-                          Avg Pace
-                        </div>
-                        <div className="text-sm font-mono font-bold text-orange-400">
-                          {act.avgPace}
-                        </div>
-                      </div>
-
-                      <div>
-                        <div className="text-[10px] font-mono text-zinc-400 uppercase mb-0.5">
-                          Elevation
-                        </div>
-                        <div className="text-sm font-mono font-bold text-white">
-                          {act.elevationGainM} m
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Card Footer Link */}
-                  <div className="pt-4 border-t border-white/10 flex items-center justify-between">
-                    <span className="text-xs font-mono text-zinc-500">
-                      Strava GPS Verified
-                    </span>
-                    <a
-                      href={act.stravaUrl || "https://www.strava.com/athletes/195893006"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-white hover:text-[#FC5200] transition-colors"
-                    >
-                      <span>View on Strava</span>
-                      <ArrowUpRight size={13} />
-                    </a>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-
-          {/* Apple View All Activities Pill */}
-          <div className="flex justify-center mt-14">
-            <a
-              href="https://www.strava.com/athletes/195893006"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider text-zinc-300 bg-zinc-900 hover:bg-zinc-800 border border-white/10 hover:border-white/30 transition-all"
-            >
-              <span>View All Athlete Activities on Strava</span>
-              <ArrowUpRight size={14} className="text-[#FC5200]" />
-            </a>
           </div>
         </section>
 

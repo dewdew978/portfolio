@@ -484,6 +484,15 @@ function PortfolioHome({ theme, setTheme }) {
             <div className="relative">
               <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-white dark:bg-zinc-950 border-4 border-emerald-600 shadow-md shadow-emerald-500/30"></div>
               <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800/80 shadow-sm">
+                <div className="mb-4">
+                  <div className="inline-flex items-center px-3 py-2 rounded-xl bg-white border border-zinc-200 dark:border-zinc-700 shadow-sm">
+                    <img
+                      src="/nav-eng.svg"
+                      alt="KMITL School of Information Technology"
+                      className="h-8 sm:h-9 w-auto max-w-full object-contain"
+                    />
+                  </div>
+                </div>
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                   <h3 className="text-xl font-bold text-zinc-900 dark:text-white">
                     B.Sc. in Data Science and Business Analytics

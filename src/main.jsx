@@ -34,10 +34,10 @@ class ErrorBoundary extends React.Component {
             </pre>
           </details>
           <div style={{ marginTop: '24px' }}>
-            <a href="/" style={{ display: 'inline-block', padding: '8px 16px', backgroundColor: '#6366f1', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold', marginRight: '12px' }}>
+            <a href={import.meta.env.BASE_URL} style={{ display: 'inline-block', padding: '8px 16px', backgroundColor: '#6366f1', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold', marginRight: '12px' }}>
               ลองโหลดหน้าแรกใหม่
             </a>
-            <a href="/athletics" style={{ display: 'inline-block', padding: '8px 16px', backgroundColor: '#fc5200', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>
+            <a href={`${import.meta.env.BASE_URL}athletics`} style={{ display: 'inline-block', padding: '8px 16px', backgroundColor: '#fc5200', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>
               ไปหน้า Strava
             </a>
           </div>
@@ -51,7 +51,7 @@ class ErrorBoundary extends React.Component {
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <App />
       </BrowserRouter>
     </ErrorBoundary>

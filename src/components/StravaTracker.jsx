@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Flame, Compass, Timer, Heart, Activity, ArrowUpRight, Trophy, Zap, Calendar, RefreshCw } from 'lucide-react'
+import { getAssetUrl } from '@/utils/url'
 
 export default function StravaTracker() {
   const [data, setData] = useState(null)
@@ -7,7 +8,7 @@ export default function StravaTracker() {
   const [activeTab, setActiveTab] = useState('weekly') // 'weekly' | 'monthly'
 
   useEffect(() => {
-    fetch('/data/strava-activities.json')
+    fetch(getAssetUrl('/data/strava-activities.json'))
       .then((res) => res.json())
       .then((json) => {
         setData(json)

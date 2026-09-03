@@ -10,6 +10,7 @@ import {
   Sparkles,
   ArrowUpRight
 } from 'lucide-react';
+import { getAssetUrl } from '@/utils/url';
 
 interface FooterLink {
   title: string;
@@ -39,14 +40,14 @@ const footerLinks: FooterSection[] = [
     links: [
       { title: 'ExamHub Platform', href: 'https://exam-hub-seven.vercel.app', target: '_blank' },
       { title: 'CMCC 2025 Case Slides', href: 'https://dewdew978.github.io/cmcc-quarto-slides/#/section', target: '_blank' },
-      { title: 'US Accidents Analytics', href: '/assets/us.html', target: '_blank' },
+      { title: 'US Accidents Analytics', href: getAssetUrl('/assets/us.html'), target: '_blank' },
       { title: 'AI BI Pipeline (Google ADK)', href: '#experience' },
     ],
   },
   {
     label: 'Credentials & Resume',
     links: [
-      { title: 'ดาวน์โหลดเรซูเม่ (CV.pdf)', href: '/assets/CV.pdf', target: '_blank', icon: DownloadIcon },
+      { title: 'ดาวน์โหลดเรซูเม่ (CV.pdf)', href: getAssetUrl('/assets/CV.pdf'), target: '_blank', icon: DownloadIcon },
       { title: 'KMITL Data Science (2027)', href: '#about' },
       { title: 'CMCC 2025 Competitor', href: '#experience' },
       { title: 'Multi-Stage BI Architecture', href: '#skills' },

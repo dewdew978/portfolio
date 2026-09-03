@@ -15,6 +15,7 @@ import {
 } from 'lucide-react'
 
 import { projectsData } from './data/projectsData'
+import { getAssetUrl } from '@/utils/url'
 
 function PortfolioHome({ theme, setTheme }) {
   const [copiedEmail, setCopiedEmail] = useState(false)
@@ -82,7 +83,7 @@ function PortfolioHome({ theme, setTheme }) {
 
               <div className="flex flex-wrap items-center gap-4 mb-8">
                 <a
-                  href="/assets/CV.pdf"
+                  href={getAssetUrl('/assets/CV.pdf')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all duration-200"
@@ -144,7 +145,7 @@ function PortfolioHome({ theme, setTheme }) {
                 {/* Avatar Frame */}
                 <div className="relative z-10 p-2.5 rounded-3xl bg-gradient-to-tr from-white/40 to-white/10 dark:from-zinc-800/80 dark:to-zinc-900/80 border border-zinc-200/80 dark:border-zinc-700/80 shadow-2xl backdrop-blur-xl hover:-translate-y-1 transition-all duration-300">
                   <img
-                    src="/profiledew.jpg"
+                    src={getAssetUrl('/profiledew.jpg')}
                     alt="Pawarit Pansing"
                     className="w-64 h-64 sm:w-72 sm:h-72 object-cover rounded-2xl bg-zinc-100 dark:bg-zinc-800 shadow-inner"
                   />
@@ -487,7 +488,7 @@ function PortfolioHome({ theme, setTheme }) {
                 <div className="mb-4">
                   <div className="inline-flex items-center px-3 py-2 rounded-xl bg-white border border-zinc-200 dark:border-zinc-700 shadow-sm">
                     <img
-                      src="/nav-eng.svg"
+                      src={getAssetUrl('/nav-eng.svg')}
                       alt="KMITL School of Information Technology"
                       className="h-8 sm:h-9 w-auto max-w-full object-contain"
                     />

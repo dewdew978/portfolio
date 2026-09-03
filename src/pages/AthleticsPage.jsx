@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { Footer } from '@/components/ui/footer-section'
+import { getAssetUrl } from '@/utils/url'
 
 export default function AthleticsPage() {
   const [activitiesData, setActivitiesData] = useState(null)
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
-    fetch('/data/strava-activities.json')
+    fetch(getAssetUrl('/data/strava-activities.json'))
       .then((res) => res.json())
       .then((data) => setActivitiesData(data))
       .catch((err) => console.error('Error loading strava data:', err))

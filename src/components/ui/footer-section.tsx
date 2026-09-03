@@ -11,6 +11,7 @@ import {
   ArrowUpRight
 } from 'lucide-react';
 import { getAssetUrl } from '@/utils/url';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface FooterLink {
   title: string;
@@ -24,46 +25,48 @@ interface FooterSection {
   links: FooterLink[];
 }
 
-const footerLinks: FooterSection[] = [
-  {
-    label: 'Navigation',
-    links: [
-      { title: 'เกี่ยวกับ (About)', href: '#about' },
-      { title: 'ทักษะ (Skills)', href: '#skills' },
-      { title: 'ผลงาน (Projects)', href: '#projects' },
-      { title: 'ประสบการณ์ (Experience)', href: '#experience' },
-      { title: 'ติดต่อ (Contact)', href: '#contact' },
-    ],
-  },
-  {
-    label: 'Featured Projects',
-    links: [
-      { title: 'ExamHub Platform', href: 'https://exam-hub-seven.vercel.app', target: '_blank' },
-      { title: 'CMCC 2025 Case Slides', href: 'https://dewdew978.github.io/cmcc-quarto-slides/#/section', target: '_blank' },
-      { title: 'US Accidents Analytics', href: getAssetUrl('/assets/us.html'), target: '_blank' },
-      { title: 'AI BI Pipeline (Google ADK)', href: '#experience' },
-    ],
-  },
-  {
-    label: 'Credentials & Resume',
-    links: [
-      { title: 'ดาวน์โหลดเรซูเม่ (CV.pdf)', href: getAssetUrl('/assets/CV.pdf'), target: '_blank', icon: DownloadIcon },
-      { title: 'KMITL Data Science (2027)', href: '#about' },
-      { title: 'CMCC 2025 Competitor', href: '#experience' },
-      { title: 'Multi-Stage BI Architecture', href: '#skills' },
-    ],
-  },
-  {
-    label: 'Social & Connect',
-    links: [
-      { title: 'GitHub Profile', href: 'https://github.com/dewdew978', target: '_blank', icon: GithubIcon },
-      { title: 'LinkedIn Profile', href: 'https://www.linkedin.com/in/pawarit-pansing-5744a435b/', target: '_blank', icon: LinkedinIcon },
-      { title: 'Email Me', href: 'mailto:pawaritpansing@gmail.com', icon: MailIcon },
-    ],
-  },
-];
-
 export function Footer() {
+  const { t, lang } = useLanguage();
+
+  const footerLinks: FooterSection[] = [
+    {
+      label: t.footer.navTitle,
+      links: [
+        { title: t.nav.about, href: '#about' },
+        { title: t.nav.skills, href: '#skills' },
+        { title: t.nav.projects, href: '#projects' },
+        { title: t.nav.experience, href: '#experience' },
+        { title: t.nav.contact, href: '#contact' },
+      ],
+    },
+    {
+      label: t.footer.projectsTitle,
+      links: [
+        { title: 'ExamHub Platform', href: 'https://exam-hub-seven.vercel.app', target: '_blank' },
+        { title: 'CMCC 2025 Case Slides', href: 'https://dewdew978.github.io/cmcc-quarto-slides/#/section', target: '_blank' },
+        { title: 'US Accidents Analytics', href: getAssetUrl('/assets/us.html'), target: '_blank' },
+        { title: 'AI BI Pipeline (Google ADK)', href: '#experience' },
+      ],
+    },
+    {
+      label: t.footer.credentialsTitle,
+      links: [
+        { title: t.footer.downloadResume, href: getAssetUrl('/assets/CV.pdf'), target: '_blank', icon: DownloadIcon },
+        { title: 'KMITL Data Science (2027)', href: '#about' },
+        { title: 'CMCC 2025 Competitor', href: '#experience' },
+        { title: 'Multi-Stage BI Architecture', href: '#skills' },
+      ],
+    },
+    {
+      label: t.footer.connectTitle,
+      links: [
+        { title: 'GitHub Profile', href: 'https://github.com/dewdew978', target: '_blank', icon: GithubIcon },
+        { title: 'LinkedIn Profile', href: 'https://www.linkedin.com/in/pawarit-pansing-5744a435b/', target: '_blank', icon: LinkedinIcon },
+        { title: t.footer.emailMe, href: 'mailto:pawaritpansing@gmail.com', icon: MailIcon },
+      ],
+    },
+  ];
+
   return (
     <footer className="relative w-full border-t border-zinc-200 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-950/80 px-4 sm:px-6 lg:px-8 py-12 lg:py-16 mt-16 backdrop-blur-xl">
       <div className="bg-indigo-500/30 absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur-sm" />
@@ -79,14 +82,16 @@ export function Footer() {
             <span>Pawarit Pansing</span>
           </a>
           <p className="text-sm text-zinc-600 dark:text-zinc-400 max-w-sm leading-relaxed">
-            Data Analyst &amp; Business Analyst • เปลี่ยนข้อมูลที่ซับซ้อนให้เป็น Actionable Insights เพื่อขับเคลื่อนการเติบโตของธุรกิจ
+            {lang === 'th'
+              ? 'Data Analyst & Business Analyst • เปลี่ยนข้อมูลที่ซับซ้อนให้เป็น Actionable Insights เพื่อขับเคลื่อนการเติบโตของธุรกิจ'
+              : 'Data Analyst & Business Analyst • Transforming complex data into actionable insights to drive strategic business growth'}
           </p>
           <div className="flex items-center gap-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400 pt-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span>Open for Opportunities • Bangkok, Thailand</span>
           </div>
           <p className="text-zinc-400 dark:text-zinc-500 text-xs pt-4">
-            &copy; {new Date().getFullYear()} Pawarit Pansing. All rights reserved.
+            &copy; {new Date().getFullYear()} {t.footer.copyright} • {t.footer.builtWith}
           </p>
         </AnimatedContainer>
 

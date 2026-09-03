@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom'
 import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { Footer } from '@/components/ui/footer-section'
 import { getAssetUrl } from '@/utils/url'
+import { useLanguage } from '@/context/LanguageContext'
 
 export default function AthleticsPage() {
   const [activitiesData, setActivitiesData] = useState(null)
+  const { lang, t } = useLanguage()
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
@@ -90,53 +92,67 @@ export default function AthleticsPage() {
           </h1>
 
           <p className="text-lg sm:text-2xl text-zinc-400 font-normal leading-relaxed max-w-2xl mx-auto mb-14">
-            บันทึกการฝึกซ้อมและสถิติวิ่งจริงของ Pawarit Pansing (Dew) เชื่อมโยงความอดทนและระเบียบวินัยสู่การคิดวิเคราะห์ข้อมูล
+            {lang === 'th'
+              ? 'บันทึกการฝึกซ้อมและสถิติวิ่งจริงของ Pawarit Pansing (Dew) เชื่อมโยงความอดทนและระเบียบวินัยสู่การคิดวิเคราะห์ข้อมูล'
+              : 'Real-world athletic logs and endurance telemetry by Pawarit Pansing (Dew), linking physical stamina and discipline to data analytics.'}
           </p>
 
           {/* Apple Watch Ultra Metric Highlights (4 Cards) */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
             <div className="p-6 sm:p-7 rounded-[28px] bg-zinc-900/40 border border-white/10 backdrop-blur-xl hover:border-white/20 transition-colors">
               <div className="text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">
-                August Distance
+                {t.athletics.totalDistance}
               </div>
               <div className="text-4xl sm:text-5xl font-bold font-mono tracking-tight text-white flex items-baseline gap-1.5">
                 <span>{summary.totalDistanceKm}</span>
                 <span className="text-sm font-semibold text-[#FC5200]">km</span>
               </div>
-              <div className="text-xs text-zinc-500 mt-2 font-mono">Monthly cumulative</div>
+              <div className="text-xs text-zinc-500 mt-2 font-mono">
+                {lang === 'th' ? 'ระยะทางสะสม' : 'Monthly cumulative'}
+              </div>
             </div>
 
             <div className="p-6 sm:p-7 rounded-[28px] bg-zinc-900/40 border border-white/10 backdrop-blur-xl hover:border-white/20 transition-colors">
               <div className="text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">
-                Total Runs
+                {t.athletics.totalActivities}
               </div>
               <div className="text-4xl sm:text-5xl font-bold font-mono tracking-tight text-white flex items-baseline gap-1.5">
                 <span>{summary.totalActivities}</span>
-                <span className="text-sm font-semibold text-zinc-400">runs</span>
+                <span className="text-sm font-semibold text-zinc-400">
+                  {lang === 'th' ? 'ครั้ง' : 'runs'}
+                </span>
               </div>
-              <div className="text-xs text-zinc-500 mt-2 font-mono">Recorded sessions</div>
+              <div className="text-xs text-zinc-500 mt-2 font-mono">
+                {lang === 'th' ? 'เซสชันการวิ่ง' : 'Recorded sessions'}
+              </div>
             </div>
 
             <div className="p-6 sm:p-7 rounded-[28px] bg-zinc-900/40 border border-white/10 backdrop-blur-xl hover:border-white/20 transition-colors">
               <div className="text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">
-                Longest Run
+                {t.athletics.longestRun}
               </div>
               <div className="text-4xl sm:text-5xl font-bold font-mono tracking-tight text-white flex items-baseline gap-1.5">
                 <span>{summary.longestRunKm}</span>
                 <span className="text-sm font-semibold text-zinc-400">km</span>
               </div>
-              <div className="text-xs text-zinc-500 mt-2 font-mono">Peak endurance distance</div>
+              <div className="text-xs text-zinc-500 mt-2 font-mono">
+                {lang === 'th' ? 'ระยะวิ่งไกลสุด' : 'Peak endurance distance'}
+              </div>
             </div>
 
             <div className="p-6 sm:p-7 rounded-[28px] bg-zinc-900/40 border border-white/10 backdrop-blur-xl hover:border-white/20 transition-colors">
               <div className="text-xs font-mono text-zinc-400 uppercase tracking-wider mb-2">
-                Moving Time
+                {t.athletics.totalTime}
               </div>
               <div className="text-4xl sm:text-5xl font-bold font-mono tracking-tight text-white flex items-baseline gap-1.5">
                 <span>{summary.totalMovingTimeHours}</span>
-                <span className="text-sm font-semibold text-zinc-400">hrs</span>
+                <span className="text-sm font-semibold text-zinc-400">
+                  {lang === 'th' ? 'ชม.' : 'hrs'}
+                </span>
               </div>
-              <div className="text-xs text-zinc-500 mt-2 font-mono">Time in motion</div>
+              <div className="text-xs text-zinc-500 mt-2 font-mono">
+                {lang === 'th' ? 'เวลาในการเคลื่อนที่' : 'Time in motion'}
+              </div>
             </div>
           </div>
         </section>
@@ -271,7 +287,7 @@ export default function AthleticsPage() {
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-xs font-mono uppercase tracking-wider text-white bg-zinc-900 hover:bg-zinc-800 border border-white/10 transition-all"
             >
               <ArrowLeft size={14} />
-              <span>Return to Portfolio</span>
+              <span>{lang === 'th' ? 'กลับหน้าพอร์ตโฟลิโอ' : 'Return to Portfolio'}</span>
             </Link>
 
             <a
@@ -280,7 +296,7 @@ export default function AthleticsPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-xs font-mono uppercase tracking-wider text-white bg-[#FC5200] hover:bg-[#E34400] transition-all"
             >
-              <span>Follow Dew on Strava</span>
+              <span>{lang === 'th' ? 'ติดตามบน Strava' : 'Follow Dew on Strava'}</span>
               <ArrowUpRight size={14} />
             </a>
           </div>

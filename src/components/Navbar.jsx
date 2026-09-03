@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Sun, Moon, Menu, X, Download, Sparkles, Activity } from 'lucide-react'
+import { Sun, Moon, Menu, X, Download, Sparkles, Activity, Languages } from 'lucide-react'
 import { getAssetUrl } from '@/utils/url'
-
-const navLinks = [
-  { id: 'about', label: 'เกี่ยวกับ' },
-  { id: 'skills', label: 'ทักษะ' },
-  { id: 'projects', label: 'ผลงาน' },
-  { id: 'experience', label: 'ประสบการณ์' },
-  { id: 'contact', label: 'ติดต่อ' },
-]
+import { useLanguage } from '@/context/LanguageContext'
 
 export default function Navbar({ theme, setTheme }) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -17,6 +10,15 @@ export default function Navbar({ theme, setTheme }) {
   const [isScrolled, setIsScrolled] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
+  const { lang, setLang, toggleLang, t } = useLanguage()
+
+  const navLinks = [
+    { id: 'about', label: t.nav.about },
+    { id: 'skills', label: t.nav.skills },
+    { id: 'projects', label: t.nav.projects },
+    { id: 'experience', label: t.nav.experience },
+    { id: 'contact', label: t.nav.contact },
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,7 +42,7 @@ export default function Navbar({ theme, setTheme }) {
     window.addEventListener('scroll', handleScroll, { passive: true })
     handleScroll()
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [lang])
 
   const scrollToSection = (id) => {
     setMenuOpen(false)
@@ -119,21 +121,49 @@ export default function Navbar({ theme, setTheme }) {
 
         {/* Right Actions */}
         <div className="flex items-center gap-2">
+          {/* Language Switcher Segment */}
+          <div className="flex items-center bg-zinc-100 dark:bg-zinc-800/80 rounded-full p-0.5 border border-zinc-200 dark:border-zinc-700/70 text-xs font-semibold">
+            <button
+              onClick={() => setLang('th')}
+              title="ภาษาไทย"
+              aria-label="เปลี่ยนเป็นภาษาไทย"
+              className={`px-2 py-1 rounded-full transition-all cursor-pointer ${
+                lang === 'th'
+                  ? 'bg-white dark:bg-zinc-900 text-indigo-600 dark:text-indigo-400 shadow-xs font-bold'
+                  : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
+              }`}
+            >
+              TH
+            </button>
+            <button
+              onClick={() => setLang('en')}
+              title="English"
+              aria-label="Switch to English"
+              className={`px-2 py-1 rounded-full transition-all cursor-pointer ${
+                lang === 'en'
+                  ? 'bg-white dark:bg-zinc-900 text-indigo-600 dark:text-indigo-400 shadow-xs font-bold'
+                  : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
+              }`}
+            >
+              EN
+            </button>
+          </div>
+
           {/* Athletics / Activities Page Link */}
           <Link
             to="/athletics"
             className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-[#FC5200] bg-orange-50 dark:bg-orange-950/50 border border-orange-200 dark:border-orange-900/60 hover:bg-orange-100 dark:hover:bg-orange-900/80 hover:-translate-y-0.5 transition-all shadow-xs"
-            title="ดูกิจกรรมวิ่ง (activities)"
+            title={t.nav.activitiesTitle}
           >
             <Activity size={13} className="text-[#FC5200]" />
-            <span className="capitalize">activities</span>
+            <span className="capitalize">{t.nav.activities}</span>
           </Link>
 
           {/* Theme Switcher Button */}
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            title={theme === 'dark' ? 'เปลี่ยนเป็นโหมดสว่าง' : 'เปลี่ยนเป็นโหมดมืด'}
-            aria-label="สลับโหมดมืด/สว่าง"
+            title={theme === 'dark' ? t.nav.toggleThemeLight : t.nav.toggleThemeDark}
+            aria-label={theme === 'dark' ? t.nav.toggleThemeLight : t.nav.toggleThemeDark}
             className="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:scale-105 transition-all duration-200 cursor-pointer"
           >
             {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
@@ -147,7 +177,7 @@ export default function Navbar({ theme, setTheme }) {
             className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-md shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all duration-200"
           >
             <Download size={14} />
-            <span>เรซูเม่</span>
+            <span>{t.nav.resume}</span>
           </a>
 
           {/* Mobile Hamburger Button */}
@@ -189,7 +219,7 @@ export default function Navbar({ theme, setTheme }) {
               onClick={() => setMenuOpen(false)}
               className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-base font-medium text-[#FC5200] hover:bg-orange-50 dark:hover:bg-orange-950/40 transition-colors"
             >
-              <span>activities</span>
+              <span className="capitalize">{t.nav.activities}</span>
               <Activity size={16} />
             </Link>
           </li>
@@ -201,7 +231,7 @@ export default function Navbar({ theme, setTheme }) {
               className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 shadow-md shadow-indigo-500/25"
             >
               <Download size={16} />
-              <span>ดาวน์โหลดเรซูเม่ (CV.pdf)</span>
+              <span>{t.nav.resumeDownload}</span>
             </a>
           </li>
         </ul>

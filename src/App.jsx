@@ -16,9 +16,11 @@ import {
 
 import { projectsData } from './data/projectsData'
 import { getAssetUrl } from '@/utils/url'
+import { useLanguage } from '@/context/LanguageContext'
 
 function PortfolioHome({ theme, setTheme }) {
   const [copiedEmail, setCopiedEmail] = useState(false)
+  const { lang, t } = useLanguage()
 
   // Filter Tabs & Modal
   const [activeFilter, setActiveFilter] = useState('all')
@@ -30,7 +32,24 @@ function PortfolioHome({ theme, setTheme }) {
     setTimeout(() => setCopiedEmail(false), 2000)
   }
 
-  const filteredProjects = Object.entries(projectsData).filter(([_, proj]) => {
+  const localizedProjects = Object.entries(projectsData).map(([key, proj]) => {
+    const loc = (t.projects?.items && t.projects.items[key]) || {}
+    return [
+      key,
+      {
+        ...proj,
+        title: loc.title || proj.title,
+        impactSuffix: loc.impactSuffix !== undefined ? loc.impactSuffix : proj.impactSuffix,
+        overview: loc.overview || proj.overview,
+        architecture: loc.architecture || proj.architecture,
+        features: loc.features || proj.features,
+        impact: loc.impact || proj.impact,
+        liveLabel: loc.liveLabel || proj.liveLabel,
+      }
+    ]
+  })
+
+  const filteredProjects = localizedProjects.filter(([_, proj]) => {
     if (activeFilter === 'all') return true
     if (activeFilter === 'data' || activeFilter === 'analytics') return proj.category === 'analytics' || (proj.badges && proj.badges.includes('Data Analytics'))
     if (activeFilter === 'business') return proj.category === 'business' || (proj.badges && proj.badges.includes('Business Strategy'))
@@ -62,23 +81,30 @@ function PortfolioHome({ theme, setTheme }) {
               <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 shadow-sm mb-6">
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
                 <span className="w-2 h-2 rounded-full bg-emerald-500 -ml-4"></span>
-                <span>Available for Data &amp; Business Analyst Roles</span>
+                <span>{t.hero.badge}</span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-white leading-[1.15] mb-4">
-                Hello, I'm <br className="hidden sm:inline" />
+                {lang === 'th' ? 'สวัสดีครับ, ผม' : "Hello, I'm"} <br className="hidden sm:inline" />
                 <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                  Pawarit Pansing
+                  {t.hero.name}
                 </span>
+                {t.hero.nickname && (
+                  <span className="text-2xl sm:text-3xl font-semibold text-zinc-500 dark:text-zinc-400 ml-3">
+                    {t.hero.nickname}
+                  </span>
+                )}
               </h1>
 
               <p className="text-xl sm:text-2xl font-medium text-zinc-600 dark:text-zinc-400 mb-6">
-                Data Analyst • Business Analyst • Data Storyteller
+                {t.hero.role}
               </p>
 
               <div className="flex items-center gap-3 p-4 rounded-2xl bg-zinc-100/90 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 border-l-4 border-l-indigo-600 text-zinc-800 dark:text-zinc-200 text-base max-w-xl mb-8 shadow-sm">
                 <Sparkles size={20} className="text-indigo-500 shrink-0" />
-                <span>เปลี่ยนข้อมูลที่ซับซ้อนให้เป็น <strong className="font-semibold text-zinc-950 dark:text-white">Actionable Insights</strong> เพื่อขับเคลื่อนการเติบโตของธุรกิจ</span>
+                <span>
+                  {t.hero.taglineLead} <strong className="font-semibold text-zinc-950 dark:text-white">{t.hero.taglineBold}</strong> {t.hero.taglineEnd}
+                </span>
               </div>
 
               <div className="flex flex-wrap items-center gap-4 mb-8">
@@ -89,13 +115,13 @@ function PortfolioHome({ theme, setTheme }) {
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all duration-200"
                 >
                   <Download size={18} />
-                  <span>ดาวน์โหลดเรซูเม่</span>
+                  <span>{t.hero.downloadResume}</span>
                 </a>
                 <a
                   href="#projects"
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-base font-semibold text-zinc-800 dark:text-zinc-200 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 shadow-sm hover:-translate-y-0.5 transition-all duration-200"
                 >
-                  <span>ดูผลงานวิเคราะห์</span>
+                  <span>{t.hero.viewProjects}</span>
                   <ChevronDown size={18} />
                 </a>
               </div>
@@ -168,7 +194,7 @@ function PortfolioHome({ theme, setTheme }) {
             aria-label="Scroll down to About section"
             className="inline-flex flex-col items-center gap-1 text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors group"
           >
-            <span>SCROLL DOWN</span>
+            <span>{t.hero.scrollDown}</span>
             <ChevronDown size={16} className="animate-bounce text-indigo-500" />
           </a>
         </div>
@@ -182,15 +208,13 @@ function PortfolioHome({ theme, setTheme }) {
         <FadeInSection direction="up" delay={50}>
           <div className="mb-12">
             <span className="inline-block px-3.5 py-1 rounded-full text-sm font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60 mb-3">
-              About Me
+              {t.about.badge}
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white mb-4">
-              เกี่ยวกับฉัน
+              {t.about.title}
             </h2>
             <p className="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-4xl">
-              นักศึกษา <strong className="font-semibold text-zinc-900 dark:text-white">Data Science and Business Analytics</strong> สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง (KMITL)
-              ที่มีความสนใจลึกซึ้งในด้านการวิเคราะห์ข้อมูล (Data Analysis), ปัญญาประดิษฐ์ (Artificial Intelligence), และการสร้างระบบ Business Intelligence อัตโนมัติ (AI Agent Pipelines)
-              มุ่งมั่นประยุกต์ใช้ทักษะการคิดเชิงวิเคราะห์และการแก้ปัญหาจริงเพื่อสร้าง <strong className="font-semibold text-zinc-900 dark:text-white">Actionable Insights</strong> ขับเคลื่อนการตัดสินใจทางธุรกิจ
+              {t.about.bioP1} <strong className="font-semibold text-zinc-900 dark:text-white">{t.about.bioP1Bold}</strong> {t.about.bioP2} <strong className="font-semibold text-zinc-900 dark:text-white">{t.about.bioP2Bold}</strong> {t.about.bioP3}
             </p>
           </div>
         </FadeInSection>
@@ -199,23 +223,23 @@ function PortfolioHome({ theme, setTheme }) {
         <FadeInSection direction="up" delay={150}>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
             <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800/80 shadow-sm hover:shadow-xl hover:border-indigo-500/50 dark:hover:border-indigo-500/50 hover:-translate-y-1 transition-all duration-300">
-              <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">AI Agent &amp; BI Pipelines</h3>
+              <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">{t.about.card1Title}</h3>
               <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                พัฒนา 5-stage Automated BI Pipeline ด้วย Google ADK (SequentialAgent) แปลงภาษาธรรมชาติเป็น SQL Query และสร้าง Prescriptive Analytics บน MS SQL Server
+                {t.about.card1Desc}
               </p>
             </div>
 
             <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800/80 shadow-sm hover:shadow-xl hover:border-purple-500/50 dark:hover:border-purple-500/50 hover:-translate-y-1 transition-all duration-300">
-              <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Business Strategy &amp; Innovation</h3>
+              <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">{t.about.card2Title}</h3>
               <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                ประสบการณ์แข่งขันเคสธุรกิจระดับชาติ CMCC 2025 (Plan B Media) วิเคราะห์กลยุทธ์ OOH Media, ออกแบบ Asset Tokenization และประเมินผลกระทบทางการเงิน
+                {t.about.card2Desc}
               </p>
             </div>
 
             <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800/80 shadow-sm hover:shadow-xl hover:border-pink-500/50 dark:hover:border-pink-500/50 hover:-translate-y-1 transition-all duration-300">
-              <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Data Analytics &amp; Visualizations</h3>
+              <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">{t.about.card3Title}</h3>
               <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                พัฒนาแพลตฟอร์ม ExamHub รองรับ 20+ สาขาวิชา พร้อมระบบ Score Analytics และ Interactive Dashboard ด้วย Altair, Gradio, และ Recharts
+                {t.about.card3Desc}
               </p>
             </div>
           </div>
@@ -233,19 +257,19 @@ function PortfolioHome({ theme, setTheme }) {
               </div>
               <div>
                 <div className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white flex items-center gap-2">
-                  <span>Live Strava Athletic &amp; Endurance Analytics</span>
+                  <span>{t.about.stravaTitle}</span>
                   <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>Live Sync</span>
+                    <span>{t.about.stravaBadge}</span>
                   </span>
                 </div>
                 <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">
-                  ดูแดชบอร์ดสถิติวิ่ง, กราฟพัฒนาการรายสัปดาห์/เดือน, และ Personal Best (PB) แบบหน้าแยก
+                  {t.about.stravaDesc}
                 </p>
               </div>
             </div>
             <div className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#FC5200] group-hover:translate-x-1 transition-transform">
-              <span>เปิดดูหน้าสถิติวิ่ง</span>
+              <span>{t.about.stravaAction}</span>
               <ArrowUpRight size={16} />
             </div>
           </Link>
@@ -257,13 +281,13 @@ function PortfolioHome({ theme, setTheme }) {
         <FadeInSection direction="up" delay={50}>
           <div className="mb-12">
             <span className="inline-block px-3.5 py-1 rounded-full text-sm font-semibold bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-800/60 mb-3">
-              Core Competencies
+              {t.skills.badge}
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white mb-4">
-              ทักษะและความเชี่ยวชาญ
+              {t.skills.title}
             </h2>
             <p className="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
-              เครื่องมือ เทคโนโลยี และองค์ความรู้ด้าน Data Analytics, AI Agents &amp; Business Strategy
+              {t.skills.subtitle}
             </p>
           </div>
         </FadeInSection>
@@ -289,13 +313,13 @@ function PortfolioHome({ theme, setTheme }) {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
             <div>
               <span className="inline-block px-3.5 py-1 rounded-full text-sm font-semibold bg-pink-50 dark:bg-pink-950/60 text-pink-600 dark:text-pink-400 border border-pink-200 dark:border-pink-800/60 mb-3">
-                Featured Works
+                {t.projects.badge}
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white mb-2">
-                ผลงานและโครงงานเด่น
+                {t.projects.title}
               </h2>
               <p className="text-lg text-zinc-600 dark:text-zinc-400">
-                การวิเคราะห์เชิงลึก AI Pipelines และการแก้ปัญหาทางธุรกิจ
+                {t.projects.subtitle}
               </p>
             </div>
 
@@ -309,7 +333,7 @@ function PortfolioHome({ theme, setTheme }) {
                     : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
                 }`}
               >
-                ทั้งหมด
+                {t.projects.filterAll}
               </button>
               <button
                 onClick={() => setActiveFilter('data')}
@@ -319,7 +343,7 @@ function PortfolioHome({ theme, setTheme }) {
                     : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
                 }`}
               >
-                Data &amp; AI
+                {t.projects.filterAnalytics}
               </button>
               <button
                 onClick={() => setActiveFilter('business')}
@@ -329,7 +353,17 @@ function PortfolioHome({ theme, setTheme }) {
                     : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
                 }`}
               >
-                Business Case
+                {t.projects.filterBusiness}
+              </button>
+              <button
+                onClick={() => setActiveFilter('web')}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                  activeFilter === 'web'
+                    ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-xs'
+                    : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'
+                }`}
+              >
+                {t.projects.filterWeb}
               </button>
             </div>
           </div>
@@ -388,7 +422,7 @@ function PortfolioHome({ theme, setTheme }) {
                       className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-sm font-semibold text-zinc-700 dark:text-zinc-200 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
                     >
                       <Eye size={15} />
-                      <span>Details</span>
+                      <span>{t.projects.details}</span>
                     </button>
 
                     <div className="flex items-center gap-2">
@@ -398,7 +432,7 @@ function PortfolioHome({ theme, setTheme }) {
                         rel="noopener noreferrer"
                         className="px-3 py-1.5 rounded-lg text-sm font-semibold text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
                       >
-                        GitHub
+                        {t.projects.github}
                       </a>
                       <a
                         href={proj.liveUrl}
@@ -406,7 +440,7 @@ function PortfolioHome({ theme, setTheme }) {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-lg text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 shadow-sm shadow-indigo-500/25 transition-colors"
                       >
-                        <span>Demo</span>
+                        <span>{t.projects.demo}</span>
                         <ArrowUpRight size={14} />
                       </a>
                     </div>
@@ -423,13 +457,13 @@ function PortfolioHome({ theme, setTheme }) {
         <FadeInSection direction="up" delay={50}>
           <div className="mb-12">
             <span className="inline-block px-3.5 py-1 rounded-full text-sm font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 mb-3">
-              Career Journey
+              {t.experience.badge}
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white mb-4">
-              ประสบการณ์และการศึกษา
+              {t.experience.title}
             </h2>
             <p className="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
-              เส้นทางการพัฒนาความเชี่ยวชาญด้าน Data Science, Business Strategy และการแข่งขันเคสธุรกิจระดับชาติ
+              {t.experience.subtitle}
             </p>
           </div>
         </FadeInSection>
@@ -441,18 +475,17 @@ function PortfolioHome({ theme, setTheme }) {
               <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800/80 shadow-sm">
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                   <h3 className="text-xl font-bold text-zinc-900 dark:text-white">
-                    Capital Market Case Competition (CMCC 2025)
+                    {t.experience.cmccTitle}
                   </h3>
                   <span className="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60">
-                    มกราคม 2025 - มีนาคม 2025
+                    {t.experience.cmccPeriod}
                   </span>
                 </div>
-                <div className="text-base font-semibold text-indigo-600 dark:text-indigo-400 mb-3">Plan B Media Case Study</div>
+                <div className="text-base font-semibold text-indigo-600 dark:text-indigo-400 mb-3">{t.experience.cmccCase}</div>
                 <ul className="space-y-2 text-base text-zinc-600 dark:text-zinc-400 list-disc list-inside leading-relaxed">
-                  <li>วิเคราะห์โอกาสและการเติบโตของอุตสาหกรรมสื่อนอกบ้าน (Out-of-Home Media) และการผสานสื่อนวัตกรรมดิจิทัล</li>
-                  <li>ออกแบบและจำลองแนวคิด <strong className="font-semibold text-zinc-900 dark:text-zinc-100">Asset Tokenization</strong> เพื่อแปลงพื้นที่โฆษณาเป็น Digital Asset เพิ่มสภาพคล่อง</li>
-                  <li>นำเสนอโมเดล <strong className="font-semibold text-zinc-900 dark:text-zinc-100">Sustainability Financing (Green Billboards)</strong> และแพลตฟอร์ม Sportainment Fan Engagement</li>
-                  <li>สร้างแบบจำลองทางการเงิน ประเมินมูลค่ากิจการ (Enterprise Valuation) และคาดการณ์ผลตอบแทน (ROI)</li>
+                  {t.experience.cmccPoints.map((pt, i) => (
+                    <li key={i}>{pt}</li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -464,18 +497,17 @@ function PortfolioHome({ theme, setTheme }) {
               <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800/80 shadow-sm">
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                   <h3 className="text-xl font-bold text-zinc-900 dark:text-white">
-                    AI Agent &amp; Data Pipeline Developer
+                    {t.experience.aiBiTitle}
                   </h3>
                   <span className="px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700">
-                    2024 - 2025
+                    {t.experience.aiBiPeriod}
                   </span>
                 </div>
-                <div className="text-base font-semibold text-purple-600 dark:text-purple-400 mb-3">Google ADK &amp; MS SQL Server Project</div>
+                <div className="text-base font-semibold text-purple-600 dark:text-purple-400 mb-3">{t.experience.aiBiOrg}</div>
                 <ul className="space-y-2 text-base text-zinc-600 dark:text-zinc-400 list-disc list-inside leading-relaxed">
-                  <li>ประยุกต์ใช้ <strong className="font-semibold text-zinc-900 dark:text-zinc-100">Google ADK (SequentialAgent)</strong> ในการประสานงาน Multi-Agent</li>
-                  <li>สร้างระบบ Text-to-SQL แปลงคำถามทางธุรกิจเป็น T-SQL Query บน Microsoft SQL Server โดยอัตโนมัติ</li>
-                  <li>พัฒนาระบบตรวจสอบความปลอดภัย Sanitization Agent และ Execution Agent ป้องกันคำสั่งที่เป็นอันตราย</li>
-                  <li>สร้างระบบสังเคราะห์ Prescriptive Analytics และแสดงผลแดชบอร์ดข้อมูลเชิงลึกอัตโนมัติ</li>
+                  {t.experience.aiBiPoints.map((pt, i) => (
+                    <li key={i}>{pt}</li>
+                  ))}
                 </ul>
               </div>
             </div>
@@ -496,18 +528,23 @@ function PortfolioHome({ theme, setTheme }) {
                 </div>
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
                   <h3 className="text-xl font-bold text-zinc-900 dark:text-white">
-                    B.Sc. in Data Science and Business Analytics
+                    {t.experience.eduDegree}
                   </h3>
                   <span className="px-3 py-1 rounded-full text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700">
-                    Class of 2027
+                    {t.experience.eduPeriod}
                   </span>
                 </div>
-                <div className="text-base font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
-                  King Mongkut's Institute of Technology Ladkrabang (KMITL)
+                <div className="text-base font-semibold text-emerald-600 dark:text-emerald-400 mb-1">
+                  {t.experience.eduUniversity}
                 </div>
-                <p className="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                  ศึกษาด้านวิทยาการข้อมูล การวิเคราะห์เชิงสถิติ ปัญญาประดิษฐ์ และการวางกลยุทธ์ธุรกิจ มุ่งเน้นการสร้างคุณค่าจากข้อมูล
-                </p>
+                <div className="text-sm text-zinc-500 dark:text-zinc-400 mb-3">
+                  {t.experience.eduFaculty}
+                </div>
+                <ul className="space-y-2 text-base text-zinc-600 dark:text-zinc-400 list-disc list-inside leading-relaxed">
+                  {t.experience.eduPoints.map((pt, i) => (
+                    <li key={i}>{pt}</li>
+                  ))}
+                </ul>
               </div>
             </div>
           </FadeInSection>
@@ -520,11 +557,15 @@ function PortfolioHome({ theme, setTheme }) {
           <div className="relative p-8 sm:p-12 rounded-3xl bg-gradient-to-b from-white to-zinc-50 dark:from-zinc-900 dark:to-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-2xl text-center overflow-hidden">
             <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
 
+            <div className="inline-block px-3.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60 mb-4">
+              {t.contact.badge}
+            </div>
+
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white mb-4">
-              พร้อมร่วมงานและขับเคลื่อนธุรกิจด้วยข้อมูล
+              {t.contact.title}
             </h2>
             <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto mb-8 leading-relaxed">
-              หากคุณกำลังมองหา Data Analyst หรือ Business Analyst เพื่อร่วมทีม หรือต้องการปรึกษาการวิเคราะห์ข้อมูล สามารถติดต่อได้ทันทีครับ
+              {t.contact.subtitle}
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4">
@@ -533,7 +574,7 @@ function PortfolioHome({ theme, setTheme }) {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all"
               >
                 <Mail size={18} />
-                <span>ส่งอีเมลหาฉัน</span>
+                <span>{t.footer.emailMe}</span>
               </a>
               <a
                 href="https://www.linkedin.com/in/pawarit-pansing-5744a435b/"
@@ -549,7 +590,7 @@ function PortfolioHome({ theme, setTheme }) {
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-base font-semibold text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800/80 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors cursor-pointer"
               >
                 {copiedEmail ? <Check size={18} className="text-emerald-400" /> : <Copy size={18} />}
-                <span>{copiedEmail ? 'คัดลอกอีเมลแล้ว!' : 'คัดลอกอีเมล'}</span>
+                <span>{copiedEmail ? t.contact.copiedEmail : t.contact.copyEmail}</span>
               </button>
             </div>
           </div>
@@ -566,6 +607,7 @@ function PortfolioHome({ theme, setTheme }) {
             <div className="p-6 bg-gradient-to-tr from-indigo-600 to-purple-600 text-white relative">
               <button
                 onClick={() => setSelectedProject(null)}
+                aria-label={t.projects.modal.close}
                 className="absolute top-4 right-4 p-2 rounded-full bg-black/30 hover:bg-black/50 text-white transition-colors cursor-pointer"
               >
                 <X size={18} />
@@ -587,14 +629,14 @@ function PortfolioHome({ theme, setTheme }) {
 
               <div>
                 <h4 className="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 mb-1.5">
-                  Overview &amp; Problem Statement
+                  {t.projects.modal.overview}
                 </h4>
                 <p>{selectedProject.overview}</p>
               </div>
 
               <div>
                 <h4 className="text-xs font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400 mb-1.5">
-                  Architecture &amp; Tech Stack
+                  {t.projects.modal.architecture}
                 </h4>
                 <p>{selectedProject.architecture}</p>
               </div>
@@ -602,7 +644,7 @@ function PortfolioHome({ theme, setTheme }) {
               {selectedProject.features && (
                 <div>
                   <h4 className="text-xs font-bold uppercase tracking-wider text-pink-600 dark:text-pink-400 mb-2">
-                    Key Findings &amp; Core Highlights
+                    {t.projects.modal.features}
                   </h4>
                   <ul className="space-y-1.5 list-disc list-inside">
                     {selectedProject.features.map((f, i) => (
@@ -614,7 +656,7 @@ function PortfolioHome({ theme, setTheme }) {
 
               <div>
                 <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 mb-1.5">
-                  Business &amp; Strategic Impact
+                  {t.projects.modal.impact}
                 </h4>
                 <p>{selectedProject.impact}</p>
               </div>
@@ -625,7 +667,7 @@ function PortfolioHome({ theme, setTheme }) {
                 onClick={() => setSelectedProject(null)}
                 className="px-5 py-2 rounded-xl text-sm font-semibold text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer"
               >
-                ปิด
+                {t.projects.modal.close}
               </button>
               <div className="flex items-center gap-3">
                 <a
@@ -642,7 +684,7 @@ function PortfolioHome({ theme, setTheme }) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 px-5 py-2 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-500 shadow-md shadow-indigo-500/25 transition-colors"
                 >
-                  <span>{selectedProject.liveLabel || 'Demo'}</span>
+                  <span>{selectedProject.liveLabel || t.projects.modal.launchDemo}</span>
                   <ExternalLink size={14} />
                 </a>
               </div>

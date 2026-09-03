@@ -7,62 +7,39 @@ import {
   LayoutDashboard,
   ArrowUpRight
 } from 'lucide-react'
+import { useLanguage } from '@/context/LanguageContext'
 import './MagicBento.css'
 
-const defaultBentoItems = [
-  {
-    id: 'ai-agents',
-    title: 'AI Agent & Multi-Stage BI Pipelines',
-    subtitle: 'Google ADK & Enterprise SQL Architecture',
-    description: 'พัฒนาระบบ Automated BI Pipeline ด้วย Google ADK (SequentialAgent) แปลงภาษาธรรมชาติเป็น SQL Query อัตโนมัติ พร้อม Data Sanitization และ Prescriptive Analytics',
+const bentoMeta = {
+  'ai-agents': {
     icon: Bot,
-    tags: ['Google ADK', 'SequentialAgent', 'Text-to-SQL', 'MS SQL Server', 'Data Sanitization'],
     accent: '#6366f1',
     glowRgb: '99, 102, 241',
     colSpan: 'col-span-1 md:col-span-2 lg:col-span-8',
     rowSpan: 'row-span-1',
-    badge: 'Featured Pipeline'
   },
-  {
-    id: 'programming',
-    title: 'Programming & Analytics',
-    subtitle: 'Data Wrangling & Statistical Modeling',
-    description: 'ประมวลผลและทำความสะอาดชุดข้อมูลขนาดใหญ่ (Data Cleansing), วิเคราะห์สถิติเชิงลึก (EDA) และสร้างโมเดลประเมินความเสี่ยง',
+  'programming': {
     icon: Code2,
-    tags: ['Python', 'SQL Server', 'Pandas', 'NumPy', 'Altair', 'Gradio'],
     accent: '#a855f7',
     glowRgb: '168, 85, 247',
     colSpan: 'col-span-1 md:col-span-1 lg:col-span-4',
     rowSpan: 'row-span-1',
-    badge: 'Core Tech'
   },
-  {
-    id: 'strategy',
-    title: 'Business Strategy & Capital Market',
-    subtitle: 'CMCC 2025 Case Competition • Plan B Media',
-    description: 'วิเคราะห์โครงสร้างตลาดสื่อนอกบ้าน (OOH Media), ออกแบบโมเดล Asset Tokenization, Green Billboards และประเมินมูลค่ากิจการ (Valuation / ROI)',
+  'strategy': {
     icon: TrendingUp,
-    tags: ['Market Dynamics', 'Asset Tokenization', 'Financial Modeling', 'ESG Financing'],
     accent: '#f43f5e',
     glowRgb: '244, 63, 94',
     colSpan: 'col-span-1 md:col-span-1 lg:col-span-4',
     rowSpan: 'row-span-1',
-    badge: 'National Case'
   },
-  {
-    id: 'bi-dashboards',
-    title: 'BI Dashboards & Digital Storytelling',
-    subtitle: 'Interactive Visualizations & Cloud Workflows',
-    description: 'ออกแบบระบบนำเสนอข้อมูลแบบ Interactive ผ่าน Quarto Slides และ Recharts พร้อมจัดการ Deploy บน Cloud Platform',
+  'bi-dashboards': {
     icon: LayoutDashboard,
-    tags: ['Quarto Slides', 'Recharts', 'Vercel', 'Data Storytelling', 'Git / GitHub'],
     accent: '#06b6d4',
     glowRgb: '6, 182, 212',
     colSpan: 'col-span-1 md:col-span-2 lg:col-span-8',
     rowSpan: 'row-span-1',
-    badge: 'Data Viz'
-  }
-]
+  },
+}
 
 export default function MagicBento({
   enableStars = true,
@@ -74,8 +51,14 @@ export default function MagicBento({
   spotlightRadius = 320,
   particleCount = 8,
   glowColor = '132, 0, 255',
-  items = defaultBentoItems
+  items,
 }) {
+  const { t } = useLanguage()
+  const displayItems = items || (t.skills?.bento || []).map((b) => ({
+    ...b,
+    ...(bentoMeta[b.id] || {}),
+  }))
+
   const containerRef = useRef(null)
   const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 })
   const [isHovered, setIsHovered] = useState(false)
@@ -116,7 +99,7 @@ export default function MagicBento({
 
       {/* Grid of Bento Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-5 w-full relative z-10">
-        {items.map((item, index) => (
+        {displayItems.map((item, index) => (
           <BentoCard
             key={item.id || index}
             item={item}

@@ -4,18 +4,33 @@
     "username": "dewdew978",
     "location": "Bangkok, Thailand",
     "profileUrl": "https://www.strava.com/athletes/195893006",
-    "lastSynced": "2026-09-10T08:49:33.135Z"
+    "lastSynced": "2026-09-10T14:09:57.920Z"
   },
   "summary": {
     "year": 2026,
-    "totalDistanceKm": 38.1,
+    "totalDistanceKm": 39,
     "totalActivities": 5,
     "longestRunKm": 14,
     "avgPace": "9'30\" /km",
-    "totalElevationGainM": 26,
-    "totalMovingTimeHours": 6.3
+    "totalElevationGainM": 25,
+    "totalMovingTimeHours": 6.4
   },
   "activities": [
+    {
+      "id": "20115387508",
+      "title": "Afternoon Run",
+      "timeOfDay": "afternoon",
+      "date": "Thursday, September 10, 2026",
+      "distanceKm": 7,
+      "movingTime": "1:01:04",
+      "avgPace": "8'43\" /km",
+      "elevationGainM": 3,
+      "calories": 455,
+      "cadence": 156,
+      "tag": "Latest Run 🏃",
+      "mapImageUrl": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/VSS63X6CS4JTB6F27J2SMTFIXRAYDBREV2BIBN6IV7LMN7GSJC6KYUNG6KG6MWEK6IMWREI6N5WSDUDQFMJVJMTWURYJ2PI7VXVRS===",
+      "stravaUrl": "https://www.strava.com/activities/20115387508"
+    },
     {
       "id": "20073872905",
       "title": "Evening Run",
@@ -27,7 +42,6 @@
       "elevationGainM": 2,
       "calories": 390,
       "cadence": 156,
-      "tag": "Latest Run 🏃",
       "mapImageUrl": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/F6ZJYNNAAHEY4MOFCKRQMQNS5BQCAJFBARBFLICGAP34LSRW6JKKM2LLLPG2YYNPV7I7NH7UUQYF3GBZEZ3GYIS7STCMPDJYIIIH7NY=",
       "stravaUrl": "https://www.strava.com/activities/20073872905"
     },
@@ -72,20 +86,6 @@
       "cadence": 156,
       "mapImageUrl": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/ZPIINF5STLNAAFFWNN66EY4DL7MLWCZ7VUERTVX2HXMCS7TNIBKWWUVMAV3ZCXIKVQQ63JGKCAWCXBDMHRUDAEZCXOUSAZOJA2MUY===",
       "stravaUrl": "https://www.strava.com/activities/19921555320"
-    },
-    {
-      "id": "19876935884",
-      "title": "Afternoon Run",
-      "timeOfDay": "afternoon",
-      "date": "Monday, August 24, 2026",
-      "distanceKm": 6.1,
-      "movingTime": "59:15",
-      "avgPace": "9'43\" /km",
-      "elevationGainM": 4,
-      "calories": 397,
-      "cadence": 156,
-      "mapImageUrl": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/R55BQSSXOC5NCHCMFQIQFGLPENOS2MDQKMAZ3SBT2ESPCRJVJW6DE37VFKF25CCX5F333Q7PSG2JYV7IZMRBKLVRUGIO6VHCATA4M===",
-      "stravaUrl": "https://www.strava.com/activities/19876935884"
     }
   ]
 }

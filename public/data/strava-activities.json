@@ -4,18 +4,33 @@
     "username": "dewdew978",
     "location": "Bangkok, Thailand",
     "profileUrl": "https://www.strava.com/athletes/195893006",
-    "lastSynced": "2026-09-15T11:24:14.366Z"
+    "lastSynced": "2026-09-15T16:36:23.807Z"
   },
   "summary": {
     "year": 2026,
-    "totalDistanceKm": 37.4,
+    "totalDistanceKm": 41.4,
     "totalActivities": 5,
-    "longestRunKm": 14,
+    "longestRunKm": 18,
     "avgPace": "9'30\" /km",
-    "totalElevationGainM": 21,
-    "totalMovingTimeHours": 6
+    "totalElevationGainM": 28,
+    "totalMovingTimeHours": 6.6
   },
   "activities": [
+    {
+      "id": "20184828914",
+      "title": "วิ่งช่วงบ่าย",
+      "timeOfDay": "afternoon",
+      "date": "Tuesday, September 15, 2026",
+      "distanceKm": 18,
+      "movingTime": "3:05:28",
+      "avgPace": "10'18\" /km",
+      "elevationGainM": 16,
+      "calories": 1170,
+      "cadence": 156,
+      "tag": "Latest Run 🏃",
+      "mapImageUrl": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/LJWY7VCEZUM7JG6FITWH2ZWRYZVZP5BZWDEMU3MRU6WKVQRO2PWUER2UCQ7GD5ZKURSVMI3AUTPY34U42JQJLL2RY3PIRJINVTSSRWI=",
+      "stravaUrl": "https://www.strava.com/activities/20184828914"
+    },
     {
       "id": "20169603869",
       "title": "วิ่งช่วงเย็น",
@@ -27,7 +42,6 @@
       "elevationGainM": 2,
       "calories": 390,
       "cadence": 156,
-      "tag": "Latest Run 🏃",
       "mapImageUrl": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/6VD5B2C6QZVFMWS4RZMDEQP5JVLEARIR6UMPGA4B3HKDDQ4O73HA3QWLP6I3J6LBGSYBRM6XWSJU5UX6N7AQIX5NPS4X72YGJH5ZW===",
       "stravaUrl": "https://www.strava.com/activities/20169603869"
     },
@@ -72,20 +86,6 @@
       "cadence": 156,
       "mapImageUrl": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/F6ZJYNNAAHEY4MOFCKRQMQNS5BQCAJFBARBFLICGAP34LSRW6JKKM2LLLPG2YYNPV7I7NH7UUQYF3GBZEZ3GYIS7STCMPDJYIIIH7NY=",
       "stravaUrl": "https://www.strava.com/activities/20073872905"
-    },
-    {
-      "id": "19990136377",
-      "title": "วิ่งช่วงบ่าย",
-      "timeOfDay": "afternoon",
-      "date": "Tuesday, September 1, 2026",
-      "distanceKm": 14,
-      "movingTime": "2:26:33",
-      "avgPace": "10'28\" /km",
-      "elevationGainM": 9,
-      "calories": 910,
-      "cadence": 156,
-      "mapImageUrl": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/UN3FV65YQDYPCSFIQS246PDVKWOSYIIHJRKXD3MOFH7YCHEWQ67LOG3DEG26MCFRDPKMWVEEBJYE7PWF7F6Y4ZWCVZNE4SP4E42MA===",
-      "stravaUrl": "https://www.strava.com/activities/19990136377"
     }
   ]
 }

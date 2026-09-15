@@ -4,7 +4,7 @@
     "username": "dewdew978",
     "location": "Bangkok, Thailand",
     "profileUrl": "https://www.strava.com/athletes/195893006",
-    "lastSynced": "2026-09-15T16:36:23.807Z"
+    "lastSynced": "2026-09-15T21:02:06.732Z"
   },
   "summary": {
     "year": 2026,
@@ -18,11 +18,11 @@
   "activities": [
     {
       "id": "20184828914",
-      "title": "วิ่งช่วงบ่าย",
-      "timeOfDay": "afternoon",
+      "title": "Long run",
+      "timeOfDay": "evening",
       "date": "Tuesday, September 15, 2026",
       "distanceKm": 18,
-      "movingTime": "3:05:28",
+      "movingTime": "3:05:27",
       "avgPace": "10'18\" /km",
       "elevationGainM": 16,
       "calories": 1170,

@@ -4,16 +4,16 @@
     "username": "dewdew978",
     "location": "Bangkok, Thailand",
     "profileUrl": "https://www.strava.com/athletes/195893006",
-    "lastSynced": "2026-09-27T07:49:31.992Z"
+    "lastSynced": "2026-09-27T13:41:24.474Z"
   },
   "summary": {
     "year": 2026,
-    "totalDistanceKm": 49.6,
-    "totalActivities": 5,
+    "totalDistanceKm": 31.6,
+    "totalActivities": 4,
     "longestRunKm": 21.4,
     "avgPace": "9'30\" /km",
-    "totalElevationGainM": 151,
-    "totalMovingTimeHours": 8.2
+    "totalElevationGainM": 135,
+    "totalMovingTimeHours": 5.1
   },
   "activities": [
     {
@@ -27,7 +27,6 @@
       "elevationGainM": 125,
       "calories": 1391,
       "cadence": 156,
-      "tag": "Latest Run 🏃",
       "mapImageUrl": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/V5HHBHZDRX7LBO33EODTVEFTMGUI3S7WHLSX4WZQSJCM2G4X7RMT6CSZRXPEQY2NWY62TIC3RR6Z3BW4BEGOKMLQMJUI53ZLMQJQHFI=",
       "stravaUrl": "https://www.strava.com/activities/20344538548"
     },
@@ -72,20 +71,6 @@
       "cadence": 156,
       "mapImageUrl": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/VSHDO6GTDSJPN22BE5YNPF7MJU4PZ76SO2XXUJMWWEZMFQKDKH5566J4D55477B7XBXUDOVQ65XGJK5OAIDRDGS5CGW4JXWAVTHE7IA=",
       "stravaUrl": "https://www.strava.com/activities/20206855569"
-    },
-    {
-      "id": "20184828914",
-      "title": "Long run",
-      "timeOfDay": "evening",
-      "date": "Tuesday, September 15, 2026",
-      "distanceKm": 18,
-      "movingTime": "3:05:27",
-      "avgPace": "10'18\" /km",
-      "elevationGainM": 16,
-      "calories": 1170,
-      "cadence": 156,
-      "mapImageUrl": "https://d3o5xota0a1fcr.cloudfront.net/v6/maps/LJWY7VCEZUM7JG6FITWH2ZWRYZVZP5BZWDEMU3MRU6WKVQRO2PWUER2UCQ7GD5ZKURSVMI3AUTPY34U42JQJLL2RY3PIRJINVTSSRWI=",
-      "stravaUrl": "https://www.strava.com/activities/20184828914"
     }
   ]
 }

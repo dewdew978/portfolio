@@ -13,7 +13,6 @@ export function useFullpageScroll(isModalOpen = false) {
   const [activeIdx, setActiveIdx] = useState(0)
   const [scrollProgress, setScrollProgress] = useState(0)
   const isTransitioningRef = useRef(false)
-  const touchStartYRef = useRef(0)
 
   const scrollToIdx = useCallback((index) => {
     if (index < 0 || index >= FULLPAGE_SECTIONS.length) return
@@ -68,7 +67,44 @@ export function useFullpageScroll(isModalOpen = false) {
     return () => window.removeEventListener('scroll', handleScrollSync)
   }, [])
 
-  // Full-page Scroll Controller (Wheel, Keyboard, Touch)
+  // Snap to the next/previous section only once the current one has been fully
+  // scrolled through, so sections taller than the viewport stay readable.
+  // Returns true when the snap was handled (caller should preventDefault).
+  const snapInDirection = useCallback((direction) => {
+    const els = FULLPAGE_SECTIONS.map((s) => document.getElementById(s.id))
+    const y = window.scrollY
+    const vh = window.innerHeight
+
+    let idx = 0
+    els.forEach((el, i) => {
+      if (el && el.offsetTop <= y + 2) idx = i
+    })
+    const current = els[idx]
+    if (!current) return false
+
+    if (direction > 0) {
+      const bottom = current.offsetTop + current.offsetHeight
+      if (y + vh < bottom - 2) return false // still content below in this section
+      if (idx >= els.length - 1) return false
+      scrollToIdx(idx + 1)
+      return true
+    }
+
+    if (y > current.offsetTop + 2) return false // still content above in this section
+    if (idx <= 0) return false
+    const prev = els[idx - 1]
+    // Land on the bottom of a tall previous section instead of jumping past it
+    const target = Math.max(prev.offsetTop, prev.offsetTop + prev.offsetHeight - vh)
+    isTransitioningRef.current = true
+    setActiveIdx(idx - 1)
+    window.scrollTo({ top: target, behavior: 'smooth' })
+    setTimeout(() => {
+      isTransitioningRef.current = false
+    }, 750)
+    return true
+  }, [scrollToIdx])
+
+  // Full-page Scroll Controller (Wheel, Keyboard). Touch devices keep native scrolling.
   useEffect(() => {
     const handleWheel = (e) => {
       if (isModalOpen) return // Allow standard scroll inside modal
@@ -81,19 +117,7 @@ export function useFullpageScroll(isModalOpen = false) {
         return
       }
 
-      if (e.deltaY > 0) {
-        // Next section
-        if (activeIdx < FULLPAGE_SECTIONS.length - 1) {
-          e.preventDefault()
-          scrollToIdx(activeIdx + 1)
-        }
-      } else {
-        // Prev section
-        if (activeIdx > 0) {
-          e.preventDefault()
-          scrollToIdx(activeIdx - 1)
-        }
-      }
+      if (snapInDirection(e.deltaY > 0 ? 1 : -1)) e.preventDefault()
     }
 
     const handleKeyDown = (e) => {
@@ -101,15 +125,9 @@ export function useFullpageScroll(isModalOpen = false) {
       if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return
 
       if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
-        if (activeIdx < FULLPAGE_SECTIONS.length - 1) {
-          e.preventDefault()
-          scrollToIdx(activeIdx + 1)
-        }
+        if (snapInDirection(1)) e.preventDefault()
       } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
-        if (activeIdx > 0) {
-          e.preventDefault()
-          scrollToIdx(activeIdx - 1)
-        }
+        if (snapInDirection(-1)) e.preventDefault()
       } else if (e.key === 'Home') {
         e.preventDefault()
         scrollToIdx(0)
@@ -119,40 +137,14 @@ export function useFullpageScroll(isModalOpen = false) {
       }
     }
 
-    const handleTouchStart = (e) => {
-      if (e.touches && e.touches[0]) {
-        touchStartYRef.current = e.touches[0].clientY
-      }
-    }
-
-    const handleTouchEnd = (e) => {
-      if (isModalOpen || isTransitioningRef.current) return
-      if (!e.changedTouches || !e.changedTouches[0]) return
-
-      const touchEndY = e.changedTouches[0].clientY
-      const diff = touchStartYRef.current - touchEndY
-
-      if (Math.abs(diff) > 45) {
-        if (diff > 0 && activeIdx < FULLPAGE_SECTIONS.length - 1) {
-          scrollToIdx(activeIdx + 1)
-        } else if (diff < 0 && activeIdx > 0) {
-          scrollToIdx(activeIdx - 1)
-        }
-      }
-    }
-
     window.addEventListener('wheel', handleWheel, { passive: false })
     window.addEventListener('keydown', handleKeyDown)
-    window.addEventListener('touchstart', handleTouchStart, { passive: true })
-    window.addEventListener('touchend', handleTouchEnd, { passive: true })
 
     return () => {
       window.removeEventListener('wheel', handleWheel)
       window.removeEventListener('keydown', handleKeyDown)
-      window.removeEventListener('touchstart', handleTouchStart)
-      window.removeEventListener('touchend', handleTouchEnd)
     }
-  }, [activeIdx, isModalOpen, scrollToIdx])
+  }, [isModalOpen, scrollToIdx, snapInDirection])
 
   return {
     activeIdx,

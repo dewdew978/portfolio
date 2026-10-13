@@ -49,7 +49,7 @@ export default function FullpageNavigator({
       {/* Floating Right Pagination Dots */}
       <nav
         aria-label="Page Sections Navigation"
-        className="fixed right-4 lg:right-6 top-1/2 -translate-y-1/2 z-40 hidden md:flex flex-col items-end gap-3.5 p-2 rounded-full backdrop-blur-md bg-white/40 dark:bg-zinc-900/40 border border-zinc-200/50 dark:border-zinc-800/50 shadow-lg shadow-black/5 select-none"
+        className="fixed right-4 lg:right-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col items-end gap-3.5 p-2 rounded-full backdrop-blur-md bg-white/40 dark:bg-zinc-900/40 border border-zinc-200/50 dark:border-zinc-800/50 shadow-lg shadow-black/5 select-none"
       >
         {sections.map((sec, idx) => {
           const isActive = activeIdx === idx
@@ -65,7 +65,7 @@ export default function FullpageNavigator({
               <span
                 className={`absolute right-7 px-2.5 py-1 rounded-md text-xs font-semibold whitespace-nowrap transition-all duration-200 pointer-events-none backdrop-blur-md shadow-sm border ${
                   isActive
-                    ? 'opacity-100 translate-x-0 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 border-zinc-800 dark:border-zinc-200'
+                    ? 'opacity-0 2xl:opacity-100 group-hover:opacity-100 translate-x-0 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 border-zinc-800 dark:border-zinc-200'
                     : 'opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 bg-white/90 dark:bg-zinc-800/90 text-zinc-700 dark:text-zinc-200 border-zinc-200 dark:border-zinc-700'
                 }`}
               >
@@ -91,7 +91,7 @@ export default function FullpageNavigator({
         <button
           onClick={scrollToTop}
           aria-label="Back to top"
-          className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-white/90 dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 shadow-xl hover:shadow-2xl hover:text-indigo-600 dark:hover:text-indigo-400 hover:-translate-y-1 transition-all duration-200 backdrop-blur-md focus:outline-none"
+          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 p-3 rounded-full bg-white/90 dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 shadow-xl hover:shadow-2xl hover:text-indigo-600 dark:hover:text-indigo-400 hover:-translate-y-1 transition-all duration-200 backdrop-blur-md focus:outline-none"
         >
           <ChevronUp size={20} />
         </button>

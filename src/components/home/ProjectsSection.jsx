@@ -43,7 +43,7 @@ export default function ProjectsSection({ onSelectProject }) {
   return (
     <section id="projects" className="fullpage-section max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 scroll-mt-12 justify-center">
       <FadeInSection direction="up" delay={50}>
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-8 gap-4">
           <div>
             <span className="inline-block px-3.5 py-1 rounded-full text-sm font-semibold bg-pink-50 dark:bg-pink-950/60 text-pink-600 dark:text-pink-400 border border-pink-200 dark:border-pink-800/60 mb-3">
               {t.projects.badge}
@@ -57,12 +57,12 @@ export default function ProjectsSection({ onSelectProject }) {
           </div>
 
           {/* Filter Tabs */}
-          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/80">
+          <div className="flex items-center gap-1.5 p-1 w-full sm:w-auto sm:self-start lg:self-auto overflow-x-auto [scrollbar-width:none] rounded-xl bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/80">
             {FILTERS.map(({ id, labelKey }) => (
               <button
                 key={id}
                 onClick={() => setActiveFilter(id)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+                className={`shrink-0 whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                   activeFilter === id
                     ? 'bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white shadow-xs'
                     : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white'

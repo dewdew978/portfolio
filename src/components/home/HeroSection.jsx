@@ -8,18 +8,18 @@ export default function HeroSection() {
   const { lang, t } = useLanguage()
 
   return (
-    <section id="hero" className="fullpage-section relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 justify-center">
+    <section id="hero" className="fullpage-section relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-12 sm:pb-16 justify-center">
       <FadeInSection direction="up" duration={800}>
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 items-center">
           {/* Left Column: Intro */}
-          <div className="lg:col-span-7 flex flex-col items-start">
+          <div className="md:col-span-7 flex flex-col items-start">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 shadow-sm mb-6">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
               <span className="w-2 h-2 rounded-full bg-emerald-500 -ml-4"></span>
               <span>{t.hero.badge}</span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-white leading-[1.15] mb-4">
+            <h1 className="text-4xl sm:text-5xl md:text-[2.75rem] lg:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-white leading-[1.15] mb-4">
               {lang === 'th' ? 'สวัสดีครับ, ผม' : "Hello, I'm"} <br className="hidden sm:inline" />
               <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                 {t.hero.name}
@@ -98,7 +98,7 @@ export default function HeroSection() {
           </div>
 
           {/* Right Column: Profile Image */}
-          <div className="lg:col-span-5 flex justify-center">
+          <div className="md:col-span-5 flex justify-center order-first md:order-none">
             <div className="relative flex justify-center items-center">
               {/* Ambient Glow */}
               <div className="absolute inset-4 rounded-full bg-gradient-to-tr from-indigo-500/25 to-purple-500/25 blur-3xl animate-pulse-glow"></div>
@@ -108,7 +108,7 @@ export default function HeroSection() {
                 <img
                   src={getAssetUrl('/profiledew.jpg')}
                   alt="Pawarit Pansing"
-                  className="w-64 h-64 sm:w-72 sm:h-72 object-cover rounded-2xl bg-zinc-100 dark:bg-zinc-800 shadow-inner"
+                  className="w-44 h-44 sm:w-56 sm:h-56 lg:w-72 lg:h-72 object-cover rounded-2xl bg-zinc-100 dark:bg-zinc-800 shadow-inner"
                 />
               </div>
 

@@ -17,7 +17,7 @@ export const translations = {
     hero: {
       role: 'Data Scientist & Business Analyst',
       badge: 'พร้อมเปิดรับโอกาสใหม่ปี 2026',
-      name: 'พวริศ พันธ์สิงห์',
+      name: 'ปวริศ ปัญสิงห์',
       nickname: '(ดิว)',
       taglineLead: 'เปลี่ยนข้อมูลที่ซับซ้อนให้เป็น',
       taglineBold: 'Actionable Insights',
@@ -200,7 +200,7 @@ export const translations = {
       projectsTitle: 'ผลงานเด่น (Featured Projects)',
       credentialsTitle: 'ประวัติและเรซูเม่ (Credentials)',
       connectTitle: 'ช่องทางติดต่อ (Social & Connect)',
-      copyright: 'พวริศ พันธ์สิงห์. สงวนลิขสิทธิ์ทั้งหมด',
+      copyright: 'ปวริศ ปัญสิงห์. สงวนลิขสิทธิ์ทั้งหมด',
       builtWith: 'พัฒนาด้วย React, Vite & Tailwind CSS',
       downloadResume: 'ดาวน์โหลดเรซูเม่ (CV.pdf)',
       emailMe: 'ส่งอีเมลหาฉัน',

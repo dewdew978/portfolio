@@ -97,7 +97,7 @@ export default function Navbar({ theme, setTheme }) {
         </button>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center">
+        <nav className="hidden lg:flex items-center">
           <ul className="flex items-center gap-1 bg-zinc-100/90 dark:bg-zinc-800/60 p-1 rounded-full border border-zinc-200/60 dark:border-zinc-700/50">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id
@@ -105,7 +105,7 @@ export default function Navbar({ theme, setTheme }) {
                 <li key={link.id}>
                   <button
                     onClick={() => scrollToSection(link.id)}
-                    className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 cursor-pointer ${
+                    className={`px-3 xl:px-4 py-1.5 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 cursor-pointer ${
                       isActive
                         ? 'bg-white dark:bg-zinc-900 text-zinc-950 dark:text-white font-semibold shadow-sm'
                         : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:bg-zinc-200/50 dark:hover:bg-zinc-700/50'
@@ -152,7 +152,7 @@ export default function Navbar({ theme, setTheme }) {
           {/* Athletics / Activities Page Link */}
           <Link
             to="/athletics"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold text-[#FC5200] bg-orange-50 dark:bg-orange-950/50 border border-orange-200 dark:border-orange-900/60 hover:bg-orange-100 dark:hover:bg-orange-900/80 hover:-translate-y-0.5 transition-all shadow-xs"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap text-[#FC5200] bg-orange-50 dark:bg-orange-950/50 border border-orange-200 dark:border-orange-900/60 hover:bg-orange-100 dark:hover:bg-orange-900/80 hover:-translate-y-0.5 transition-all shadow-xs"
             title={t.nav.activitiesTitle}
           >
             <Activity size={13} className="text-[#FC5200]" />
@@ -174,7 +174,7 @@ export default function Navbar({ theme, setTheme }) {
             href={getAssetUrl('/assets/CV.pdf')}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-md shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all duration-200"
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-md shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all duration-200"
           >
             <Download size={14} />
             <span>{t.nav.resume}</span>
@@ -184,7 +184,7 @@ export default function Navbar({ theme, setTheme }) {
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="เมนูนำทาง"
-            className="flex md:hidden w-9 h-9 items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+            className="flex lg:hidden w-9 h-9 items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -193,7 +193,7 @@ export default function Navbar({ theme, setTheme }) {
 
       {/* Mobile Dropdown Drawer */}
       <div
-        className={`absolute top-full mt-2 inset-x-4 p-4 rounded-2xl backdrop-blur-2xl border bg-white/95 dark:bg-zinc-900/95 border-zinc-200 dark:border-zinc-800 shadow-2xl pointer-events-auto transition-all duration-300 md:hidden ${
+        className={`absolute top-full mt-2 inset-x-4 p-4 rounded-2xl backdrop-blur-2xl border bg-white/95 dark:bg-zinc-900/95 border-zinc-200 dark:border-zinc-800 shadow-2xl pointer-events-auto transition-all duration-300 lg:hidden ${
           menuOpen ? 'opacity-100 translate-y-0 scale-100 visible' : 'opacity-0 -translate-y-2 scale-95 invisible'
         }`}
       >

@@ -23,12 +23,19 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Fullpage Fullscreen Section */
 .fullpage-section {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
   box-sizing: border-box;
+}
+
+/* Full-viewport sections only on desktop; phones/tablets flow naturally */
+@media (min-width: 1024px) {
+  .fullpage-section {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
 }
 
 /* Monospace for Code Blocks */

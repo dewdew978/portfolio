@@ -23,11 +23,6 @@ jobs:
           node-version: 20
 
       - name: Run Strava Sync Script
-        env:
-          PAYLOAD_JSON: ${{ toJson(github.event.client_payload) }}
-          STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
-          STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
-          STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
         run: node scripts/sync-strava.js
 
       - name: Commit & Push updated Strava activities

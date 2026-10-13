@@ -79,7 +79,7 @@ export function Footer() {
             className="inline-flex items-center gap-2.5 text-xl font-extrabold tracking-tight text-zinc-900 dark:text-white"
           >
             <span className="w-3 h-3 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 shadow-sm shadow-indigo-500"></span>
-            <span>Pawarit Pansing</span>
+            <span>{t.hero.name}</span>
           </a>
           <p className="text-sm text-zinc-600 dark:text-zinc-400 max-w-sm leading-relaxed">
             {lang === 'th'

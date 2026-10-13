@@ -55,7 +55,7 @@ export const projectsData = {
     ],
     impact: 'ผลการวิเคราะห์ให้ข้อเสนอแนะเชิงประจักษ์ในการวางแผนจัดสรรหน่วยกู้ภัยเชิงรุก และการจัดทำนโยบายลดอุบัติเหตุในพื้นที่เสี่ยงสูงได้อย่างตรงจุด',
     liveUrl: getAssetUrl('/assets/us.html'),
-    liveLabel: 'เปิดดู Interactive Report',
+    liveLabel: 'เปิดดู Interactive Slides',
     gitHubUrl: 'https://github.com/dewdew978'
   }
 }

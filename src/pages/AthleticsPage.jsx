@@ -93,7 +93,7 @@ export default function AthleticsPage() {
 
           <p className="text-lg sm:text-2xl text-zinc-400 font-normal leading-relaxed max-w-2xl mx-auto mb-14">
             {lang === 'th'
-              ? 'บันทึกการฝึกซ้อมและสถิติวิ่งจริงของ Pawarit Pansing (Dew) เชื่อมโยงความอดทนและระเบียบวินัยสู่การคิดวิเคราะห์ข้อมูล'
+              ? 'บันทึกการฝึกซ้อมและสถิติวิ่งจริงของ ปวริศ ปัญสิงห์ (ดิว) เชื่อมโยงความอดทนและระเบียบวินัยสู่การคิดวิเคราะห์ข้อมูล'
               : 'Real-world athletic logs and endurance telemetry by Pawarit Pansing (Dew), linking physical stamina and discipline to data analytics.'}
           </p>
 

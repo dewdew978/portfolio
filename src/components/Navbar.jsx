@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { Sun, Moon, Menu, X, Download, Sparkles, Activity, Languages } from 'lucide-react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { Sun, Moon, Menu, X, Download, Sparkles } from 'lucide-react'
 import { getAssetUrl } from '@/utils/url'
 import { useLanguage } from '@/context/LanguageContext'
 
@@ -149,16 +149,6 @@ export default function Navbar({ theme, setTheme }) {
             </button>
           </div>
 
-          {/* Athletics / Activities Page Link */}
-          <Link
-            to="/athletics"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap text-[#FC5200] bg-orange-50 dark:bg-orange-950/50 border border-orange-200 dark:border-orange-900/60 hover:bg-orange-100 dark:hover:bg-orange-900/80 hover:-translate-y-0.5 transition-all shadow-xs"
-            title={t.nav.activitiesTitle}
-          >
-            <Activity size={13} className="text-[#FC5200]" />
-            <span className="capitalize">{t.nav.activities}</span>
-          </Link>
-
           {/* Theme Switcher Button */}
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
@@ -213,16 +203,6 @@ export default function Navbar({ theme, setTheme }) {
               </button>
             </li>
           ))}
-          <li className="pt-1">
-            <Link
-              to="/athletics"
-              onClick={() => setMenuOpen(false)}
-              className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-base font-medium text-[#FC5200] hover:bg-orange-50 dark:hover:bg-orange-950/40 transition-colors"
-            >
-              <span className="capitalize">{t.nav.activities}</span>
-              <Activity size={16} />
-            </Link>
-          </li>
           <li className="mt-2 pt-3 border-t border-zinc-200 dark:border-zinc-800">
             <a
               href={getAssetUrl('/assets/CV.pdf')}

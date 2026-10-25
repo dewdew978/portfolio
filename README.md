@@ -1,13 +1,12 @@
 # Pawarit Pansing — Data Science & Business Analytics Portfolio
 
 > **Transforming complex data into actionable, high-impact business decisions.**
-> Bilingual (TH/EN) web portfolio with an auto-synced Strava athletics page.
+> Bilingual (TH/EN) portfolio featuring data, analytics, business strategy, and verified AWS Academy credentials.
 
 ---
 
 ## 🚀 Live Demo & Links
 - **Portfolio Website:** [dewdew978.github.io/portfolio](https://dewdew978.github.io/portfolio/)
-- **Athletics & Strava Page:** [dewdew978.github.io/portfolio/athletics](https://dewdew978.github.io/portfolio/athletics)
 - **GitHub Repository:** [github.com/dewdew978/portfolio](https://github.com/dewdew978/portfolio)
 - **LinkedIn Profile:** [linkedin.com/in/pawarit-pansing-5744a435b](https://www.linkedin.com/in/pawarit-pansing-5744a435b/)
 
@@ -20,7 +19,6 @@ npm install
 npm run dev          # local dev server at http://localhost:5173/
 npm run build        # production build → dist/ (base path /portfolio/)
 npm run preview      # serve the production build locally
-npm run sync:strava  # refresh public/data/strava-activities.json manually
 ```
 
 ---
@@ -30,14 +28,11 @@ npm run sync:strava  # refresh public/data/strava-activities.json manually
 ```text
 WEB_PORT/
 ├── .github/workflows/
-│   ├── deploy.yml                # Build & deploy to GitHub Pages on every push to main
-│   └── strava-sync.yml           # Cron (every 2h) Strava sync → commits JSON back to the repo
+│   └── deploy.yml                # Build & deploy to GitHub Pages on every push to main
 ├── public/                       # Static assets served as-is (resolve with getAssetUrl)
-│   ├── assets/                   # CV.pdf, report figures, us.html (US Accidents report)
-│   └── data/strava-activities.json
+│   └── assets/                   # CV, AWS certificates, report figures, and US Accidents slides
 ├── scripts/
-│   ├── postbuild.js              # Copies dist/index.html → 404.html for SPA routing on Pages
-│   └── sync-strava.js            # Scrapes the public Strava widget into strava-activities.json
+│   └── postbuild.js              # Copies dist/index.html → 404.html for SPA routing on Pages
 ├── src/
 │   ├── components/
 │   │   ├── home/                 # Home page sections: Hero, About, Skills, Projects,
@@ -53,10 +48,9 @@ WEB_PORT/
 │   ├── hooks/useFullpageScroll.js   # Wheel/keyboard section-by-section scrolling
 │   ├── locales/translations.js   # All UI copy in TH and EN
 │   ├── pages/
-│   │   ├── HomePage.jsx          # Composes the home sections
-│   │   └── AthleticsPage.jsx     # Strava activity page
+│   │   └── HomePage.jsx          # Composes the home sections
 │   ├── utils/url.js              # getAssetUrl(): prefixes public paths with the Vite base
-│   ├── App.jsx                   # Routes (/, /athletics, /strava) + dark/light theme
+│   ├── App.jsx                   # Home route + dark/light theme
 │   └── main.jsx                  # Entry: ErrorBoundary → Router → LanguageProvider
 ├── legacy/                       # Archived pre-React static site
 ├── index.html
@@ -80,25 +74,14 @@ The site is deployed to **GitHub Pages** at `/portfolio/` by `.github/workflows/
 
 - `vite.config.js` sets `base: '/portfolio/'` for production builds, and the router uses `import.meta.env.BASE_URL` as its basename.
 - Always reference files in `public/` through `getAssetUrl('/path')` so they resolve under the base path.
-- `scripts/postbuild.js` copies `index.html` to `404.html` so deep links like `/portfolio/athletics` work.
-
----
-
-## 🏃 Strava Sync Pipeline
-
-1. **`strava-sync.yml`** runs every 2 hours, and also on `workflow_dispatch` or a `strava_new_activity` repository dispatch.
-2. **`scripts/sync-strava.js`** scrapes the athlete's public Strava "latest rides" widget. No OAuth or secrets are needed.
-3. The result is written to **`public/data/strava-activities.json`** and committed with `[skip ci]`.
-4. **`AthleticsPage.jsx`** fetches that JSON at runtime.
-
-> Because it scrapes widget HTML, the sync can break if Strava changes the widget markup.
+- `scripts/postbuild.js` copies `index.html` to `404.html` for GitHub Pages SPA fallback support.
 
 ---
 
 ## 🛠️ Tech Stack
 
 - **Frontend:** React 18, Vite 5, React Router 7, Tailwind CSS 4, Motion, Lucide React
-- **Automation:** Node.js, GitHub Actions (Pages deploy + cron data sync)
+- **Automation:** Node.js and GitHub Actions for GitHub Pages deployment
 - **Data & Analytics (projects):** Python, Pandas, MS SQL Server, Google ADK, Altair, Gradio, Quarto
 
 ---

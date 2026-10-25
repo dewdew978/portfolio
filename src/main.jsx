@@ -37,9 +37,6 @@ class ErrorBoundary extends React.Component {
             <a href={import.meta.env.BASE_URL} style={{ display: 'inline-block', padding: '8px 16px', backgroundColor: '#6366f1', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold', marginRight: '12px' }}>
               ลองโหลดหน้าแรกใหม่
             </a>
-            <a href={`${import.meta.env.BASE_URL}athletics`} style={{ display: 'inline-block', padding: '8px 16px', backgroundColor: '#fc5200', color: '#fff', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold' }}>
-              ไปหน้า Strava
-            </a>
           </div>
         </div>
       )

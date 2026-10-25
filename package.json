@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && node scripts/postbuild.js",
-    "preview": "vite preview",
-    "sync:strava": "node scripts/sync-strava.js"
+    "preview": "vite preview"
   },
   "dependencies": {
     "lucide-react": "^0.475.0",

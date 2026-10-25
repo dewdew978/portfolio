@@ -1,6 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { Activity, ArrowUpRight } from 'lucide-react'
 import FadeInSection from '@/components/FadeInSection'
 import { useLanguage } from '@/context/LanguageContext'
 
@@ -47,36 +45,6 @@ export default function AboutSection() {
             </p>
           </div>
         </div>
-      </FadeInSection>
-
-      {/* Strava Standalone Page Direct Callout */}
-      <FadeInSection direction="up" delay={300}>
-        <Link
-          to="/athletics"
-          className="group flex flex-wrap items-center justify-between gap-4 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-orange-500/10 via-amber-500/5 to-transparent border border-orange-500/20 hover:border-orange-500/40 hover:bg-orange-500/15 transition-all shadow-sm max-w-4xl mx-auto mt-8 cursor-pointer"
-        >
-          <div className="flex items-center gap-3.5">
-            <div className="w-11 h-11 rounded-xl bg-[#FC5200] text-white flex items-center justify-center shadow-md shadow-orange-500/20 group-hover:scale-105 transition-transform">
-              <Activity size={22} />
-            </div>
-            <div>
-              <div className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white flex items-center gap-2">
-                <span>{t.about.stravaTitle}</span>
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  <span>{t.about.stravaBadge}</span>
-                </span>
-              </div>
-              <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">
-                {t.about.stravaDesc}
-              </p>
-            </div>
-          </div>
-          <div className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#FC5200] group-hover:translate-x-1 transition-transform">
-            <span>{t.about.stravaAction}</span>
-            <ArrowUpRight size={16} />
-          </div>
-        </Link>
       </FadeInSection>
     </section>
   )

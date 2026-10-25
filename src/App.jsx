@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Navigate, Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage'
-import AthleticsPage from './pages/AthleticsPage'
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
@@ -22,8 +21,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage theme={theme} setTheme={setTheme} />} />
-      <Route path="/athletics" element={<AthleticsPage theme={theme} setTheme={setTheme} />} />
-      <Route path="/strava" element={<AthleticsPage theme={theme} setTheme={setTheme} />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )
 }

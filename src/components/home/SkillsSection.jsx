@@ -7,9 +7,9 @@ export default function SkillsSection() {
   const { t } = useLanguage()
 
   return (
-    <section id="skills" className="fullpage-section max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 scroll-mt-12 justify-center">
+    <section id="skills" className="fullpage-section site-container section-space scroll-mt-12 justify-center">
       <FadeInSection direction="up" delay={50}>
-        <div className="mb-12">
+        <div className="mb-8 sm:mb-12">
           <span className="inline-block px-3.5 py-1 rounded-full text-sm font-semibold bg-purple-50 dark:bg-purple-950/60 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-800/60 mb-3">
             {t.skills.badge}
           </span>

@@ -6,8 +6,11 @@ export const FULLPAGE_SECTIONS = [
   { id: 'skills', number: '03', label: 'Skills', thai: 'ทักษะ' },
   { id: 'projects', number: '04', label: 'Works', thai: 'ผลงาน' },
   { id: 'experience', number: '05', label: 'Journey', thai: 'ประสบการณ์' },
-  { id: 'contact', number: '06', label: 'Contact', thai: 'ติดต่อ' }
+  { id: 'aws-certifications', number: '06', label: 'Certificates', thai: 'ใบรับรอง' },
+  { id: 'contact', number: '07', label: 'Contact', thai: 'ติดต่อ' }
 ]
+
+const getSectionTop = (element) => element.getBoundingClientRect().top + window.scrollY
 
 export function useFullpageScroll(isModalOpen = false) {
   const [activeIdx, setActiveIdx] = useState(0)
@@ -23,7 +26,7 @@ export function useFullpageScroll(isModalOpen = false) {
     isTransitioningRef.current = true
     setActiveIdx(index)
 
-    const targetTop = el.offsetTop
+    const targetTop = getSectionTop(el)
     window.scrollTo({
       top: targetTop,
       behavior: 'smooth'
@@ -54,7 +57,7 @@ export function useFullpageScroll(isModalOpen = false) {
       const midPoint = currentScroll + window.innerHeight / 2.5
       for (let i = FULLPAGE_SECTIONS.length - 1; i >= 0; i--) {
         const el = document.getElementById(FULLPAGE_SECTIONS[i].id)
-        if (el && midPoint >= el.offsetTop) {
+        if (el && midPoint >= getSectionTop(el)) {
           setActiveIdx(i)
           return
         }
@@ -77,24 +80,25 @@ export function useFullpageScroll(isModalOpen = false) {
 
     let idx = 0
     els.forEach((el, i) => {
-      if (el && el.offsetTop <= y + 2) idx = i
+      if (el && getSectionTop(el) <= y + 2) idx = i
     })
     const current = els[idx]
     if (!current) return false
 
     if (direction > 0) {
-      const bottom = current.offsetTop + current.offsetHeight
+      const bottom = getSectionTop(current) + current.offsetHeight
       if (y + vh < bottom - 2) return false // still content below in this section
       if (idx >= els.length - 1) return false
       scrollToIdx(idx + 1)
       return true
     }
 
-    if (y > current.offsetTop + 2) return false // still content above in this section
+    if (y > getSectionTop(current) + 2) return false // still content above in this section
     if (idx <= 0) return false
     const prev = els[idx - 1]
     // Land on the bottom of a tall previous section instead of jumping past it
-    const target = Math.max(prev.offsetTop, prev.offsetTop + prev.offsetHeight - vh)
+    const prevTop = getSectionTop(prev)
+    const target = Math.max(prevTop, prevTop + prev.offsetHeight - vh)
     isTransitioningRef.current = true
     setActiveIdx(idx - 1)
     window.scrollTo({ top: target, behavior: 'smooth' })

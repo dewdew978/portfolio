@@ -8,6 +8,7 @@ import AboutSection from '@/components/home/AboutSection'
 import SkillsSection from '@/components/home/SkillsSection'
 import ProjectsSection from '@/components/home/ProjectsSection'
 import ExperienceSection from '@/components/home/ExperienceSection'
+import CertificatesSection from '@/components/home/CertificatesSection'
 import ContactSection from '@/components/home/ContactSection'
 import ProjectModal from '@/components/home/ProjectModal'
 import { useFullpageScroll } from '@/hooks/useFullpageScroll'
@@ -40,6 +41,7 @@ export default function HomePage({ theme, setTheme }) {
       <SkillsSection />
       <ProjectsSection onSelectProject={setSelectedProject} />
       <ExperienceSection />
+      <CertificatesSection />
       <ContactSection />
 
       <Footer />

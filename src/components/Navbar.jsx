@@ -74,9 +74,9 @@ export default function Navbar({ theme, setTheme }) {
   }
 
   return (
-    <header className="fixed top-4 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
+    <header className="fixed top-3 sm:top-4 inset-x-0 z-50 flex justify-center px-3 sm:px-4 pointer-events-none">
       <div
-        className={`pointer-events-auto flex items-center justify-between w-full max-w-5xl px-4 py-2.5 rounded-full backdrop-blur-xl border transition-all duration-300 ${
+        className={`pointer-events-auto flex items-center justify-between w-full max-w-5xl px-3 sm:px-4 py-2 rounded-full backdrop-blur-xl border transition-all duration-300 ${
           isScrolled
             ? 'bg-white/90 dark:bg-zinc-900/90 border-zinc-300/70 dark:border-zinc-700/80 shadow-2xl shadow-indigo-500/10'
             : 'bg-white/80 dark:bg-zinc-900/75 border-zinc-200/80 dark:border-zinc-800/80 shadow-xl shadow-black/5 dark:shadow-black/40'
@@ -90,10 +90,10 @@ export default function Navbar({ theme, setTheme }) {
             }
             window.scrollTo({ top: 0, behavior: 'smooth' })
           }}
-          className="flex items-center gap-2.5 text-lg font-extrabold tracking-tight text-zinc-900 dark:text-white hover:opacity-85 transition-opacity cursor-pointer"
+          className="flex min-h-11 min-w-11 shrink-0 items-center gap-2.5 text-lg font-extrabold tracking-tight text-zinc-900 dark:text-white hover:opacity-85 transition-opacity cursor-pointer"
         >
           <span className="w-2.5 h-2.5 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 shadow-sm shadow-indigo-500 animate-pulse"></span>
-          <span>Pawarit.</span>
+          <span className="hidden min-[360px]:inline">Pawarit.</span>
         </button>
 
         {/* Desktop Navigation Links */}
@@ -127,7 +127,7 @@ export default function Navbar({ theme, setTheme }) {
               onClick={() => setLang('th')}
               title="ภาษาไทย"
               aria-label="เปลี่ยนเป็นภาษาไทย"
-              className={`px-2 py-1 rounded-full transition-all cursor-pointer ${
+              className={`min-h-11 min-w-11 px-2 py-1 rounded-full transition-all cursor-pointer ${
                 lang === 'th'
                   ? 'bg-white dark:bg-zinc-900 text-indigo-600 dark:text-indigo-400 shadow-xs font-bold'
                   : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
@@ -139,7 +139,7 @@ export default function Navbar({ theme, setTheme }) {
               onClick={() => setLang('en')}
               title="English"
               aria-label="Switch to English"
-              className={`px-2 py-1 rounded-full transition-all cursor-pointer ${
+              className={`min-h-11 min-w-11 px-2 py-1 rounded-full transition-all cursor-pointer ${
                 lang === 'en'
                   ? 'bg-white dark:bg-zinc-900 text-indigo-600 dark:text-indigo-400 shadow-xs font-bold'
                   : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
@@ -154,7 +154,7 @@ export default function Navbar({ theme, setTheme }) {
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             title={theme === 'dark' ? t.nav.toggleThemeLight : t.nav.toggleThemeDark}
             aria-label={theme === 'dark' ? t.nav.toggleThemeLight : t.nav.toggleThemeDark}
-            className="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:scale-105 transition-all duration-200 cursor-pointer"
+            className="min-h-11 min-w-11 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:scale-105 transition-all duration-200 cursor-pointer"
           >
             {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
           </button>
@@ -174,7 +174,7 @@ export default function Navbar({ theme, setTheme }) {
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="เมนูนำทาง"
-            className="flex lg:hidden w-9 h-9 items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
+            className="flex lg:hidden min-h-11 min-w-11 items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
@@ -183,7 +183,7 @@ export default function Navbar({ theme, setTheme }) {
 
       {/* Mobile Dropdown Drawer */}
       <div
-        className={`absolute top-full mt-2 inset-x-4 p-4 rounded-2xl backdrop-blur-2xl border bg-white/95 dark:bg-zinc-900/95 border-zinc-200 dark:border-zinc-800 shadow-2xl pointer-events-auto transition-all duration-300 lg:hidden ${
+        className={`absolute top-full mt-2 inset-x-3 sm:inset-x-4 max-h-[calc(100svh-6rem)] overflow-y-auto p-4 rounded-2xl backdrop-blur-2xl border bg-white/95 dark:bg-zinc-900/95 border-zinc-200 dark:border-zinc-800 shadow-2xl pointer-events-auto transition-all duration-300 lg:hidden ${
           menuOpen ? 'opacity-100 translate-y-0 scale-100 visible' : 'opacity-0 -translate-y-2 scale-95 invisible'
         }`}
       >

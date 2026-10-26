@@ -42,19 +42,19 @@ export default function HeroSection() {
               </span>
             </div>
 
-            <div className="flex flex-wrap items-center gap-4 mb-8">
+            <div className="flex w-full flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 mb-8">
               <a
                 href={getAssetUrl('/assets/Pawarit-Pansing-CV.pdf')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all duration-200"
+                className="inline-flex w-full sm:w-auto min-h-11 items-center justify-center gap-2 px-6 py-3 rounded-full text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all duration-200"
               >
                 <Download size={18} />
                 <span>{t.hero.downloadResume}</span>
               </a>
               <a
                 href="#projects"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-base font-semibold text-zinc-800 dark:text-zinc-200 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 shadow-sm hover:-translate-y-0.5 transition-all duration-200"
+                className="inline-flex w-full sm:w-auto min-h-11 items-center justify-center gap-2 px-6 py-3 rounded-full text-base font-semibold text-zinc-800 dark:text-zinc-200 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 shadow-sm hover:-translate-y-0.5 transition-all duration-200"
               >
                 <span>{t.hero.viewProjects}</span>
                 <ChevronDown size={18} />

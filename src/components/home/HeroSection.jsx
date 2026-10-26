@@ -44,7 +44,7 @@ export default function HeroSection() {
 
             <div className="flex flex-wrap items-center gap-4 mb-8">
               <a
-                href={getAssetUrl('/assets/CV.pdf')}
+                href={getAssetUrl('/assets/Pawarit-Pansing-CV.pdf')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all duration-200"

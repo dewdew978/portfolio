@@ -51,7 +51,7 @@ export function Footer() {
     {
       label: t.footer.credentialsTitle,
       links: [
-        { title: t.footer.downloadResume, href: getAssetUrl('/assets/CV.pdf'), target: '_blank', icon: DownloadIcon },
+        { title: t.footer.downloadResume, href: getAssetUrl('/assets/Pawarit-Pansing-CV.pdf'), target: '_blank', icon: DownloadIcon },
         { title: t.footer.awsCertifications, href: '#aws-certifications' },
         { title: 'KMITL Data Science (2027)', href: '#about' },
         { title: 'CMCC 2025 Competitor', href: '#experience' },

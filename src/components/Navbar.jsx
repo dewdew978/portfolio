@@ -161,7 +161,7 @@ export default function Navbar({ theme, setTheme }) {
 
           {/* Download Resume Button */}
           <a
-            href={getAssetUrl('/assets/CV.pdf')}
+            href={getAssetUrl('/assets/Pawarit-Pansing-CV.pdf')}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-md shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all duration-200"
@@ -205,7 +205,7 @@ export default function Navbar({ theme, setTheme }) {
           ))}
           <li className="mt-2 pt-3 border-t border-zinc-200 dark:border-zinc-800">
             <a
-              href={getAssetUrl('/assets/CV.pdf')}
+              href={getAssetUrl('/assets/Pawarit-Pansing-CV.pdf')}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 shadow-md shadow-indigo-500/25"

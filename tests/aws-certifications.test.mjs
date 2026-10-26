@@ -3,7 +3,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import test from 'node:test'
 
 const projectRoot = new URL('../', import.meta.url)
-const experienceSource = readFileSync(new URL('src/components/home/ExperienceSection.jsx', projectRoot), 'utf8')
+const certificatesSource = readFileSync(new URL('src/components/home/CertificatesSection.jsx', projectRoot), 'utf8')
 const footerSource = readFileSync(new URL('src/components/ui/footer-section.tsx', projectRoot), 'utf8')
 const translationsSource = readFileSync(new URL('src/locales/translations.js', projectRoot), 'utf8')
 
@@ -30,14 +30,14 @@ test('publishes both AWS Academy badge images and certificate PDFs', () => {
 })
 
 test('renders accessible credential links for both AWS Academy certifications', () => {
-  assert.match(experienceSource, /awsCertifications/)
-  assert.match(experienceSource, /id="aws-certifications"/)
-  assert.match(footerSource, /href: '#aws-certifications'/)
-  assert.match(experienceSource, /target="_blank"/)
-  assert.match(experienceSource, /rel="noopener noreferrer"/)
+  assert.match(certificatesSource, /awsCertifications/)
+  assert.match(certificatesSource, /id="aws-certifications"/)
+  assert.match(footerSource, /homeAnchor\('aws-certifications'\)/)
+  assert.match(certificatesSource, /target="_blank"/)
+  assert.match(certificatesSource, /rel="noopener noreferrer"/)
 
   for (const credential of credentials) {
-    assert.match(experienceSource, new RegExp(credential.credlyUrl.replaceAll('/', '\\/')))
+    assert.match(certificatesSource, new RegExp(credential.credlyUrl.replaceAll('/', '\\/')))
     assert.match(translationsSource, new RegExp(credential.title.replaceAll('-', '\\-')))
   }
 })

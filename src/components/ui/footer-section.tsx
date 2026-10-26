@@ -27,16 +27,17 @@ interface FooterSection {
 
 export function Footer() {
   const { t, lang } = useLanguage();
+  const homeAnchor = (id: string) => getAssetUrl(`/#${id}`);
 
   const footerLinks: FooterSection[] = [
     {
       label: t.footer.navTitle,
       links: [
-        { title: t.nav.about, href: '#about' },
-        { title: t.nav.skills, href: '#skills' },
-        { title: t.nav.projects, href: '#projects' },
-        { title: t.nav.experience, href: '#experience' },
-        { title: t.nav.contact, href: '#contact' },
+        { title: t.nav.about, href: homeAnchor('about') },
+        { title: t.nav.skills, href: homeAnchor('skills') },
+        { title: t.nav.projects, href: homeAnchor('projects') },
+        { title: t.nav.experience, href: homeAnchor('experience') },
+        { title: t.nav.contact, href: homeAnchor('contact') },
       ],
     },
     {
@@ -45,17 +46,17 @@ export function Footer() {
         { title: 'ExamHub Platform', href: 'https://exam-hub-seven.vercel.app', target: '_blank' },
         { title: 'CMCC 2025 Case Slides', href: 'https://dewdew978.github.io/cmcc-quarto-slides/#/section', target: '_blank' },
         { title: 'US Accidents Analytics', href: getAssetUrl('/assets/us.html'), target: '_blank' },
-        { title: 'AI BI Pipeline (Google ADK)', href: '#experience' },
+        { title: 'AI BI Pipeline (Google ADK)', href: homeAnchor('experience') },
       ],
     },
     {
       label: t.footer.credentialsTitle,
       links: [
         { title: t.footer.downloadResume, href: getAssetUrl('/assets/Pawarit-Pansing-CV.pdf'), target: '_blank', icon: DownloadIcon },
-        { title: t.footer.awsCertifications, href: '#aws-certifications' },
-        { title: 'KMITL Data Science (2027)', href: '#about' },
-        { title: 'CMCC 2025 Competitor', href: '#experience' },
-        { title: 'Multi-Stage BI Architecture', href: '#skills' },
+        { title: t.footer.awsCertifications, href: homeAnchor('aws-certifications') },
+        { title: 'KMITL Data Science (2027)', href: homeAnchor('about') },
+        { title: 'CMCC 2025 Competitor', href: homeAnchor('experience') },
+        { title: 'Multi-Stage BI Architecture', href: homeAnchor('skills') },
       ],
     },
     {
@@ -96,7 +97,7 @@ export function Footer() {
           </p>
         </AnimatedContainer>
 
-        <div className="mt-8 grid grid-cols-2 gap-8 sm:grid-cols-4 xl:col-span-2 xl:mt-0">
+        <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 xl:col-span-2 xl:mt-0">
           {footerLinks.map((section, index) => (
             <AnimatedContainer key={section.label} delay={0.1 + index * 0.1}>
               <div className="mb-8 md:mb-0">
@@ -110,10 +111,10 @@ export function Footer() {
                         href={link.href}
                         target={link.target}
                         rel={link.target ? 'noopener noreferrer' : undefined}
-                        className="hover:text-indigo-600 dark:hover:text-indigo-400 inline-flex items-center gap-1.5 transition-all duration-200"
+                        className="hover:text-indigo-600 dark:hover:text-indigo-400 inline-flex min-h-11 max-w-full items-center gap-1.5 py-1 transition-all duration-200"
                       >
                         {link.icon && <link.icon className="size-3.5" />}
-                        <span>{link.title}</span>
+                        <span className="break-words">{link.title}</span>
                         {link.target === '_blank' && <ArrowUpRight size={12} className="opacity-50" />}
                       </a>
                     </li>

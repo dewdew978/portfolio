@@ -36,3 +36,11 @@ test('light theme is the default when no preference has been saved', () => {
   assert.match(app, /localStorage\.getItem\('theme'\) \|\| 'light'/)
   assert.doesNotMatch(app, /localStorage\.getItem\('theme'\) \|\| 'dark'/)
 })
+
+test('experience section keeps education and removes the two selected experience cards', () => {
+  const experience = read('src/components/home/ExperienceSection.jsx')
+
+  assert.doesNotMatch(experience, /t\.experience\.cmccTitle/)
+  assert.doesNotMatch(experience, /t\.experience\.aiBiTitle/)
+  assert.match(experience, /t\.experience\.eduDegree/)
+})

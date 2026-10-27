@@ -39,6 +39,44 @@ export const projectsData = {
     liveLabel: 'เปิดดู Interactive Slides',
     gitHubUrl: 'https://github.com/dewdew978/cmcc-quarto-slides'
   },
+  'curriculum-system': {
+    title: 'Intelligent Curriculum Information System',
+    impactSuffix: 'OCR, LLM, Text-to-SQL และ Question Answering',
+    category: 'analytics',
+    badges: ['Intelligent System', 'OCR', 'Text-to-SQL', 'Python'],
+    image: getAssetUrl('/assets/projects/intelligent-curriculum-system.png'),
+    overview: 'ระบบผู้ช่วยค้นหาข้อมูลหลักสูตรที่สกัดข้อมูลจากเอกสาร มคอ.2 ครอบคลุมหลักสูตร AIT, IT, DSBA และ BIT แล้วเปิดให้ถามตอบข้อมูลด้วยภาษาธรรมชาติ',
+    architecture: 'Python OCR pipeline เปรียบเทียบหลาย OCR engines ก่อนจัดโครงสร้างข้อมูลลง SQLite และให้บริการเว็บผ่าน FastAPI โดยใช้ Local LLM แปลงคำถามเป็น SQL และสังเคราะห์คำตอบจากข้อมูลที่ตรวจสอบได้',
+    features: [
+      'Curriculum OCR Pipeline: สกัดรายวิชา แผนการศึกษา วิชาเลือก ข้อบังคับ และคำอธิบายรายวิชาจากเอกสารหลักสูตร',
+      'Text-to-SQL Question Answering: แปลงคำถามภาษาธรรมชาติเป็น SQL แล้วตอบจากฐานข้อมูลหลักสูตร',
+      'Evaluation Workflow: ประเมินผลการสกัดด้วย CER, WER, Precision, Recall และ F1 พร้อมเก็บรายงานที่ตรวจสอบซ้ำได้',
+      'Multi-Program Database: รวมข้อมูลหลักสูตร AIT, IT, DSBA และ BIT ในฐานข้อมูลเชิงสัมพันธ์เดียว'
+    ],
+    impact: 'เปลี่ยนเอกสารหลักสูตรจำนวนมากให้เป็นฐานข้อมูลที่ค้นหาและถามตอบได้ พร้อมกระบวนการประเมินคุณภาพที่ทำซ้ำได้',
+    liveUrl: 'https://canva.link/tgvf3eo1finloeb',
+    liveLabel: 'เปิดดู Presentation',
+    gitHubUrl: 'https://github.com/dewdew978/isd-2026-luksuitpiti'
+  },
+  'cloud-sql-playground': {
+    title: 'Cloud SQL Playground',
+    impactSuffix: 'SQL workspace แบบแยก schema บน AWS',
+    category: 'web',
+    badges: ['Cloud Platform', 'AWS', 'PostgreSQL', 'React'],
+    image: getAssetUrl('/assets/projects/cloud-sql-playground.png'),
+    overview: 'ต้นแบบพื้นที่ฝึกเขียนและทดลอง SQL บน PostgreSQL โดยไม่ต้องติดตั้งฐานข้อมูล ออกแบบให้ผู้ใช้แต่ละคนมีพื้นที่แบบแยก schema พร้อมชุดข้อมูลและโจทย์ฝึกสำหรับเรียนรู้ผ่านเว็บ โดยหน้าเว็บยังไม่ได้เปิดใช้งานสาธารณะ',
+    architecture: 'ต้นแบบ React และ Monaco Editor เชื่อมต่อ API Gateway กับ AWS Lambda ภายใน VPC ใช้ RDS PostgreSQL 16 เป็นฐานข้อมูล พร้อม DynamoDB, Secrets Manager, S3 และ EventBridge โดยบางส่วนยังรอการ deploy และทดสอบกับ API จริง',
+    features: [
+      'Isolated SQL Workspace: แยก PostgreSQL schema และ role รายผู้ใช้ พร้อมจำกัด connection และ query timeout',
+      'Learning Datasets: ชุดข้อมูล school, shop และ company รวม 14 ตาราง พร้อมโจทย์ SQL 30 ข้อที่ทดสอบในเครื่องแล้ว',
+      'Database Exploration: เรียกใช้ SQL ดูประวัติ query สำรวจ schema และ ER diagram ผ่านหน้าเว็บ',
+      'Serverless Operations: ออกแบบการจัดการ session, authentication, secrets และ cleanup ด้วยบริการ AWS'
+    ],
+    impact: 'พัฒนาต้นแบบสภาพแวดล้อมฝึก SQL พร้อมมาตรการแยกข้อมูลและจำกัดคำสั่งในระดับฐานข้อมูล โดยมีชุดทดสอบสำหรับตรวจสอบการทำงานก่อนเปิดใช้งานจริง',
+    liveUrl: 'https://canva.link/5mlz3o5a602axht',
+    liveLabel: 'เปิดดู Presentation',
+    gitHubUrl: null
+  },
   'us-accidents': {
     title: 'US Accidents Analytics & Risk Modeling Report',
     impactSuffix: 'Big Data Risk Modeling ล้านเรคคอร์ด',

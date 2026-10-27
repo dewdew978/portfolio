@@ -44,3 +44,16 @@ test('experience section keeps education and removes the two selected experience
   assert.doesNotMatch(experience, /t\.experience\.aiBiTitle/)
   assert.match(experience, /t\.experience\.eduDegree/)
 })
+test('skills use a responsive minimal list without bento effects', () => {
+  const section = read('src/components/home/SkillsSection.jsx')
+  const list = read('src/components/skills/SkillsList.jsx')
+
+  assert.match(section, /SkillsList/)
+  assert.doesNotMatch(section, /MagicBento/)
+  assert.match(list, /<ol/)
+  assert.match(list, /items\.map/)
+  assert.match(list, /String\(index \+ 1\)\.padStart\(2, '0'\)/)
+  assert.match(list, /flex-wrap/)
+  assert.match(list, /border-t/)
+  assert.doesNotMatch(list, /svg|Sparkles|enableTilt|particle/i)
+})

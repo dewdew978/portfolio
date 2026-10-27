@@ -12,7 +12,7 @@ test('the page and showcase remain inside narrow viewports', () => {
   assert.match(showcase, /w-\[min\(calc\(100vw-2rem\),28\.75rem\)\]/)
 })
 
-test('primary actions stack on phones and expand progressively', () => {
+test('primary actions adapt safely across phone widths', () => {
   const certificate = read('src/components/home/CertificatesSection.jsx')
   const contact = read('src/components/home/ContactSection.jsx')
   const modal = read('src/components/home/ProjectModal.jsx')
@@ -22,7 +22,7 @@ test('primary actions stack on phones and expand progressively', () => {
   assert.match(certificate, /w-full sm:w-auto/)
   assert.match(contact, /flex flex-col sm:flex-row/)
   assert.match(contact, /w-full sm:w-auto/)
-  assert.match(modal, /flex-col sm:flex-row/)
+  assert.match(modal, /flex flex-wrap items-center/)
   assert.match(grid, /flex flex-col sm:flex-row/)
 })
 

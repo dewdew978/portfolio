@@ -1,6 +1,6 @@
 import React from 'react'
 import FadeInSection from '@/components/FadeInSection'
-import MagicBento from '@/components/MagicBento/MagicBento'
+import SkillsList from '@/components/skills/SkillsList'
 import { useLanguage } from '@/context/LanguageContext'
 
 export default function SkillsSection() {
@@ -22,18 +22,8 @@ export default function SkillsSection() {
         </div>
       </FadeInSection>
 
-      {/* REACT BITS MAGIC BENTO COMPONENT */}
       <FadeInSection direction="up" delay={150}>
-        <MagicBento 
-          enableStars={true}
-          enableSpotlight={true}
-          enableBorderGlow={true}
-          enableTilt={true}
-          glowColor="147, 51, 234"
-          spotlightRadius={300}
-          particleCount={12}
-          className="w-full"
-        />
+        <SkillsList items={t.skills.bento} />
       </FadeInSection>
     </section>
   )

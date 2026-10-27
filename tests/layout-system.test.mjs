@@ -19,6 +19,20 @@ test('major pages use shared site container and section spacing', () => {
     assert.match(source, /site-container/)
     assert.match(source, /section-space/)
   }
-  assert.match(read('src/components/home/ProjectsSection.jsx'), /display-heading/)
+  assert.match(read('src/components/home/ProjectsSection.jsx'), /text-3xl sm:text-4xl/)
   assert.match(read('src/pages/ProjectsPage.jsx'), /display-heading/)
+})
+
+test('hero omits the availability badge and insight tagline block', () => {
+  const hero = read('src/components/home/HeroSection.jsx')
+  assert.doesNotMatch(hero, /t\.hero\.badge/)
+  assert.doesNotMatch(hero, /t\.hero\.taglineLead/)
+  assert.doesNotMatch(hero, /t\.hero\.taglineBold/)
+  assert.doesNotMatch(hero, /t\.hero\.taglineEnd/)
+})
+
+test('light theme is the default when no preference has been saved', () => {
+  const app = read('src/App.jsx')
+  assert.match(app, /localStorage\.getItem\('theme'\) \|\| 'light'/)
+  assert.doesNotMatch(app, /localStorage\.getItem\('theme'\) \|\| 'dark'/)
 })

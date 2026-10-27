@@ -1,8 +1,9 @@
 import React from 'react'
-import { Download, ChevronDown, Github, Linkedin, Mail, Sparkles } from 'lucide-react'
+import { Download, ChevronDown, Github, Linkedin, Mail } from 'lucide-react'
 import FadeInSection from '@/components/FadeInSection'
 import { getAssetUrl } from '@/utils/url'
 import { useLanguage } from '@/context/LanguageContext'
+import PixelOrb from '@/components/brand/PixelOrb'
 
 export default function HeroSection() {
   const { lang, t } = useLanguage()
@@ -13,12 +14,6 @@ export default function HeroSection() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 items-center">
           {/* Left Column: Intro */}
           <div className="md:col-span-7 flex flex-col items-start">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-medium bg-zinc-100 dark:bg-zinc-900 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 shadow-sm mb-6">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-              <span className="w-2 h-2 rounded-full bg-emerald-500 -ml-4"></span>
-              <span>{t.hero.badge}</span>
-            </div>
-
             <h1 className="text-4xl sm:text-5xl md:text-[2.75rem] lg:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-white leading-[1.15] mb-4">
               {lang === 'th' ? 'สวัสดีครับ, ผม' : "Hello, I'm"} <br className="hidden sm:inline" />
               <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
@@ -34,13 +29,6 @@ export default function HeroSection() {
             <p className="text-xl sm:text-2xl font-medium text-zinc-600 dark:text-zinc-400 mb-6">
               {t.hero.role}
             </p>
-
-            <div className="flex items-center gap-3 p-4 rounded-2xl bg-zinc-100/90 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 border-l-4 border-l-indigo-600 text-zinc-800 dark:text-zinc-200 text-base max-w-xl mb-8 shadow-sm">
-              <Sparkles size={20} className="text-indigo-500 shrink-0" />
-              <span>
-                {t.hero.taglineLead} <strong className="font-semibold text-zinc-950 dark:text-white">{t.hero.taglineBold}</strong> {t.hero.taglineEnd}
-              </span>
-            </div>
 
             <div className="flex w-full flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 mb-8">
               <a
@@ -100,6 +88,12 @@ export default function HeroSection() {
           {/* Right Column: Profile Image */}
           <div className="md:col-span-5 flex justify-center order-first md:order-none">
             <div className="relative flex justify-center items-center">
+              <PixelOrb
+                size="lg"
+                interactive
+                className="absolute -right-4 -top-10 sm:-right-14 sm:-top-12 z-20"
+              />
+
               {/* Ambient Glow */}
               <div className="absolute inset-4 rounded-full bg-gradient-to-tr from-indigo-500/25 to-purple-500/25 blur-3xl animate-pulse-glow"></div>
 

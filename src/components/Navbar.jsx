@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Sun, Moon, Menu, X, Download, Sparkles } from 'lucide-react'
 import { getAssetUrl } from '@/utils/url'
 import { useLanguage } from '@/context/LanguageContext'
+import PixelOrb from '@/components/brand/PixelOrb'
 
 export default function Navbar({ theme, setTheme }) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -83,18 +84,28 @@ export default function Navbar({ theme, setTheme }) {
         }`}
       >
         {/* Brand Logo */}
-        <button
-          onClick={() => {
-            if (location.pathname !== '/') {
-              navigate('/')
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' })
-          }}
+        <div
           className="flex min-h-11 min-w-11 shrink-0 items-center gap-2.5 text-lg font-extrabold tracking-tight text-zinc-900 dark:text-white hover:opacity-85 transition-opacity cursor-pointer"
         >
-          <span className="w-2.5 h-2.5 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 shadow-sm shadow-indigo-500 animate-pulse"></span>
-          <span className="hidden min-[360px]:inline">Pawarit.</span>
-        </button>
+          <PixelOrb
+            size="sm"
+            interactive
+            onActivate={() => {
+              if (location.pathname !== '/') navigate('/')
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
+          />
+          <button
+            type="button"
+            onClick={() => {
+              if (location.pathname !== '/') navigate('/')
+              window.scrollTo({ top: 0, behavior: 'smooth' })
+            }}
+            className="hidden min-[360px]:inline cursor-pointer"
+          >
+            <span>Pawarit</span>
+          </button>
+        </div>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden lg:flex items-center">

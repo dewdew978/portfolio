@@ -3,7 +3,7 @@ import { getAssetUrl } from '@/utils/url'
 export const projectsData = {
   examhub: {
     title: 'ExamHub — Online Examination Platform',
-    impactSuffix: '— ลดเวลาจัดชุดข้อสอบลง 70%',
+    impactSuffix: 'ลดเวลาจัดชุดข้อสอบลง 70%',
     category: 'web',
     badges: ['Web Platform', 'EdTech', 'Analytics', 'Vercel'],
     image: getAssetUrl('/ExamHubpage.png'),
@@ -22,7 +22,7 @@ export const projectsData = {
   },
   cmcc: {
     title: 'CMCC 2025 — Strategy & Digital Innovation (Plan B Media)',
-    impactSuffix: '— โมเดล Asset Tokenization & ROI',
+    impactSuffix: 'โมเดล Asset Tokenization & ROI',
     category: 'business',
     badges: ['Business Strategy', 'Financial Valuation', 'Capital Market', 'Quarto'],
     image: getAssetUrl('/cmcc.png'),
@@ -41,7 +41,7 @@ export const projectsData = {
   },
   'us-accidents': {
     title: 'US Accidents Analytics & Risk Modeling Report',
-    impactSuffix: '— Big Data Risk Modeling ล้านเรคคอร์ด',
+    impactSuffix: 'Big Data Risk Modeling ล้านเรคคอร์ด',
     category: 'analytics',
     badges: ['Data Analytics', 'Python', 'Pandas', 'EDA', 'Data Viz'],
     image: getAssetUrl('/assets/images/1.png'),

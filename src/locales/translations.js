@@ -103,7 +103,8 @@ export const translations = {
       items: {
         examhub: {
           title: 'ExamHub — Online Examination Platform',
-          impactSuffix: '— ลดเวลาจัดชุดข้อสอบลง 70%',
+          showcaseTitle: 'ExamHub',
+          impactSuffix: 'ลดเวลาจัดชุดข้อสอบลง 70%',
           category: 'web',
           badges: ['Web Platform', 'EdTech', 'Analytics', 'Vercel'],
           overview: 'แพลตฟอร์มคลังข้อสอบและจัดการการสอบออนไลน์ ออกแบบมาเพื่อสนับสนุนการเรียนรู้ในระดับอุดมศึกษา รองรับมากกว่า 20+ สาขาวิชาในหมวด Computer Science และ Data Science พร้อมระบบตรวจคำตอบและการวิเคราะห์คะแนนแบบเรียลไทม์',
@@ -119,7 +120,8 @@ export const translations = {
         },
         cmcc: {
           title: 'CMCC 2025 — Strategy & Digital Innovation (Plan B Media)',
-          impactSuffix: '— โมเดล Asset Tokenization & ROI',
+          showcaseTitle: 'CMCC 2025',
+          impactSuffix: 'โมเดล Asset Tokenization & ROI',
           category: 'business',
           badges: ['Business Strategy', 'Financial Valuation', 'Capital Market', 'Quarto'],
           overview: 'โครงการแข่งขันวิเคราะห์เคสตลาดทุนระดับประเทศ Capital Market Case Competition 2025 สำหรับ Plan B Media เพื่อค้นหาโอกาสทางธุรกิจใหม่และวางแผนกลยุทธ์เชิงรุกสำหรับสื่อนอกบ้าน (Out-of-Home Media) ในยุคดิจิทัล',
@@ -135,7 +137,8 @@ export const translations = {
         },
         'us-accidents': {
           title: 'US Accidents Analytics & Risk Modeling Report',
-          impactSuffix: '— Big Data Risk Modeling ล้านเรคคอร์ด',
+          showcaseTitle: 'US Accident Analytics',
+          impactSuffix: 'Big Data Risk Modeling ล้านเรคคอร์ด',
           category: 'analytics',
           badges: ['Data Analytics', 'Python', 'Pandas', 'EDA', 'Data Viz'],
           overview: 'โครงการวิเคราะห์ชุดข้อมูลอุบัติเหตุจราจรในสหรัฐอเมริกาขนาดใหญ่ (US Accidents Dataset หลายล้านเรคคอร์ด) เพื่อค้นหาความสัมพันธ์ ปัจจัยเสี่ยง และสร้างโมเดลความรุนแรงของอุบัติเหตุในแต่ละพื้นที่',
@@ -327,7 +330,8 @@ export const translations = {
       items: {
         examhub: {
           title: 'ExamHub — Online Examination Platform',
-          impactSuffix: '— Reduced exam compilation time by 70%',
+          showcaseTitle: 'ExamHub',
+          impactSuffix: 'Reduced exam compilation time by 70%',
           category: 'web',
           badges: ['Web Platform', 'EdTech', 'Analytics', 'Vercel'],
           overview: 'Online examination and question repository platform engineered for higher education. Supports 20+ disciplines across Computer Science and Data Science with automated scoring and real-time performance analytics.',
@@ -343,7 +347,8 @@ export const translations = {
         },
         cmcc: {
           title: 'CMCC 2025 — Strategy & Digital Innovation (Plan B Media)',
-          impactSuffix: '— Asset Tokenization & ROI Model',
+          showcaseTitle: 'CMCC 2025',
+          impactSuffix: 'Asset Tokenization & ROI Model',
           category: 'business',
           badges: ['Business Strategy', 'Financial Valuation', 'Capital Market', 'Quarto'],
           overview: 'National Capital Market Case Competition 2025 representing strategic analysis for Plan B Media, identifying new business ventures and proactive digital transformation opportunities for Out-of-Home (OOH) media.',
@@ -359,7 +364,8 @@ export const translations = {
         },
         'us-accidents': {
           title: 'US Accidents Analytics & Risk Modeling Report',
-          impactSuffix: '— Big Data Risk Modeling (Million Records)',
+          showcaseTitle: 'US Accident Analytics',
+          impactSuffix: 'Big Data Risk Modeling (Million Records)',
           category: 'analytics',
           badges: ['Data Analytics', 'Python', 'Pandas', 'EDA', 'Data Viz'],
           overview: 'Extensive multi-million record US traffic accidents dataset analysis uncovering risk factors, geographic correlations, and predictive severity scoring.',

@@ -48,11 +48,13 @@ test('index.html contains comprehensive SEO tags for personal branding', () => {
   assert.equal(jsonLd['@context'], 'https://schema.org')
   assert.ok(jsonLd['@graph'] || jsonLd['@type'], 'Must define graph or type')
 
-  const personNode = Array.isArray(jsonLd['@graph'])
-    ? jsonLd['@graph'].find(n => n['@type'] === 'Person')
-    : (jsonLd['@type'] === 'Person' ? jsonLd : null)
+  const graph = jsonLd['@graph'] || [jsonLd]
+  const profilePage = graph.find(n => n['@type'] === 'ProfilePage')
+  assert.ok(profilePage, 'Must define ProfilePage')
+  assert.ok(profilePage.mainEntity, 'Google requires mainEntity on ProfilePage')
 
-  assert.ok(personNode, 'Must contain a Person entity')
+  const personNode = profilePage.mainEntity
+  assert.equal(personNode['@type'], 'Person')
   assert.equal(personNode.name, 'Pawarit Pansing')
   assert.equal(personNode.alternateName, 'ปวริศ ปัญสิงห์')
   assert.ok(personNode.sameAs?.includes('https://www.linkedin.com/in/pawarit-pansing-5744a435b/'))

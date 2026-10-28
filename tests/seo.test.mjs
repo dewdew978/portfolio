@@ -12,6 +12,9 @@ test('index.html contains comprehensive SEO tags for personal branding', () => {
   assert.match(html, /ปวริศ ปัญสิงห์/)
   assert.match(html, /Data/)
 
+  // Google Search Console verification
+  assert.match(html, /<meta name="google-site-verification" content="y2G3DkCRNnwlofSIuaDwhAGATrReT9b4MJpwYIIUCVY"\s*\/?>/)
+
   // Canonical tag
   assert.match(html, /<link rel="canonical" href="https:\/\/dewdew978\.github\.io\/portfolio\/"\s*\/?>/)
 
@@ -28,14 +31,14 @@ test('index.html contains comprehensive SEO tags for personal branding', () => {
   assert.match(html, /<meta property="og:title"/)
   assert.match(html, /<meta property="og:description"/)
   assert.match(html, /<meta property="og:url" content="https:\/\/dewdew978\.github\.io\/portfolio\/"\s*\/?>/)
-  assert.match(html, /<meta property="og:image" content="https:\/\/dewdew978\.github\.io\/portfolio\/profiledew\.jpg"\s*\/?>/)
+  assert.match(html, /<meta property="og:image" content="https:\/\/dewdew978\.github\.io\/portfolio\/profiledew.jpg"\s*\/?>/)
   assert.match(html, /<meta property="og:site_name" content="Pawarit Pansing Portfolio"\s*\/?>/)
 
   // Twitter cards
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\s*\/?>/)
   assert.match(html, /<meta name="twitter:title"/)
   assert.match(html, /<meta name="twitter:description"/)
-  assert.match(html, /<meta name="twitter:image" content="https:\/\/dewdew978\.github\.io\/portfolio\/profiledew\.jpg"\s*\/?>/)
+  assert.match(html, /<meta name="twitter:image" content="https:\/\/dewdew978\.github\.io\/portfolio\/profiledew.jpg"\s*\/?>/)
 
   // JSON-LD Structured Data
   assert.match(html, /<script type="application\/ld\+json">/)

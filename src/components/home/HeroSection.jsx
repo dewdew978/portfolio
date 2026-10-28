@@ -101,7 +101,7 @@ export default function HeroSection() {
               <div className="relative z-10 p-2.5 rounded-3xl bg-gradient-to-tr from-white/40 to-white/10 dark:from-zinc-800/80 dark:to-zinc-900/80 border border-zinc-200/80 dark:border-zinc-700/80 shadow-2xl backdrop-blur-xl hover:-translate-y-1 transition-all duration-300">
                 <img
                   src={getAssetUrl('/profiledew.jpg')}
-                  alt="Pawarit Pansing"
+                  alt="Pawarit Pansing (ปวริศ ปัญสิงห์) – Data & Business Analyst"
                   className="w-44 h-44 sm:w-56 sm:h-56 lg:w-72 lg:h-72 object-cover rounded-2xl bg-zinc-100 dark:bg-zinc-800 shadow-inner"
                 />
               </div>

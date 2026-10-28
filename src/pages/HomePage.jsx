@@ -12,9 +12,22 @@ import CertificatesSection from '@/components/home/CertificatesSection'
 import ContactSection from '@/components/home/ContactSection'
 import ProjectModal from '@/components/home/ProjectModal'
 import { useFullpageScroll } from '@/hooks/useFullpageScroll'
+import { usePageSEO } from '@/hooks/usePageSEO'
+import { useLanguage } from '@/context/LanguageContext'
 
 export default function HomePage({ theme, setTheme }) {
+  const { lang } = useLanguage()
   const [selectedProject, setSelectedProject] = useState(null)
+
+  usePageSEO({
+    title: lang === 'th'
+      ? 'Pawarit Pansing (ปวริศ ปัญสิงห์) | พอร์ตโฟลิโอ Data & Business Analyst'
+      : 'Pawarit Pansing (ปวริศ ปัญสิงห์) | Data & Business Analyst Portfolio',
+    description: lang === 'th'
+      ? 'พอร์ตโฟลิโออย่างเป็นทางการของ ปวริศ ปัญสิงห์ (Pawarit Pansing) – Data Analyst & Business Analyst รวมผลงานการวิเคราะห์ข้อมูล แดชบอร์ด Power BI, SQL, Python'
+      : 'Official portfolio of Pawarit Pansing (ปวริศ ปัญสิงห์) – Data Analyst & Business Analyst showcasing data analytics, Power BI dashboards, SQL, and business insights.',
+    canonicalPath: '',
+  })
 
   // Fullpage scrolling is paused while the project modal is open
   const { activeIdx, scrollToIdx, scrollProgress, sections } = useFullpageScroll(Boolean(selectedProject))

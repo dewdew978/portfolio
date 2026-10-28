@@ -7,11 +7,22 @@ import ProjectModal from '@/components/home/ProjectModal'
 import { Footer } from '@/components/ui/footer-section'
 import { useLanguage } from '@/context/LanguageContext'
 import { getLocalizedProjects } from '@/utils/projects'
+import { usePageSEO } from '@/hooks/usePageSEO'
 
 export default function ProjectsPage({ theme, setTheme }) {
   const { t, lang } = useLanguage()
   const [selectedProject, setSelectedProject] = useState(null)
   const projects = getLocalizedProjects(t)
+
+  usePageSEO({
+    title: lang === 'th'
+      ? 'ผลงานและโปรเจกต์ทั้งหมด (Projects) | Pawarit Pansing (ปวริศ ปัญสิงห์)'
+      : 'All Projects & Case Studies | Pawarit Pansing (ปวริศ ปัญสิงห์)',
+    description: lang === 'th'
+      ? `รวมผลงานและเคสศึกษาการวิเคราะห์ข้อมูล ${projects.length} โปรเจกต์ของ ปวริศ ปัญสิงห์ (Pawarit Pansing)`
+      : `Explore ${projects.length} data analytics and business strategy projects by Pawarit Pansing (ปวริศ ปัญสิงห์).`,
+    canonicalPath: 'projects',
+  })
 
   return (
     <div className="min-h-screen bg-zinc-50 text-zinc-950 dark:bg-zinc-950 dark:text-white">

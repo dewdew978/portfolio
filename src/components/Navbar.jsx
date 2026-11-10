@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Sun, Moon, Menu, X, Download, Sparkles } from 'lucide-react'
+import { Sun, Moon, Menu, X, Download } from 'lucide-react'
 import { getAssetUrl } from '@/utils/url'
 import { useLanguage } from '@/context/LanguageContext'
 import PixelOrb from '@/components/brand/PixelOrb'
@@ -213,7 +213,6 @@ export default function Navbar({ theme, setTheme }) {
                 }`}
               >
                 <span>{link.label}</span>
-                {activeSection === link.id && <Sparkles size={16} className="text-zinc-900 dark:text-zinc-100" />}
               </button>
             </li>
           ))}

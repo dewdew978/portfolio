@@ -9,7 +9,7 @@ export function LanguageProvider({ children }) {
       const saved = localStorage.getItem('portfolio_lang')
       if (saved === 'th' || saved === 'en') return saved
     }
-    return 'th'
+    return 'en'
   })
 
   const setLang = (newLang) => {
@@ -27,7 +27,7 @@ export function LanguageProvider({ children }) {
     document.documentElement.lang = lang
   }, [lang])
 
-  const t = translations[lang] || translations.th
+  const t = translations[lang] || translations.en
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, toggleLang, t }}>

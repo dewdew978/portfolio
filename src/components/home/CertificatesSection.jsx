@@ -7,19 +7,22 @@ import { useLanguage } from '@/context/LanguageContext'
 const CERTIFICATIONS = [
   {
     id: 'cloud-foundations',
-    image: '/assets/certificates/aws-cloud-foundations.png',
+    image: '/assets/certificates/aws-cloud-foundations-cert.png',
+    badgeImage: '/assets/certificates/aws-cloud-foundations.png',
     certificate: '/assets/certificates/aws-cloud-foundations.pdf',
     credentialUrl: 'https://www.credly.com/go/ZDQCsvZy',
   },
   {
     id: 'cloud-architecting',
-    image: '/assets/certificates/aws-cloud-architecting.png',
+    image: '/assets/certificates/aws-cloud-architecting-cert.png',
+    badgeImage: '/assets/certificates/aws-cloud-architecting.png',
     certificate: '/assets/certificates/aws-cloud-architecting.pdf',
     credentialUrl: 'https://www.credly.com/go/BbT284Yr',
   },
   {
     id: 'opswat-cybersecurity-fundamentals-associate',
     image: '/assets/certificates/opswat-cybersecurity-fundamentals-associate.png',
+    badgeImage: '/assets/certificates/opswat-cybersecurity-fundamentals-associate-ocfa.png',
     credentialUrl: 'https://learn.opswatacademy.com/certificate/I6qeVClKjA',
   },
 ]

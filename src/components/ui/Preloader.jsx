@@ -12,7 +12,7 @@ export default function Preloader({ onComplete }) {
   const scene1Text = 'Hello welcome'
   const scene2Text = "Pawarit Pansing, it's me"
 
-  // Ensure Momo Signature font is loaded before typewriter starts
+  // Ensure Caveat font is loaded before typewriter starts
   useEffect(() => {
     let active = true
     const fallbackTimer = setTimeout(() => {
@@ -20,7 +20,7 @@ export default function Preloader({ onComplete }) {
     }, 250)
 
     if (typeof document !== 'undefined' && document.fonts?.load) {
-      document.fonts.load('48px "Momo Signature"').then(() => {
+      document.fonts.load('64px "Caveat"').then(() => {
         if (active) setFontReady(true)
       }).catch(() => {
         if (active) setFontReady(true)
@@ -58,7 +58,7 @@ export default function Preloader({ onComplete }) {
             timer = setTimeout(() => {
               setScene(2)
             }, 380)
-          }, 500)
+          }, 520)
         }
       }
 
@@ -81,7 +81,7 @@ export default function Preloader({ onComplete }) {
             timer = setTimeout(() => {
               onComplete?.()
             }, 600)
-          }, 650)
+          }, 700)
         }
       }
 
@@ -132,17 +132,17 @@ export default function Preloader({ onComplete }) {
               </span>
             </div>
 
-            {/* Large Momo Signature Display */}
-            <div className="min-h-[6rem] sm:min-h-[8rem] md:min-h-[10rem] flex items-center justify-center w-full px-2">
+            {/* Large Caveat Handwriting Display */}
+            <div className="min-h-[6.5rem] sm:min-h-[8.5rem] md:min-h-[11rem] flex items-center justify-center w-full px-2">
               <div
                 className={`transition-all duration-350 transform ${
                   sceneExiting ? 'opacity-0 -translate-y-4 scale-98' : 'opacity-100 translate-y-0 scale-100'
                 }`}
               >
-                <h1 className="font-momo text-4xl min-[480px]:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-zinc-900 dark:text-zinc-100 leading-relaxed tracking-normal">
-                  <span className="font-momo">{displayText}</span>
+                <h1 className="font-caveat text-5xl min-[480px]:text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-semibold text-zinc-900 dark:text-zinc-100 leading-tight tracking-wide">
+                  <span className="font-caveat">{displayText}</span>
                   <span
-                    className="inline-block w-1 sm:w-1.5 h-8 sm:h-12 md:h-16 ml-2 bg-zinc-900 dark:bg-zinc-100 align-middle animate-pulse"
+                    className="inline-block w-1 sm:w-1.5 h-10 sm:h-14 md:h-20 ml-2 bg-zinc-900 dark:bg-zinc-100 align-middle animate-pulse"
                     aria-hidden="true"
                   />
                 </h1>

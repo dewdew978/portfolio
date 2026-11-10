@@ -109,22 +109,21 @@ html[lang="th"] .display-heading {
   }
 }
 
-/* Momo Signature Font for Preloader & Signature display */
+/* Caveat Handwriting Font for Preloader */
 @font-face {
-  font-family: 'Momo Signature';
+  font-family: 'Caveat';
   font-style: normal;
-  font-weight: 400;
+  font-weight: 400 700;
   font-display: block;
-  src: url('/fonts/MomoSignature.woff2') format('woff2'),
-       url('/fonts/MomoSignature.ttf') format('truetype');
+  src: url('/fonts/Caveat.woff2') format('woff2');
 }
 
-.font-momo,
-.font-momo *,
-.font-momo h1,
-.font-momo span {
-  font-family: 'Momo Signature', cursive, sans-serif !important;
-  letter-spacing: 0 !important;
+.font-caveat,
+.font-caveat *,
+.font-caveat h1,
+.font-caveat span {
+  font-family: 'Caveat', cursive, sans-serif !important;
+  letter-spacing: 0.01em !important;
 }
 
 /* Monospace for Code Blocks */

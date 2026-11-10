@@ -18,7 +18,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-family: "Sukhumvit Set", "SF Pro TH", "Prompt", "SF Pro Display", "SF Pro Text", "IBM Plex Sans Thai", "Thonburi", "Noto Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-family: "Urbanist", "Sukhumvit Set", "SF Pro TH", "Prompt", "SF Pro Display", "SF Pro Text", "IBM Plex Sans Thai", "Thonburi", "Noto Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
 }
 
 html, body, #root {
@@ -31,11 +31,11 @@ body {
 }
 
 *, *::before, *::after {
-  font-family: "Sukhumvit Set", "SF Pro TH", "Prompt", "SF Pro Display", "SF Pro Text", "IBM Plex Sans Thai", "Thonburi", "Noto Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-family: "Urbanist", "Sukhumvit Set", "SF Pro TH", "Prompt", "SF Pro Display", "SF Pro Text", "IBM Plex Sans Thai", "Thonburi", "Noto Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
 }
 
 body, button, input, textarea, select, a, p, span, h1, h2, h3, h4, h5, h6, li, strong, b, em, div, article, section, header, footer {
-  font-family: "Sukhumvit Set", "SF Pro TH", "Prompt", "SF Pro Display", "SF Pro Text", "IBM Plex Sans Thai", "Thonburi", "Noto Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-family: "Urbanist", "Sukhumvit Set", "SF Pro TH", "Prompt", "SF Pro Display", "SF Pro Text", "IBM Plex Sans Thai", "Thonburi", "Noto Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
   letter-spacing: -0.015em;
 }
 

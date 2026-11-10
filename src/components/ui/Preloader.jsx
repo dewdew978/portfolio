@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
+import { playKeyStroke, resumeAudio } from '../../utils/keyboardAudio'
 
 export default function Preloader({ onComplete }) {
   // scene: 1 = "Hello welcome", 2 = "Pawarit Pansing, it's me"
@@ -8,6 +9,32 @@ export default function Preloader({ onComplete }) {
   const [sceneExiting, setSceneExiting] = useState(false)
   const [isDone, setIsDone] = useState(false)
   const [fontReady, setFontReady] = useState(false)
+  const [isMuted, setIsMuted] = useState(false)
+  const isMutedRef = useRef(false)
+
+  // Unlock and resume AudioContext on first user interaction
+  useEffect(() => {
+    const unlockAudio = () => {
+      resumeAudio()
+    }
+    resumeAudio()
+
+    window.addEventListener('pointerdown', unlockAudio, { once: true })
+    window.addEventListener('keydown', unlockAudio, { once: true })
+    return () => {
+      window.removeEventListener('pointerdown', unlockAudio)
+      window.removeEventListener('keydown', unlockAudio)
+    }
+  }, [])
+
+  const toggleSound = (e) => {
+    e.stopPropagation()
+    resumeAudio()
+    setIsMuted((prev) => {
+      isMutedRef.current = !prev
+      return !prev
+    })
+  }
 
   const scene1Text = 'Hello welcome'
   const scene2Text = "Pawarit Pansing, it's me"
@@ -48,6 +75,13 @@ export default function Preloader({ onComplete }) {
       const typeScene1 = () => {
         if (currentIndex <= scene1Text.length) {
           setDisplayText(scene1Text.slice(0, currentIndex))
+          if (currentIndex > 0 && !isMutedRef.current) {
+            const char = scene1Text[currentIndex - 1]
+            playKeyStroke({
+              isSpace: char === ' ',
+              isPunctuation: char === ',' || char === '.',
+            })
+          }
           currentIndex++
           const char = scene1Text[currentIndex - 1]
           const delay = char === ' ' ? 140 : 88
@@ -72,6 +106,13 @@ export default function Preloader({ onComplete }) {
       const typeScene2 = () => {
         if (currentIndex <= scene2Text.length) {
           setDisplayText(scene2Text.slice(0, currentIndex))
+          if (currentIndex > 0 && !isMutedRef.current) {
+            const char = scene2Text[currentIndex - 1]
+            playKeyStroke({
+              isSpace: char === ' ',
+              isPunctuation: char === ',' || char === "'" || char === '.',
+            })
+          }
           currentIndex++
           const char = scene2Text[currentIndex - 1]
           let delay = 84
@@ -150,6 +191,32 @@ export default function Preloader({ onComplete }) {
               </div>
             </div>
           </div>
+
+          {/* Subtle sound toggle button */}
+          <button
+            type="button"
+            onClick={toggleSound}
+            className="absolute bottom-6 right-6 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono text-zinc-500 dark:text-zinc-400 bg-zinc-200/50 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 backdrop-blur-sm border border-zinc-300/40 dark:border-zinc-700/40 opacity-70 hover:opacity-100 transition-all cursor-pointer"
+            aria-label={isMuted ? 'Unmute typing sound' : 'Mute typing sound'}
+            title={isMuted ? 'Unmute typing sound' : 'Mute typing sound'}
+          >
+            {isMuted ? (
+              <>
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                </svg>
+                <span>Muted</span>
+              </>
+            ) : (
+              <>
+                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                </svg>
+                <span>Sound</span>
+              </>
+            )}
+          </button>
         </motion.div>
       )}
     </AnimatePresence>

@@ -9,12 +9,15 @@ export default function App() {
   })
 
   useEffect(() => {
+    const metaTheme = document.querySelector('meta[name="theme-color"]')
     if (theme === 'dark') {
       document.documentElement.classList.add('dark')
       document.documentElement.setAttribute('data-theme', 'dark')
+      if (metaTheme) metaTheme.setAttribute('content', '#0a0908')
     } else {
       document.documentElement.classList.remove('dark')
       document.documentElement.setAttribute('data-theme', 'light')
+      if (metaTheme) metaTheme.setAttribute('content', '#fbfaf8')
     }
     localStorage.setItem('theme', theme)
   }, [theme])

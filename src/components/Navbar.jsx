@@ -94,7 +94,7 @@ export default function Navbar({ theme, setTheme }) {
           className="flex min-h-11 min-w-11 shrink-0 items-center text-lg font-extrabold tracking-tight text-zinc-900 dark:text-white hover:opacity-80 transition-opacity cursor-pointer"
           aria-label="Pawarit - Home"
         >
-          <PawaritLogo className="h-6 sm:h-7 w-auto text-zinc-900 dark:text-white" />
+          <PawaritLogo className="text-2xl sm:text-3xl text-zinc-900 dark:text-white" />
           <span className="sr-only">Pawarit</span>
         </button>
 

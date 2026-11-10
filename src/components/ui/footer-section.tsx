@@ -83,7 +83,7 @@ export function Footer() {
               className="inline-flex items-center text-xl font-extrabold tracking-tight text-zinc-900 dark:text-white hover:opacity-85 transition-opacity"
               aria-label="Pawarit - Back to top"
             >
-              <PawaritLogo className="h-7 sm:h-8 w-auto text-zinc-900 dark:text-white" />
+              <PawaritLogo className="text-3xl sm:text-4xl text-zinc-900 dark:text-white" />
               <span className="sr-only">{t.hero.name}</span>
             </a>
             <p className="text-sm text-zinc-600 dark:text-zinc-400 max-w-sm leading-relaxed">

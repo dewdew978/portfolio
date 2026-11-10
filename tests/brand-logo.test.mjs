@@ -14,14 +14,13 @@ test('brand logo asset exists as standalone SVG with vector paths', () => {
   assert.match(svg, /aria-label="Pawarit Logo"/)
 })
 
-test('PawaritLogo React component is reusable with theme adaptive currentColor', () => {
+test('PawaritLogo React component is reusable with Caveat font matching hello typography', () => {
   assert.ok(existsSync(new URL('../src/components/brand/PawaritLogo.jsx', import.meta.url)))
   const component = read('src/components/brand/PawaritLogo.jsx')
 
   assert.match(component, /export default function PawaritLogo/)
-  assert.match(component, /viewBox="79\.0 314\.0 655\.2 154\.0"/)
-  assert.match(component, /fill="currentColor"/)
-  assert.match(component, /className=\{className\}/)
+  assert.match(component, /font-caveat/)
+  assert.match(component, /Pawarit/)
   assert.match(component, /role="img"/)
   assert.match(component, /aria-label="Pawarit"/)
 })

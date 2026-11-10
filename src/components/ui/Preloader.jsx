@@ -132,13 +132,6 @@ export default function Preloader({ onComplete }) {
 
           {/* Center Content */}
           <div className="relative z-10 flex flex-col items-center max-w-4xl w-full text-center">
-            {/* Minimal Brand Label */}
-            <div className="mb-6 sm:mb-8 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-zinc-400 dark:bg-zinc-600 animate-pulse" />
-              <span className="font-mono text-xs uppercase tracking-[0.25em] text-zinc-400 dark:text-zinc-500 font-medium">
-                pawarit.dev
-              </span>
-            </div>
 
             {/* Large Caveat Handwriting Display */}
             <div className="min-h-[6.5rem] sm:min-h-[8.5rem] md:min-h-[11rem] flex items-center justify-center w-full px-2">
@@ -156,11 +149,6 @@ export default function Preloader({ onComplete }) {
                 </h1>
               </div>
             </div>
-
-            {/* Minimal Skip Cue */}
-            <p className="mt-8 sm:mt-12 font-mono text-[11px] sm:text-xs uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-600">
-              click or press esc to skip
-            </p>
           </div>
         </motion.div>
       )}

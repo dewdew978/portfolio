@@ -38,7 +38,7 @@ export default function ProjectsPage({ theme, setTheme }) {
       ? 'ผลงานและโปรเจกต์ทั้งหมด (Projects) | Pawarit Pansing (ปวริศ ปัญสิงห์ - ดิว)'
       : 'All Projects & Case Studies | Pawarit Pansing (ปวริศ ปัญสิงห์ - Dew)',
     description: selectedProject
-      ? `${selectedProject.title} — ${selectedProject.overview}`
+      ? `${selectedProject.title}: ${selectedProject.overview}`
       : lang === 'th'
       ? `รวมผลงานและเคสศึกษาการวิเคราะห์ข้อมูล ${projects.length} โปรเจกต์ของ ดิว - ปวริศ ปัญสิงห์ (Pawarit Pansing / ปวริศ / ปัญสิงห์)`
       : `Explore ${projects.length} data analytics and business strategy projects by Pawarit Pansing (ปวริศ ปัญสิงห์ - Dew).`,

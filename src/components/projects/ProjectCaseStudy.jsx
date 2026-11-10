@@ -118,7 +118,7 @@ export default function ProjectCaseStudy({ project, onClose, onSelectProject, al
               <div className="grid grid-cols-12 gap-2 py-1.5">
                 <span className="col-span-1 text-zinc-400 font-bold">4</span>
                 <span className="col-span-4 text-zinc-500 uppercase tracking-wider font-semibold">{lang === 'th' ? 'ปี' : 'Year'}</span>
-                <span className="col-span-7 font-sans font-medium text-zinc-900 dark:text-zinc-200">2025 – 2026</span>
+                <span className="col-span-7 font-sans font-medium text-zinc-900 dark:text-zinc-200">2025 - 2026</span>
               </div>
             </div>
           </div>

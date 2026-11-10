@@ -2,7 +2,7 @@ import { getAssetUrl } from '@/utils/url'
 
 export const projectsData = {
   examhub: {
-    title: 'ExamHub — Online Examination Platform',
+    title: 'ExamHub Online Examination Platform',
     impactSuffix: 'ลดเวลาจัดชุดข้อสอบลง 70%',
     category: 'web',
     badges: ['Web Platform', 'EdTech', 'Analytics', 'Vercel'],
@@ -21,7 +21,7 @@ export const projectsData = {
     gitHubUrl: 'https://github.com/dewdew978/ExamHub'
   },
   cmcc: {
-    title: 'CMCC 2025 — Strategy & Digital Innovation (Plan B Media)',
+    title: 'CMCC 2025 Strategy & Digital Innovation (Plan B Media)',
     impactSuffix: 'โมเดล Asset Tokenization & ROI',
     category: 'business',
     badges: ['Business Strategy', 'Financial Valuation', 'Capital Market', 'Quarto'],

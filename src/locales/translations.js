@@ -102,7 +102,7 @@ export const translations = {
       },
       items: {
         examhub: {
-          title: 'ExamHub — Online Examination Platform',
+          title: 'ExamHub Online Examination Platform',
           showcaseTitle: 'ExamHub',
           impactSuffix: 'ลดเวลาจัดชุดข้อสอบลง 70%',
           category: 'web',
@@ -119,7 +119,7 @@ export const translations = {
           liveLabel: 'เปิดดู Live App',
         },
         cmcc: {
-          title: 'CMCC 2025 — Strategy & Digital Innovation (Plan B Media)',
+          title: 'CMCC 2025 Strategy & Digital Innovation (Plan B Media)',
           showcaseTitle: 'CMCC 2025',
           impactSuffix: 'โมเดล Asset Tokenization & ROI',
           category: 'business',
@@ -370,7 +370,7 @@ export const translations = {
       },
       items: {
         examhub: {
-          title: 'ExamHub — Online Examination Platform',
+          title: 'ExamHub Online Examination Platform',
           showcaseTitle: 'ExamHub',
           impactSuffix: 'Reduced exam compilation time by 70%',
           category: 'web',
@@ -387,7 +387,7 @@ export const translations = {
           liveLabel: 'Launch Live App',
         },
         cmcc: {
-          title: 'CMCC 2025 — Strategy & Digital Innovation (Plan B Media)',
+          title: 'CMCC 2025 Strategy & Digital Innovation (Plan B Media)',
           showcaseTitle: 'CMCC 2025',
           impactSuffix: 'Asset Tokenization & ROI Model',
           category: 'business',

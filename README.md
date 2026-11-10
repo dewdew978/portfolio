@@ -1,4 +1,4 @@
-# Pawarit Pansing — Data Science & Business Analytics Portfolio
+# Pawarit Pansing | Data Science & Business Analytics Portfolio
 
 > **Transforming complex data into actionable, high-impact business decisions.**
 > Bilingual (TH/EN) portfolio featuring data, analytics, business strategy, and verified AWS Academy credentials.

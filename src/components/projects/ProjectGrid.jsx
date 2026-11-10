@@ -126,10 +126,7 @@ export default function ProjectGrid({ projects, t, onSelectProject }) {
                   </div>
                   <div className="overflow-hidden rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-5 sm:p-6 aspect-[16/10] flex flex-col justify-between transition group-hover:border-zinc-400 dark:group-hover:border-zinc-600 shadow-xs">
                     <div>
-                      <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 mb-2">
-                        Engineering
-                      </span>
-                      <p className="line-clamp-4 text-xs sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300 font-sans">
+                      <p className="line-clamp-5 text-xs sm:text-sm leading-relaxed text-zinc-700 dark:text-zinc-300 font-sans">
                         {p.architecture || p.overview}
                       </p>
                     </div>
@@ -151,10 +148,7 @@ export default function ProjectGrid({ projects, t, onSelectProject }) {
                   </div>
                   <div className="overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 p-5 sm:p-6 aspect-[16/10] flex flex-col justify-between transition group-hover:border-zinc-400 dark:group-hover:border-zinc-600 shadow-xs">
                     <div>
-                      <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/60 mb-2">
-                        {p.impactSuffix || 'Delivered Value'}
-                      </span>
-                      <p className="line-clamp-4 text-xs sm:text-sm leading-relaxed text-zinc-800 dark:text-zinc-200 font-medium">
+                      <p className="line-clamp-5 text-xs sm:text-sm leading-relaxed text-zinc-800 dark:text-zinc-200 font-medium">
                         "{p.impact || p.overview}"
                       </p>
                     </div>

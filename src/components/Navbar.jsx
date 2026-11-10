@@ -4,6 +4,7 @@ import { Sun, Moon, Menu, X, Download, Sparkles } from 'lucide-react'
 import { getAssetUrl } from '@/utils/url'
 import { useLanguage } from '@/context/LanguageContext'
 import PixelOrb from '@/components/brand/PixelOrb'
+import PawaritLogo from '@/components/brand/PawaritLogo'
 
 export default function Navbar({ theme, setTheme }) {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -101,9 +102,11 @@ export default function Navbar({ theme, setTheme }) {
               if (location.pathname !== '/') navigate('/')
               window.scrollTo({ top: 0, behavior: 'smooth' })
             }}
-            className="hidden min-[360px]:inline cursor-pointer"
+            className="hidden min-[360px]:inline-flex items-center cursor-pointer"
+            aria-label="Pawarit - Home"
           >
-            <span>Pawarit</span>
+            <PawaritLogo className="h-6 sm:h-7 w-auto text-zinc-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" />
+            <span className="sr-only">Pawarit</span>
           </button>
         </div>
 

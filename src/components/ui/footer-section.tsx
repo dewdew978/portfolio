@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { getAssetUrl } from '@/utils/url';
 import { useLanguage } from '@/context/LanguageContext';
+import PawaritLogo from '@/components/brand/PawaritLogo';
 
 interface FooterLink {
   title: string;
@@ -78,10 +79,12 @@ export function Footer() {
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="inline-flex items-center gap-2.5 text-xl font-extrabold tracking-tight text-zinc-900 dark:text-white"
+            className="inline-flex items-center gap-3 text-xl font-extrabold tracking-tight text-zinc-900 dark:text-white hover:opacity-85 transition-opacity"
+            aria-label="Pawarit - Back to top"
           >
             <span className="w-3 h-3 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 shadow-sm shadow-indigo-500"></span>
-            <span>{t.hero.name}</span>
+            <PawaritLogo className="h-7 sm:h-8 w-auto text-zinc-900 dark:text-white" />
+            <span className="sr-only">{t.hero.name}</span>
           </a>
           <p className="text-sm text-zinc-600 dark:text-zinc-400 max-w-sm leading-relaxed">
             {lang === 'th'

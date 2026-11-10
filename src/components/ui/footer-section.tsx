@@ -80,10 +80,9 @@ export function Footer() {
             <a
               href="#"
               onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="inline-flex items-center gap-3 text-xl font-extrabold tracking-tight text-zinc-900 dark:text-white hover:opacity-85 transition-opacity"
+              className="inline-flex items-center text-xl font-extrabold tracking-tight text-zinc-900 dark:text-white hover:opacity-85 transition-opacity"
               aria-label="Pawarit - Back to top"
             >
-              <span className="w-2.5 h-2.5 rounded-full bg-zinc-900 dark:bg-[#fbfaf8]"></span>
               <PawaritLogo className="h-7 sm:h-8 w-auto text-zinc-900 dark:text-white" />
               <span className="sr-only">{t.hero.name}</span>
             </a>

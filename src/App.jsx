@@ -8,7 +8,22 @@ export default function App() {
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light'
   })
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const path = window.location.pathname.replace(/\/$/, '')
+      const isInnerPage = path.endsWith('/projects')
+      const hasSeen = sessionStorage.getItem('pawarit_has_seen_preloader')
+      return !hasSeen && !isInnerPage
+    }
+    return true
+  })
+
+  const handlePreloaderComplete = () => {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('pawarit_has_seen_preloader', 'true')
+    }
+    setLoading(false)
+  }
 
   useEffect(() => {
     const metaTheme = document.querySelector('meta[name="theme-color"]')
@@ -26,7 +41,7 @@ export default function App() {
 
   return (
     <>
-      {loading && <Preloader onComplete={() => setLoading(false)} />}
+      {loading && <Preloader onComplete={handlePreloaderComplete} />}
       <Routes>
         <Route path="/" element={<HomePage theme={theme} setTheme={setTheme} />} />
         <Route path="/projects" element={<ProjectsPage theme={theme} setTheme={setTheme} />} />

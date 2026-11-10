@@ -1,7 +1,7 @@
 /**
- * Web Audio API synthesizer for tactile mechanical keyboard typing sounds.
- * Generates natural switch click transients and acoustic bottom-out "thock"
- * with subtle randomized pitch variation on every keystroke.
+ * Web Audio API synthesizer for handwriting sounds (pen/pencil gliding on paper).
+ * Synthesizes natural friction across paper fibers with microscopic grain texture,
+ * dual-band acoustic filtering, nib-contact presence, and stroke-duration tracking.
  * Zero external audio assets, zero latency, zero bundle overhead.
  */
 
@@ -26,18 +26,25 @@ export function resumeAudio() {
 }
 
 /**
- * Play a synthesized mechanical keyboard keypress sound.
+ * Play a synthesized pen-on-paper handwriting stroke sound.
  * @param {Object} [options]
- * @param {boolean} [options.isSpace=false] - Spacebar has a deeper acoustic resonance
- * @param {boolean} [options.isPunctuation=false] - Commas/periods have slightly different pitch
- * @param {number} [options.volume=0.15] - Master gain volume (0.0 to 1.0)
+ * @param {number} [options.duration=0.09] - Stroke drawing duration in seconds
+ * @param {boolean} [options.isDot=false] - Short dot/punctuation mark tap
+ * @param {boolean} [options.isSpace=false] - Word transition pause (softer lift)
+ * @param {boolean} [options.isPunctuation=false] - Comma/period tap
+ * @param {number} [options.volume=0.22] - Master volume (0.0 to 1.0)
  */
-export function playKeyStroke({ isSpace = false, isPunctuation = false, volume = 0.14 } = {}) {
+export function playWritingStroke({
+  duration = 0.09,
+  isDot = false,
+  isSpace = false,
+  isPunctuation = false,
+  volume = 0.22,
+} = {}) {
   try {
     const ctx = getAudioContext()
     if (!ctx) return
 
-    // Attempt to resume if suspended
     if (ctx.state === 'suspended') {
       ctx.resume().catch(() => {})
     }
@@ -45,56 +52,87 @@ export function playKeyStroke({ isSpace = false, isPunctuation = false, volume =
 
     const now = ctx.currentTime
 
-    // 1. High-frequency transient click (switch leaf & keycap impact)
-    const bufferSize = Math.max(1, Math.floor(ctx.sampleRate * 0.01))
+    // Calculate effective scratch duration matching the visual drawing
+    const isShortTap = isDot || isPunctuation || duration < 0.02
+    const strokeDur = isShortTap
+      ? 0.035
+      : Math.max(0.045, Math.min(duration * 1.05, 0.26))
+
+    // 1. Paper texture friction noise buffer
+    const bufferSize = Math.max(1, Math.floor(ctx.sampleRate * strokeDur))
     const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate)
-    const output = noiseBuffer.getChannelData(0)
+    const channelData = noiseBuffer.getChannelData(0)
+
+    // Fill with textured noise (with microscopic grain modulation simulating paper tooth)
     for (let i = 0; i < bufferSize; i++) {
-      output[i] = Math.random() * 2 - 1
+      const flutter = 0.85 + 0.15 * Math.sin(i * 0.04)
+      channelData[i] = (Math.random() * 2 - 1) * flutter
     }
 
     const noiseSource = ctx.createBufferSource()
     noiseSource.buffer = noiseBuffer
 
-    const noiseFilter = ctx.createBiquadFilter()
-    noiseFilter.type = 'bandpass'
-    const clickFreq = isSpace ? 2800 : 3400 + (Math.random() * 600 - 300)
-    noiseFilter.frequency.setValueAtTime(clickFreq, now)
-    noiseFilter.Q.setValueAtTime(3.0, now)
+    // 2. Dual-stage paper friction filter
+    // Bandpass centered at pen nib resonance (~2100Hz - 3400Hz)
+    const bandFilter = ctx.createBiquadFilter()
+    bandFilter.type = 'bandpass'
+    const centerFreq = isShortTap
+      ? 2600 + Math.random() * 400
+      : 2100 + Math.random() * 600
+    bandFilter.frequency.setValueAtTime(centerFreq, now)
+    bandFilter.Q.setValueAtTime(isShortTap ? 2.2 : 1.7, now)
 
-    const noiseGain = ctx.createGain()
-    const clickVol = volume * (isSpace ? 0.7 : 0.85) * (0.9 + Math.random() * 0.2)
-    noiseGain.gain.setValueAtTime(clickVol, now)
-    noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.01)
+    // High shelf to gently soften harsh highs for a warm, realistic paper scratch
+    const shelfFilter = ctx.createBiquadFilter()
+    shelfFilter.type = 'highshelf'
+    shelfFilter.frequency.setValueAtTime(5500, now)
+    shelfFilter.gain.setValueAtTime(-6, now)
 
-    noiseSource.connect(noiseFilter)
-    noiseFilter.connect(noiseGain)
-    noiseGain.connect(ctx.destination)
+    // 3. Natural pen stroke gain envelope (attack -> sustain -> smooth paper lift decay)
+    const strokeGain = ctx.createGain()
+    const strokeVol = volume * (isShortTap ? 0.65 : 0.9) * (0.9 + Math.random() * 0.2)
+    const attackTime = isShortTap ? 0.006 : 0.012
+    const decayTime = isShortTap ? 0.02 : 0.025
+
+    strokeGain.gain.setValueAtTime(0.0001, now)
+    strokeGain.gain.linearRampToValueAtTime(strokeVol, now + attackTime)
+
+    // Sustain across the stroke duration, then fade out as pen lifts off paper
+    const releaseStart = Math.max(now + attackTime, now + strokeDur - decayTime)
+    strokeGain.gain.setValueAtTime(strokeVol, releaseStart)
+    strokeGain.gain.exponentialRampToValueAtTime(0.0001, now + strokeDur)
+
+    // Connect noise pipeline
+    noiseSource.connect(bandFilter)
+    bandFilter.connect(shelfFilter)
+    shelfFilter.connect(strokeGain)
+    strokeGain.connect(ctx.destination)
     noiseSource.start(now)
+    noiseSource.stop(now + strokeDur + 0.01)
 
-    // 2. Low-frequency acoustic "thock" (switch bottom-out plate resonance)
-    const osc = ctx.createOscillator()
-    const oscGain = ctx.createGain()
+    // 4. Subtle low-frequency nib contact presence (~280Hz, very soft, 8ms)
+    const tapOsc = ctx.createOscillator()
+    const tapGain = ctx.createGain()
+    tapOsc.type = 'sine'
+    tapOsc.frequency.setValueAtTime(isShortTap ? 340 : 280, now)
+    tapOsc.frequency.exponentialRampToValueAtTime(160, now + 0.01)
 
-    let baseFreq = 220
-    if (isSpace) baseFreq = 145
-    else if (isPunctuation) baseFreq = 180
-    baseFreq += (Math.random() * 28 - 14) // subtle natural jitter
+    const tapVol = volume * 0.28 * (0.85 + Math.random() * 0.3)
+    tapGain.gain.setValueAtTime(tapVol, now)
+    tapGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.012)
 
-    const thockDuration = isSpace ? 0.045 : 0.032
-    osc.type = isSpace ? 'sine' : 'triangle'
-    osc.frequency.setValueAtTime(baseFreq, now)
-    osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.6, now + thockDuration)
-
-    const thockVol = volume * (isSpace ? 1.1 : 0.95) * (0.9 + Math.random() * 0.2)
-    oscGain.gain.setValueAtTime(thockVol, now)
-    oscGain.gain.exponentialRampToValueAtTime(0.0001, now + thockDuration)
-
-    osc.connect(oscGain)
-    oscGain.connect(ctx.destination)
-    osc.start(now)
-    osc.stop(now + thockDuration)
+    tapOsc.connect(tapGain)
+    tapGain.connect(ctx.destination)
+    tapOsc.start(now)
+    tapOsc.stop(now + 0.015)
   } catch {
-    // Gracefully ignore audio errors (e.g. if autoplay restricted or headless)
+    // Gracefully ignore audio errors (e.g. autoplay restricted or headless)
   }
+}
+
+/**
+ * Backward compatibility alias for key stroke calls.
+ */
+export function playKeyStroke(options = {}) {
+  return playWritingStroke(options)
 }

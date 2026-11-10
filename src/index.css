@@ -150,3 +150,11 @@ pre, code, kbd, samp, .font-mono {
   background-color: #f4f0e8;
   color: #141311;
 }
+
+@font-face {
+  font-family: 'Momo Signature';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/MomoSignature.ttf') format('truetype');
+}

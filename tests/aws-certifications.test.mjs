@@ -9,35 +9,51 @@ const translationsSource = readFileSync(new URL('src/locales/translations.js', p
 
 const credentials = [
   {
+    id: 'cloud-foundations',
     image: 'public/assets/certificates/aws-cloud-foundations.png',
     pdf: 'public/assets/certificates/aws-cloud-foundations.pdf',
     title: 'AWS Academy Graduate - Cloud Foundations',
-    credlyUrl: 'https://www.credly.com/go/ZDQCsvZy',
+    credentialUrl: 'https://www.credly.com/go/ZDQCsvZy',
   },
   {
+    id: 'cloud-architecting',
     image: 'public/assets/certificates/aws-cloud-architecting.png',
     pdf: 'public/assets/certificates/aws-cloud-architecting.pdf',
     title: 'AWS Academy Graduate - Cloud Architecting',
-    credlyUrl: 'https://www.credly.com/go/BbT284Yr',
+    credentialUrl: 'https://www.credly.com/go/BbT284Yr',
+  },
+  {
+    id: 'opswat-cybersecurity-fundamentals-associate',
+    image: 'public/assets/certificates/opswat-cybersecurity-fundamentals-associate.png',
+    pdf: null,
+    title: 'OPSWAT Cybersecurity Fundamentals Associate',
+    credentialUrl: 'https://learn.opswatacademy.com/certificate/I6qeVClKjA',
+    certificateId: 'I6qeVClKjA',
   },
 ]
 
-test('publishes both AWS Academy badge images and certificate PDFs', () => {
+test('publishes all certificate image assets and required PDFs', () => {
   for (const credential of credentials) {
     assert.equal(existsSync(new URL(credential.image, projectRoot)), true, `${credential.image} is missing`)
-    assert.equal(existsSync(new URL(credential.pdf, projectRoot)), true, `${credential.pdf} is missing`)
+    if (credential.pdf) {
+      assert.equal(existsSync(new URL(credential.pdf, projectRoot)), true, `${credential.pdf} is missing`)
+    }
   }
 })
 
-test('renders accessible credential links for both AWS Academy certifications', () => {
-  assert.match(certificatesSource, /awsCertifications/)
+test('renders accessible credential links and responsive 3-column layout', () => {
   assert.match(certificatesSource, /id="aws-certifications"/)
   assert.match(footerSource, /homeAnchor\('aws-certifications'\)/)
   assert.match(certificatesSource, /target="_blank"/)
   assert.match(certificatesSource, /rel="noopener noreferrer"/)
+  assert.match(certificatesSource, /lg:grid-cols-3/)
+
+  // Local PDF rendering must be conditional on cert.certificate
+  assert.match(certificatesSource, /cert\.certificate/)
 
   for (const credential of credentials) {
-    assert.match(certificatesSource, new RegExp(credential.credlyUrl.replaceAll('/', '\\/')))
+    assert.match(certificatesSource, new RegExp(credential.credentialUrl.replaceAll('/', '\\/').replaceAll('.', '\\.')))
     assert.match(translationsSource, new RegExp(credential.title.replaceAll('-', '\\-')))
   }
+  assert.match(translationsSource, /I6qeVClKjA/)
 })

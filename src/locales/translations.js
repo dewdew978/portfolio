@@ -219,7 +219,7 @@ export const translations = {
       ],
       awsCertifications: {
         title: 'Certificate',
-        subtitle: 'ผ่านการอบรมพื้นฐานระบบคลาวด์และการออกแบบสถาปัตยกรรมบน AWS Academy',
+        subtitle: 'ผ่านการอบรมและรับรองสมรรถนะด้านระบบคลาวด์และ Cybersecurity จากสถาบันชั้นนำ',
         viewCertificate: 'ดูใบรับรอง PDF',
         verifyCredential: 'ตรวจสอบ Credential',
         items: [
@@ -236,6 +236,13 @@ export const translations = {
             duration: '60 ชั่วโมง',
             issued: 'ออกเมื่อ 25 ต.ค. 2026',
             imageAlt: 'ตรา AWS Academy Cloud Architecting Trained',
+          },
+          {
+            title: 'OPSWAT Cybersecurity Fundamentals Associate',
+            description: 'ความรู้พื้นฐานด้านการรักษาความมั่นคงปลอดภัยไซเบอร์ การป้องกันมัลแวร์ การรักษาความปลอดภัยเครือข่าย และโครงสร้างพื้นฐานสำคัญ (Critical Infrastructure)',
+            duration: 'Certificate ID: I6qeVClKjA',
+            issued: 'ออกเมื่อ 10 พ.ย. 2026 • หมดอายุ 10 พ.ย. 2027',
+            imageAlt: 'ใบรับรอง OPSWAT Cybersecurity Fundamentals Associate',
           },
         ],
       },
@@ -480,7 +487,7 @@ export const translations = {
       ],
       awsCertifications: {
         title: 'Certificate',
-        subtitle: 'Completed AWS Academy training in cloud fundamentals and solution architecture',
+        subtitle: 'Verified credentials across cloud architecture and cybersecurity fundamentals',
         viewCertificate: 'View PDF Certificate',
         verifyCredential: 'Verify Credential',
         items: [
@@ -497,6 +504,13 @@ export const translations = {
             duration: '60 hours',
             issued: 'Issued Oct 25, 2026',
             imageAlt: 'AWS Academy Cloud Architecting Trained badge',
+          },
+          {
+            title: 'OPSWAT Cybersecurity Fundamentals Associate',
+            description: 'Foundational principles of cybersecurity, malware prevention, network security, and Critical Infrastructure Protection (CIP).',
+            duration: 'Certificate ID: I6qeVClKjA',
+            issued: 'Issued Nov 10, 2026 • Expires Nov 10, 2027',
+            imageAlt: 'OPSWAT Cybersecurity Fundamentals Associate Certificate',
           },
         ],
       },

@@ -84,11 +84,7 @@ export default function ProjectCaseStudy({ project, onClose, onSelectProject, al
                 {project.title}
               </h1>
 
-              {project.impactSuffix && (
-                <p className="inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800/60 mb-6">
-                  {project.impactSuffix}
-                </p>
-              )}
+              
 
               <p className="text-sm sm:text-base leading-relaxed text-zinc-600 dark:text-zinc-400 mb-8 font-normal">
                 {project.overview}

@@ -77,11 +77,7 @@ export default function ProjectGrid({ projects, t, onSelectProject }) {
                   <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
                     {p.title}
                   </h2>
-                  {p.badges?.[0] && (
-                    <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
-                      • {p.badges[0]}
-                    </span>
-                  )}
+                  
                 </div>
 
                 <button
@@ -205,9 +201,7 @@ export default function ProjectGrid({ projects, t, onSelectProject }) {
                 />
               </button>
               <div className="p-4 sm:p-6">
-                <p className="text-xs uppercase tracking-widest text-zinc-500 dark:text-zinc-400 font-semibold">
-                  {p.badges?.[0]}
-                </p>
+                
                 <h2 className="mt-2 break-words text-xl font-bold">{p.title}</h2>
                 <p className="mt-3 line-clamp-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
                   {p.overview}

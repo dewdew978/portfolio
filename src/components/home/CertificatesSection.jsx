@@ -1,5 +1,5 @@
-import React from 'react'
-import { ExternalLink, FileText } from 'lucide-react'
+import React, { useState } from 'react'
+import { ExternalLink, FileText, ArrowLeftRight } from 'lucide-react'
 import FadeInSection from '@/components/FadeInSection'
 import { getAssetUrl } from '@/utils/url'
 import { useLanguage } from '@/context/LanguageContext'
@@ -7,29 +7,40 @@ import { useLanguage } from '@/context/LanguageContext'
 const CERTIFICATIONS = [
   {
     id: 'cloud-foundations',
-    image: '/assets/certificates/aws-cloud-foundations-cert.png',
     badgeImage: '/assets/certificates/aws-cloud-foundations.png',
+    certImage: '/assets/certificates/aws-cloud-foundations-cert.png',
+    image: '/assets/certificates/aws-cloud-foundations.png',
     certificate: '/assets/certificates/aws-cloud-foundations.pdf',
     credentialUrl: 'https://www.credly.com/go/ZDQCsvZy',
   },
   {
     id: 'cloud-architecting',
-    image: '/assets/certificates/aws-cloud-architecting-cert.png',
     badgeImage: '/assets/certificates/aws-cloud-architecting.png',
+    certImage: '/assets/certificates/aws-cloud-architecting-cert.png',
+    image: '/assets/certificates/aws-cloud-architecting.png',
     certificate: '/assets/certificates/aws-cloud-architecting.pdf',
     credentialUrl: 'https://www.credly.com/go/BbT284Yr',
   },
   {
     id: 'opswat-cybersecurity-fundamentals-associate',
-    image: '/assets/certificates/opswat-cybersecurity-fundamentals-associate.png',
     badgeImage: '/assets/certificates/opswat-cybersecurity-fundamentals-associate-ocfa.png',
+    certImage: '/assets/certificates/opswat-cybersecurity-fundamentals-associate.png',
+    image: '/assets/certificates/opswat-cybersecurity-fundamentals-associate.png',
     credentialUrl: 'https://learn.opswatacademy.com/certificate/I6qeVClKjA',
   },
 ]
 
 export default function CertificatesSection() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const copy = t.experience.awsCertifications
+  const [activeViewMap, setActiveViewMap] = useState({})
+
+  const toggleView = (id) => {
+    setActiveViewMap((prev) => ({
+      ...prev,
+      [id]: prev[id] === 'cert' ? 'badge' : 'cert',
+    }))
+  }
 
   return (
     <section
@@ -38,55 +49,79 @@ export default function CertificatesSection() {
     >
       <FadeInSection direction="up" delay={50}>
         <div className="mb-7 sm:mb-8">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-900 dark:text-white">
-              {copy.title}
-            </h2>
-            <p className="mt-2 text-base sm:text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
-              {copy.subtitle}
-            </p>
-          </div>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-900 dark:text-white">
+            {copy.title}
+          </h2>
+          <p className="mt-2 text-base sm:text-lg leading-relaxed text-zinc-600 dark:text-zinc-400">
+            {copy.subtitle}
+          </p>
+        </div>
       </FadeInSection>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
         {CERTIFICATIONS.map((cert, index) => {
           const content = copy.items[index]
           if (!content) return null
+          const isShowingCert = activeViewMap[cert.id] === 'cert'
 
           return (
             <FadeInSection key={cert.id} direction="up" delay={100 + index * 100}>
               <article className="group flex h-full min-w-0 flex-col overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-zinc-400 dark:hover:border-zinc-600 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900">
-                <div className="relative flex min-h-44 sm:min-h-52 items-center justify-center bg-gradient-to-br from-zinc-50 via-white to-zinc-100 p-5 sm:p-6 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-850 overflow-hidden">
-                  {cert.badgeImage ? (
-                    <>
-                      {/* Certificate paper view */}
-                      <img
-                        src={getAssetUrl(cert.image)}
-                        alt={content.imageAlt}
-                        width="320"
-                        height="200"
-                        loading="lazy"
-                        className="h-32 sm:h-40 max-w-full object-contain drop-shadow-lg transition-all duration-300 group-hover:opacity-0 group-hover:scale-95"
-                      />
-                      {/* Hover Badge view */}
-                      <img
-                        src={getAssetUrl(cert.badgeImage)}
-                        alt={`${content.title} Badge`}
-                        width="320"
-                        height="200"
-                        loading="lazy"
-                        className="absolute inset-0 m-auto h-28 sm:h-36 max-w-full object-contain drop-shadow-xl opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105 pointer-events-none"
-                      />
-                    </>
-                  ) : (
-                    <img
-                      src={getAssetUrl(cert.image)}
-                      alt={content.imageAlt}
-                      width="320"
-                      height="200"
-                      loading="lazy"
-                      className="h-32 sm:h-40 max-w-full object-contain drop-shadow-lg transition-transform duration-300 group-hover:scale-105"
-                    />
-                  )}
+                {/* Interactive Display Area: Badge by default, Certificate on desktop hover or mobile tap */}
+                <div
+                  onClick={() => toggleView(cert.id)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault()
+                      toggleView(cert.id)
+                    }
+                  }}
+                  className="relative flex min-h-48 sm:min-h-56 items-center justify-center bg-gradient-to-br from-zinc-50 via-white to-zinc-100 p-5 sm:p-6 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-850 overflow-hidden cursor-pointer select-none"
+                  aria-label={
+                    isShowingCert
+                      ? (lang === 'th' ? 'กำลังแสดงใบรับรอง แตะเพื่อดู Badge' : 'Showing certificate. Tap to view badge')
+                      : (lang === 'th' ? 'กำลังแสดง Badge แตะเพื่อดูใบรับรอง' : 'Showing badge. Tap to view certificate')
+                  }
+                >
+                  {/* Subtle Corner Toggle Pill */}
+                  <div className="absolute top-3 right-3 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-medium bg-white/90 dark:bg-zinc-800/90 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-700/80 text-zinc-700 dark:text-zinc-300 shadow-xs pointer-events-none transition-transform group-hover:scale-105">
+                    <ArrowLeftRight className="w-3 h-3 text-zinc-500 dark:text-zinc-400" />
+                    <span className="font-mono text-[10px] uppercase tracking-wider">
+                      {isShowingCert
+                        ? (lang === 'th' ? 'ใบรับรอง' : 'Certificate')
+                        : 'Badge'}
+                    </span>
+                  </div>
+
+                  {/* Badge view: Default on desktop and mobile */}
+                  <img
+                    src={getAssetUrl(cert.badgeImage)}
+                    alt={`${content.title} Badge`}
+                    width="320"
+                    height="200"
+                    loading="lazy"
+                    className={`h-28 sm:h-36 max-w-full object-contain drop-shadow-xl transition-all duration-300 ${
+                      isShowingCert
+                        ? 'opacity-0 scale-90'
+                        : 'opacity-100 scale-100 group-hover:opacity-0 group-hover:scale-90'
+                    }`}
+                  />
+
+                  {/* Certificate paper view: Revealed on desktop hover or mobile tap */}
+                  <img
+                    src={getAssetUrl(cert.certImage)}
+                    alt={content.imageAlt}
+                    width="320"
+                    height="200"
+                    loading="lazy"
+                    className={`absolute inset-0 m-auto h-32 sm:h-40 max-w-full object-contain drop-shadow-md transition-all duration-300 ${
+                      isShowingCert
+                        ? 'opacity-100 scale-100'
+                        : 'opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100'
+                    }`}
+                  />
                 </div>
 
                 <div className="flex flex-1 flex-col p-4 sm:p-6">

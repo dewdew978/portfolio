@@ -94,27 +94,23 @@ export default function ProjectCaseStudy({ project, onClose, onSelectProject, al
             {/* Gil Huybrecht Numbered Specs Table (1, 2, 3, 4) */}
             <div className="border-t border-zinc-200 dark:border-zinc-800 pt-6 space-y-4 font-mono text-xs">
               <div className="grid grid-cols-12 gap-2 py-1.5 border-b border-zinc-100 dark:border-zinc-900/60">
-                <span className="col-span-1 text-zinc-400 font-bold">1</span>
                 <span className="col-span-4 text-zinc-500 uppercase tracking-wider font-semibold">{lang === 'th' ? 'บทบาท' : 'Role'}</span>
-                <span className="col-span-7 font-sans font-medium text-zinc-900 dark:text-zinc-200">{getRole()}</span>
+                <span className="col-span-8 font-sans font-medium text-zinc-900 dark:text-zinc-200">{getRole()}</span>
               </div>
 
               <div className="grid grid-cols-12 gap-2 py-1.5 border-b border-zinc-100 dark:border-zinc-900/60">
-                <span className="col-span-1 text-zinc-400 font-bold">2</span>
                 <span className="col-span-4 text-zinc-500 uppercase tracking-wider font-semibold">{lang === 'th' ? 'หมวดหมู่' : 'Category'}</span>
-                <span className="col-span-7 font-sans font-medium text-zinc-900 dark:text-zinc-200">{getClientOrCategory()}</span>
+                <span className="col-span-8 font-sans font-medium text-zinc-900 dark:text-zinc-200">{getClientOrCategory()}</span>
               </div>
 
               <div className="grid grid-cols-12 gap-2 py-1.5 border-b border-zinc-100 dark:border-zinc-900/60">
-                <span className="col-span-1 text-zinc-400 font-bold">3</span>
                 <span className="col-span-4 text-zinc-500 uppercase tracking-wider font-semibold">{lang === 'th' ? 'เครื่องมือ' : 'Tools'}</span>
-                <span className="col-span-7 font-sans font-medium text-zinc-900 dark:text-zinc-200">{getTools()}</span>
+                <span className="col-span-8 font-sans font-medium text-zinc-900 dark:text-zinc-200">{getTools()}</span>
               </div>
 
               <div className="grid grid-cols-12 gap-2 py-1.5">
-                <span className="col-span-1 text-zinc-400 font-bold">4</span>
                 <span className="col-span-4 text-zinc-500 uppercase tracking-wider font-semibold">{lang === 'th' ? 'ปี' : 'Year'}</span>
-                <span className="col-span-7 font-sans font-medium text-zinc-900 dark:text-zinc-200">2025 - 2026</span>
+                <span className="col-span-8 font-sans font-medium text-zinc-900 dark:text-zinc-200">2025 - 2026</span>
               </div>
             </div>
           </div>
@@ -162,7 +158,7 @@ export default function ProjectCaseStudy({ project, onClose, onSelectProject, al
           <section className="space-y-4 border-t border-zinc-200 dark:border-zinc-800 pt-8 sm:pt-12">
             <div className="flex items-center gap-3">
               <span className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
-                01 / {lang === 'th' ? 'ภาพรวม' : 'Overview'}
+                {lang === 'th' ? 'ภาพรวม' : 'Overview'}
               </span>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
@@ -178,7 +174,7 @@ export default function ProjectCaseStudy({ project, onClose, onSelectProject, al
             <section className="space-y-4 border-t border-zinc-200 dark:border-zinc-800 pt-8 sm:pt-12">
               <div className="flex items-center gap-3">
                 <span className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
-                  02 / {lang === 'th' ? 'สถาปัตยกรรม' : 'Architecture'}
+                  {lang === 'th' ? 'สถาปัตยกรรม' : 'Architecture'}
                 </span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
@@ -197,7 +193,7 @@ export default function ProjectCaseStudy({ project, onClose, onSelectProject, al
             <section className="space-y-6 border-t border-zinc-200 dark:border-zinc-800 pt-8 sm:pt-12">
               <div className="flex items-center gap-3">
                 <span className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
-                  03 / {lang === 'th' ? 'ฟีเจอร์เด่น' : 'Key Features'}
+                  {lang === 'th' ? 'ฟีเจอร์เด่น' : 'Key Features'}
                 </span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">
@@ -214,9 +210,6 @@ export default function ProjectCaseStudy({ project, onClose, onSelectProject, al
                       className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xs"
                     >
                       <div className="flex items-start gap-4">
-                        <span className="font-mono text-xs font-bold text-zinc-400 dark:text-zinc-500 pt-1">
-                          {(idx + 1).toString().padStart(2, '0')}
-                        </span>
                         <div>
                           {title && (
                             <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-white mb-1.5">
@@ -240,7 +233,7 @@ export default function ProjectCaseStudy({ project, onClose, onSelectProject, al
             <section className="space-y-4 border-t border-zinc-200 dark:border-zinc-800 pt-8 sm:pt-12">
               <div className="flex items-center gap-3">
                 <span className="font-mono text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
-                  04 / {lang === 'th' ? 'ผลลัพธ์เชิงธุรกิจ' : 'Impact'}
+                  {lang === 'th' ? 'ผลลัพธ์เชิงธุรกิจ' : 'Impact'}
                 </span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-white tracking-tight">

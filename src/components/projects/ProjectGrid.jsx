@@ -98,9 +98,8 @@ export default function ProjectGrid({ projects, t, onSelectProject }) {
                   onClick={() => onSelectProject(p)}
                   className="group cursor-pointer flex flex-col"
                 >
-                  <div className="flex items-center justify-between font-mono text-xs text-zinc-400 dark:text-zinc-500 pb-2 border-b border-zinc-200/60 dark:border-zinc-800/60 mb-2">
-                    <span className="font-bold">1</span>
-                    <span className="text-[11px] uppercase tracking-wider">Overview</span>
+                  <div className="font-mono text-xs text-zinc-400 dark:text-zinc-500 pb-2 border-b border-zinc-200/60 dark:border-zinc-800/60 mb-2">
+                    <span className="text-[11px] uppercase tracking-wider font-semibold">Overview</span>
                   </div>
                   <div className="overflow-hidden rounded-2xl bg-zinc-950 border border-zinc-200 dark:border-zinc-800 aspect-[16/10]">
                     <img
@@ -116,9 +115,8 @@ export default function ProjectGrid({ projects, t, onSelectProject }) {
                   onClick={() => onSelectProject(p)}
                   className="group cursor-pointer flex flex-col"
                 >
-                  <div className="flex items-center justify-between font-mono text-xs text-zinc-400 dark:text-zinc-500 pb-2 border-b border-zinc-200/60 dark:border-zinc-800/60 mb-2">
-                    <span className="font-bold">2</span>
-                    <span className="text-[11px] uppercase tracking-wider">Architecture</span>
+                  <div className="font-mono text-xs text-zinc-400 dark:text-zinc-500 pb-2 border-b border-zinc-200/60 dark:border-zinc-800/60 mb-2">
+                    <span className="text-[11px] uppercase tracking-wider font-semibold">Architecture</span>
                   </div>
                   <div className="overflow-hidden rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-5 sm:p-6 aspect-[16/10] flex flex-col justify-between transition group-hover:border-zinc-400 dark:group-hover:border-zinc-600 shadow-xs">
                     <div>
@@ -138,9 +136,8 @@ export default function ProjectGrid({ projects, t, onSelectProject }) {
                   onClick={() => onSelectProject(p)}
                   className="group cursor-pointer flex flex-col sm:col-span-2 lg:col-span-1"
                 >
-                  <div className="flex items-center justify-between font-mono text-xs text-zinc-400 dark:text-zinc-500 pb-2 border-b border-zinc-200/60 dark:border-zinc-800/60 mb-2">
-                    <span className="font-bold">3</span>
-                    <span className="text-[11px] uppercase tracking-wider">Impact</span>
+                  <div className="font-mono text-xs text-zinc-400 dark:text-zinc-500 pb-2 border-b border-zinc-200/60 dark:border-zinc-800/60 mb-2">
+                    <span className="text-[11px] uppercase tracking-wider font-semibold">Impact</span>
                   </div>
                   <div className="overflow-hidden rounded-2xl bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 p-5 sm:p-6 aspect-[16/10] flex flex-col justify-between transition group-hover:border-zinc-400 dark:group-hover:border-zinc-600 shadow-xs">
                     <div>

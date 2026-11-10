@@ -52,7 +52,7 @@ test('skills use a responsive minimal list without bento effects', () => {
   assert.doesNotMatch(section, /MagicBento/)
   assert.match(list, /<ol/)
   assert.match(list, /items\.map/)
-  assert.match(list, /String\(index \+ 1\)\.padStart\(2, '0'\)/)
+  assert.doesNotMatch(list, /String\(index \+ 1\)\.padStart\(2, '0'\)/)
   assert.match(list, /flex-wrap/)
   assert.match(list, /border-t/)
   assert.doesNotMatch(list, /svg|Sparkles|enableTilt|particle/i)

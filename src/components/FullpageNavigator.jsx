@@ -69,7 +69,7 @@ export default function FullpageNavigator({
                     : 'opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 bg-white/90 dark:bg-zinc-800/90 text-zinc-700 dark:text-zinc-200 border-zinc-200 dark:border-zinc-700'
                 }`}
               >
-                <span className="text-zinc-400 dark:text-zinc-500 font-mono mr-1.5">{sec.number}</span>
+                
                 <span>{sec.thai}</span>
               </span>
 

@@ -6,11 +6,8 @@ export default function SkillsList({ items = [] }) {
       {items.map((item, index) => (
         <li
           key={item.id || item.title}
-          className="grid grid-cols-[2.5rem_minmax(0,1fr)] gap-3 border-b border-zinc-200 py-7 sm:grid-cols-[4rem_minmax(0,1fr)] sm:gap-6 sm:py-9 dark:border-zinc-800"
+          className="border-b border-zinc-200 py-7 sm:py-9 dark:border-zinc-800 list-none"
         >
-          <span className="pt-1 font-mono text-xs font-semibold tracking-[0.16em] text-zinc-400 dark:text-zinc-500">
-            {String(index + 1).padStart(2, '0')}
-          </span>
 
           <article className="min-w-0">
             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">

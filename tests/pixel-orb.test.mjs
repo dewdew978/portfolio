@@ -31,11 +31,11 @@ test('Pixel Orb animations respect reduced motion and theme contrast', () => {
   assert.match(css, /\[data-theme='dark'\]/)
 })
 
-test('Navbar and Hero use compact and interactive Pixel Orbs', () => {
+test('Hero uses large interactive Pixel Orb and Navbar brand omits orb for clean identity', () => {
   const navbar = read('src/components/Navbar.jsx')
   const hero = read('src/components/home/HeroSection.jsx')
 
-  assert.match(navbar, /<PixelOrb[\s\S]*size="sm"[\s\S]*interactive/)
+  assert.doesNotMatch(navbar, /<PixelOrb/)
   assert.match(navbar, /Pawarit<\/span>/)
   assert.match(hero, /<PixelOrb\s+size="lg"\s+interactive/)
   assert.match(hero, /profiledew\.jpg/)
@@ -58,15 +58,15 @@ test('interactive Pixel Orb exposes an accessible repeatable excited reaction', 
   assert.match(css, /prefers-reduced-motion:[\s\S]*pixel-orb--excited/)
 })
 
-test('Navbar orb preserves home navigation and a 44px touch target', () => {
+test('Navbar brand preserves home navigation and a 44px touch target', () => {
   const component = read('src/components/brand/PixelOrb.jsx')
   const css = read('src/components/brand/PixelOrb.css')
   const navbar = read('src/components/Navbar.jsx')
 
   assert.match(component, /onActivate/)
   assert.match(component, /onActivate\?\.\(\)/)
-  assert.match(navbar, /<PixelOrb[\s\S]*onActivate=/)
   assert.match(navbar, /navigate\('\/'\)/)
+  assert.match(navbar, /min-h-11 min-w-11/)
   assert.match(css, /pixel-orb--sm\.pixel-orb--interactive[\s\S]*min-width:\s*44px/)
   assert.match(css, /pixel-orb--sm\.pixel-orb--interactive[\s\S]*min-height:\s*44px/)
 })

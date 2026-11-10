@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Sun, Moon, Menu, X, Download } from 'lucide-react'
 import { getAssetUrl } from '@/utils/url'
 import { useLanguage } from '@/context/LanguageContext'
-import PixelOrb from '@/components/brand/PixelOrb'
+
 import PawaritLogo from '@/components/brand/PawaritLogo'
 
 export default function Navbar({ theme, setTheme }) {
@@ -84,31 +84,19 @@ export default function Navbar({ theme, setTheme }) {
             : 'bg-white/80 dark:bg-zinc-900/75 border-zinc-200/80 dark:border-zinc-800/80 shadow-xl shadow-black/5 dark:shadow-black/40'
         }`}
       >
-        {/* Brand Logo */}
-        <div
-          className="flex min-h-11 min-w-11 shrink-0 items-center gap-2.5 text-lg font-extrabold tracking-tight text-zinc-900 dark:text-white hover:opacity-85 transition-opacity cursor-pointer"
+                {/* Brand Logo */}
+        <button
+          type="button"
+          onClick={() => {
+            if (location.pathname !== '/') navigate('/')
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+          }}
+          className="flex min-h-11 min-w-11 shrink-0 items-center text-lg font-extrabold tracking-tight text-zinc-900 dark:text-white hover:opacity-80 transition-opacity cursor-pointer"
+          aria-label="Pawarit - Home"
         >
-          <PixelOrb
-            size="sm"
-            interactive
-            onActivate={() => {
-              if (location.pathname !== '/') navigate('/')
-              window.scrollTo({ top: 0, behavior: 'smooth' })
-            }}
-          />
-          <button
-            type="button"
-            onClick={() => {
-              if (location.pathname !== '/') navigate('/')
-              window.scrollTo({ top: 0, behavior: 'smooth' })
-            }}
-            className="hidden min-[360px]:inline-flex items-center cursor-pointer"
-            aria-label="Pawarit - Home"
-          >
-            <PawaritLogo className="h-6 sm:h-7 w-auto text-zinc-900 dark:text-white hover:opacity-75 transition-opacity" />
-            <span className="sr-only">Pawarit</span>
-          </button>
-        </div>
+          <PawaritLogo className="h-6 sm:h-7 w-auto text-zinc-900 dark:text-white" />
+          <span className="sr-only">Pawarit</span>
+        </button>
 
         {/* Desktop Navigation Links */}
         <nav className="hidden lg:flex items-center">

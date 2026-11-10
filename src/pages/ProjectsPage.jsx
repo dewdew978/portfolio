@@ -16,11 +16,11 @@ export default function ProjectsPage({ theme, setTheme }) {
 
   usePageSEO({
     title: lang === 'th'
-      ? 'ผลงานและโปรเจกต์ทั้งหมด (Projects) | Pawarit Pansing (ปวริศ ปัญสิงห์)'
-      : 'All Projects & Case Studies | Pawarit Pansing (ปวริศ ปัญสิงห์)',
+      ? 'ผลงานและโปรเจกต์ทั้งหมด (Projects) | Pawarit Pansing (ปวริศ ปัญสิงห์ - ดิว)'
+      : 'All Projects & Case Studies | Pawarit Pansing (ปวริศ ปัญสิงห์ - Dew)',
     description: lang === 'th'
-      ? `รวมผลงานและเคสศึกษาการวิเคราะห์ข้อมูล ${projects.length} โปรเจกต์ของ ปวริศ ปัญสิงห์ (Pawarit Pansing)`
-      : `Explore ${projects.length} data analytics and business strategy projects by Pawarit Pansing (ปวริศ ปัญสิงห์).`,
+      ? `รวมผลงานและเคสศึกษาการวิเคราะห์ข้อมูล ${projects.length} โปรเจกต์ของ ดิว - ปวริศ ปัญสิงห์ (Pawarit Pansing / ปวริศ / ปัญสิงห์)`
+      : `Explore ${projects.length} data analytics and business strategy projects by Pawarit Pansing (ปวริศ ปัญสิงห์ - Dew).`,
     canonicalPath: 'projects',
   })
 

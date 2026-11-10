@@ -10,6 +10,7 @@ test('index.html contains comprehensive SEO tags for personal branding', () => {
   // Title includes both English and Thai names + Role
   assert.match(html, /Pawarit Pansing/)
   assert.match(html, /ปวริศ ปัญสิงห์/)
+  assert.match(html, /ดิว/)
   assert.match(html, /Data/)
 
   // Google Search Console verification
@@ -19,20 +20,24 @@ test('index.html contains comprehensive SEO tags for personal branding', () => {
   assert.match(html, /<link rel="canonical" href="https:\/\/dewdew978\.github\.io\/portfolio\/"\s*\/?>/)
 
   // Meta author & robots
-  assert.match(html, /<meta name="author" content="Pawarit Pansing"\s*\/?>/)
+  assert.match(html, /<meta name="author" content="Pawarit Pansing[^"]*"\s*\/?>/)
   assert.match(html, /<meta name="robots" content="index,\s*follow"\s*\/?>/)
 
-  // Meta keywords
+  // Meta keywords covers all variations: pawarit pansing, pawarit, ปวริศ, ปวริศ ปัญสิงห์, ปัญสิงห์, ดิว
   assert.match(html, /<meta name="keywords"/)
-  assert.match(html, /Pawarit Pansing/)
+  assert.match(html, /pawarit pansing/i)
+  assert.match(html, /pawarit/i)
   assert.match(html, /ปวริศ ปัญสิงห์/)
+  assert.match(html, /ปวริศ/)
+  assert.match(html, /ปัญสิงห์/)
+  assert.match(html, /ดิว/)
 
   // Open Graph
   assert.match(html, /<meta property="og:title"/)
   assert.match(html, /<meta property="og:description"/)
   assert.match(html, /<meta property="og:url" content="https:\/\/dewdew978\.github\.io\/portfolio\/"\s*\/?>/)
   assert.match(html, /<meta property="og:image" content="https:\/\/dewdew978\.github\.io\/portfolio\/profiledew.jpg"\s*\/?>/)
-  assert.match(html, /<meta property="og:site_name" content="Pawarit Pansing Portfolio"\s*\/?>/)
+  assert.match(html, /<meta property="og:site_name" content="Pawarit Pansing[^"]*Portfolio"\s*\/?>/)
 
   // Twitter cards
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\s*\/?>/)
@@ -56,7 +61,14 @@ test('index.html contains comprehensive SEO tags for personal branding', () => {
   const personNode = profilePage.mainEntity
   assert.equal(personNode['@type'], 'Person')
   assert.equal(personNode.name, 'Pawarit Pansing')
-  assert.equal(personNode.alternateName, 'ปวริศ ปัญสิงห์')
+
+  // Alternate names covers all Thai & English search variations
+  const altNames = Array.isArray(personNode.alternateName) ? personNode.alternateName : [personNode.alternateName]
+  assert.ok(altNames.includes('ปวริศ ปัญสิงห์'))
+  assert.ok(altNames.includes('ปวริศ'))
+  assert.ok(altNames.includes('ปัญสิงห์'))
+  assert.ok(altNames.includes('ดิว'))
+  assert.ok(altNames.includes('pawarit'))
   assert.ok(personNode.sameAs?.includes('https://www.linkedin.com/in/pawarit-pansing-5744a435b/'))
   assert.ok(personNode.sameAs?.includes('https://github.com/dewdew978'))
 })

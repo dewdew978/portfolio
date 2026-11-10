@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react'
 import { Navigate, Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import ProjectsPage from './pages/ProjectsPage'
+import Preloader from './components/ui/Preloader'
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('theme') || 'light'
   })
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const metaTheme = document.querySelector('meta[name="theme-color"]')
@@ -23,10 +25,13 @@ export default function App() {
   }, [theme])
 
   return (
-    <Routes>
-      <Route path="/" element={<HomePage theme={theme} setTheme={setTheme} />} />
-      <Route path="/projects" element={<ProjectsPage theme={theme} setTheme={setTheme} />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <>
+      {loading && <Preloader onComplete={() => setLoading(false)} />}
+      <Routes>
+        <Route path="/" element={<HomePage theme={theme} setTheme={setTheme} />} />
+        <Route path="/projects" element={<ProjectsPage theme={theme} setTheme={setTheme} />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </>
   )
 }

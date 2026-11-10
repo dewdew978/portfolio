@@ -22,10 +22,18 @@ export default function ExperienceSection() {
         </div>
       </FadeInSection>
 
-      <div className="relative pl-5 sm:pl-8 border-l-2 border-zinc-200 dark:border-zinc-800 space-y-7 sm:space-y-10">
-        <FadeInSection direction="up" delay={100}>
-          <div className="relative">
-            <div className="absolute -left-[27px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-white dark:bg-zinc-950 border-4 border-zinc-700 dark:border-zinc-300 shadow-xs"></div>
+      <FadeInSection direction="up" delay={100}>
+        <div className="relative flex gap-4 sm:gap-6">
+          {/* Perfectly centered timeline column */}
+          <div aria-hidden="true" className="relative flex flex-col items-center shrink-0">
+            {/* Vertical connector line starting at circle center */}
+            <div className="absolute top-2 bottom-0 w-0.5 bg-gradient-to-b from-zinc-300 via-zinc-200 to-transparent dark:from-zinc-700 dark:via-zinc-800" />
+            {/* Timeline node circle */}
+            <div className="relative z-10 w-4 h-4 rounded-full bg-white dark:bg-zinc-950 border-4 border-zinc-700 dark:border-zinc-300 shadow-xs shrink-0 mt-1.5" />
+          </div>
+
+          {/* Education Card */}
+          <div className="flex-1 min-w-0">
             <div className="p-4 sm:p-6 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800/80 shadow-sm">
               <div className="mb-4">
                 <div className="inline-flex items-center px-3 py-2 rounded-xl bg-white border border-zinc-200 dark:border-zinc-700 shadow-sm">
@@ -57,9 +65,8 @@ export default function ExperienceSection() {
               </ul>
             </div>
           </div>
-        </FadeInSection>
-      </div>
-
+        </div>
+      </FadeInSection>
     </section>
   )
 }

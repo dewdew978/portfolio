@@ -106,11 +106,7 @@ export default function HeroSection() {
                 />
               </div>
 
-              {/* Bottom Status Chip */}
-              <div className="absolute -bottom-3.5 z-20 inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold bg-white/95 dark:bg-zinc-900/95 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 shadow-lg backdrop-blur-md">
-                <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-                <span>KMITL • Data Science (2027)</span>
-              </div>
+              
             </div>
           </div>
         </div>

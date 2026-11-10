@@ -91,10 +91,6 @@ export function Footer() {
               ? 'Data Analyst & Business Analyst • เปลี่ยนข้อมูลที่ซับซ้อนให้เป็น Actionable Insights เพื่อขับเคลื่อนการเติบโตของธุรกิจ'
               : 'Data Analyst & Business Analyst • Transforming complex data into actionable insights to drive strategic business growth'}
           </p>
-          <div className="flex items-center gap-2 text-xs font-medium text-zinc-600 dark:text-zinc-400 pt-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>Open for Opportunities • Bangkok, Thailand</span>
-          </div>
           <p className="text-zinc-400 dark:text-zinc-500 text-xs pt-4">
             &copy; {new Date().getFullYear()} {t.footer.copyright} • {t.footer.builtWith}
           </p>

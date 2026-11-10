@@ -9,7 +9,7 @@ export default function HeroSection() {
   const { lang, t } = useLanguage()
 
   return (
-    <section id="hero" className="fullpage-section relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-12 sm:pb-16 justify-center">
+    <section id="hero" className="fullpage-section relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 min-[400px]:pt-32 sm:pt-36 lg:pt-28 pb-12 sm:pb-16 justify-center">
       <FadeInSection direction="up" duration={800}>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 items-center">
           {/* Left Column: Intro */}
@@ -86,12 +86,12 @@ export default function HeroSection() {
           </div>
 
           {/* Right Column: Profile Image */}
-          <div className="md:col-span-5 flex justify-center order-first md:order-none">
+          <div className="md:col-span-5 flex justify-center order-first md:order-none mt-2 sm:mt-0">
             <div className="relative flex justify-center items-center">
               <PixelOrb
                 size="lg"
                 interactive
-                className="absolute -right-4 -top-10 sm:-right-14 sm:-top-12 z-20"
+                className="absolute -right-2 -top-4 sm:-right-14 sm:-top-12 z-20"
               />
 
               {/* Ambient Glow */}

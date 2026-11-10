@@ -78,11 +78,11 @@ export default function Navbar({ theme, setTheme }) {
   return (
     <header className="fixed top-3 sm:top-4 inset-x-0 z-50 flex justify-center px-3 sm:px-4 pointer-events-none">
       <div
-        className={`pointer-events-auto flex items-center justify-between w-full max-w-5xl px-3 sm:px-4 py-2 rounded-full backdrop-blur-xl border transition-all duration-300 ${
+                className={`pointer-events-auto flex items-center justify-between w-full max-w-5xl px-3 sm:px-4 py-2 rounded-full backdrop-blur-xl border transition-all duration-500 ${
           isScrolled
-            ? 'bg-white/90 dark:bg-zinc-900/90 border-zinc-300/70 dark:border-zinc-700/80 shadow-xl shadow-black/5 dark:shadow-black/40'
-            : 'bg-white/80 dark:bg-zinc-900/75 border-zinc-200/80 dark:border-zinc-800/80 shadow-xl shadow-black/5 dark:shadow-black/40'
-        }`}
+            ? 'bg-white/60 dark:bg-zinc-900/60 border-zinc-200/50 dark:border-zinc-800/50 shadow-sm opacity-70 hover:opacity-100 focus-within:opacity-100 active:opacity-100'
+            : 'bg-white/85 dark:bg-zinc-900/80 border-zinc-200/80 dark:border-zinc-800/80 shadow-lg shadow-black/5 dark:shadow-black/40 opacity-100'
+        } ${menuOpen ? '!opacity-100 !bg-white dark:!bg-zinc-900' : ''}`}
       >
                 {/* Brand Logo */}
         <button

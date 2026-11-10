@@ -98,6 +98,7 @@ html[lang="th"] .display-heading {
   justify-content: center;
   position: relative;
   box-sizing: border-box;
+  min-height: 100svh;
 }
 
 /* Full-viewport sections only on desktop; phones/tablets flow naturally */

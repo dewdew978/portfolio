@@ -19,8 +19,8 @@ export default function ContactSection() {
         <div className="relative p-5 sm:p-12 rounded-3xl bg-gradient-to-b from-white to-zinc-50 dark:from-zinc-900 dark:to-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-2xl text-center overflow-hidden">
           <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-zinc-400 dark:via-zinc-600 to-transparent"></div>
 
-          <div className="inline-block px-3.5 py-1 rounded-full text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 mb-4">
-            {t.contact.badge}
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full text-xl sm:text-2xl font-caveat font-bold bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-700 mb-4 tracking-wide shadow-xs">
+            <span className="font-caveat leading-none">{t.contact.badge}</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white mb-4">

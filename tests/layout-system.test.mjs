@@ -57,3 +57,9 @@ test('skills use a responsive minimal list without bento effects', () => {
   assert.match(list, /border-t/)
   assert.doesNotMatch(list, /svg|Sparkles|enableTilt|particle/i)
 })
+
+test('contact badge uses Caveat handwriting font matching preloader hello typography', () => {
+  const contact = read('src/components/home/ContactSection.jsx')
+  assert.match(contact, /font-caveat/)
+  assert.match(contact, /t\.contact\.badge/)
+})

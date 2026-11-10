@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
 
 export default function Preloader({ onComplete }) {
   // scene: 1 = "Hello welcome", 2 = "Pawarit Pansing, it's me", 3 = done
@@ -7,16 +7,36 @@ export default function Preloader({ onComplete }) {
   const [displayText, setDisplayText] = useState('')
   const [sceneExiting, setSceneExiting] = useState(false)
   const [isDone, setIsDone] = useState(false)
-  const reducedMotion = useReducedMotion()
+  const [fontReady, setFontReady] = useState(false)
 
   const scene1Text = 'Hello welcome'
   const scene2Text = "Pawarit Pansing, it's me"
 
+  // Ensure Momo Signature font is loaded before typewriter starts
   useEffect(() => {
-    if (reducedMotion) {
-      onComplete?.()
-      return
+    let active = true
+    const fallbackTimer = setTimeout(() => {
+      if (active) setFontReady(true)
+    }, 250)
+
+    if (typeof document !== 'undefined' && document.fonts?.load) {
+      document.fonts.load('48px "Momo Signature"').then(() => {
+        if (active) setFontReady(true)
+      }).catch(() => {
+        if (active) setFontReady(true)
+      })
+    } else {
+      setFontReady(true)
     }
+
+    return () => {
+      active = false
+      clearTimeout(fallbackTimer)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!fontReady) return
 
     let currentIndex = 0
     let timer = null
@@ -42,7 +62,7 @@ export default function Preloader({ onComplete }) {
         }
       }
 
-      timer = setTimeout(typeScene1, 200)
+      timer = setTimeout(typeScene1, 150)
     } else if (scene === 2) {
       setDisplayText('')
       setSceneExiting(false)
@@ -69,7 +89,7 @@ export default function Preloader({ onComplete }) {
     }
 
     return () => clearTimeout(timer)
-  }, [scene, reducedMotion, onComplete])
+  }, [scene, fontReady])
 
   const handleSkip = () => {
     setIsDone(true)
@@ -119,13 +139,8 @@ export default function Preloader({ onComplete }) {
                   sceneExiting ? 'opacity-0 -translate-y-4 scale-98' : 'opacity-100 translate-y-0 scale-100'
                 }`}
               >
-                <h1
-                  style={{
-                    fontFamily: '"Momo Signature", "SF Pro Display", cursive, sans-serif',
-                  }}
-                  className="text-4xl min-[480px]:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-zinc-900 dark:text-zinc-100 leading-relaxed"
-                >
-                  <span>{displayText}</span>
+                <h1 className="font-momo text-4xl min-[480px]:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-normal text-zinc-900 dark:text-zinc-100 leading-relaxed tracking-normal">
+                  <span className="font-momo">{displayText}</span>
                   <span
                     className="inline-block w-1 sm:w-1.5 h-8 sm:h-12 md:h-16 ml-2 bg-zinc-900 dark:bg-zinc-100 align-middle animate-pulse"
                     aria-hidden="true"

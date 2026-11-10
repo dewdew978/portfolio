@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 
 export default function Preloader({ onComplete }) {
-  // scene: 1 = "Hello welcome", 2 = "Pawarit Pansing, it's me", 3 = done
+  // scene: 1 = "Hello welcome", 2 = "Pawarit Pansing, it's me"
   const [scene, setScene] = useState(1)
   const [displayText, setDisplayText] = useState('')
   const [sceneExiting, setSceneExiting] = useState(false)
@@ -49,7 +49,9 @@ export default function Preloader({ onComplete }) {
         if (currentIndex <= scene1Text.length) {
           setDisplayText(scene1Text.slice(0, currentIndex))
           currentIndex++
-          timer = setTimeout(typeScene1, 48)
+          const char = scene1Text[currentIndex - 1]
+          const delay = char === ' ' ? 140 : 88
+          timer = setTimeout(typeScene1, delay)
         } else {
           // Pause when "Hello welcome" is fully written
           timer = setTimeout(() => {
@@ -57,12 +59,12 @@ export default function Preloader({ onComplete }) {
             // Fade out smoothly, then proceed to Scene 2
             timer = setTimeout(() => {
               setScene(2)
-            }, 380)
-          }, 520)
+            }, 450)
+          }, 750)
         }
       }
 
-      timer = setTimeout(typeScene1, 150)
+      timer = setTimeout(typeScene1, 220)
     } else if (scene === 2) {
       setDisplayText('')
       setSceneExiting(false)
@@ -72,7 +74,9 @@ export default function Preloader({ onComplete }) {
           setDisplayText(scene2Text.slice(0, currentIndex))
           currentIndex++
           const char = scene2Text[currentIndex - 1]
-          const delay = char === ',' ? 190 : 42
+          let delay = 84
+          if (char === ',') delay = 280
+          else if (char === ' ') delay = 130
           timer = setTimeout(typeScene2, delay)
         } else {
           // Pause when "Pawarit Pansing, it's me" is fully written
@@ -80,12 +84,12 @@ export default function Preloader({ onComplete }) {
             setIsDone(true)
             timer = setTimeout(() => {
               onComplete?.()
-            }, 600)
-          }, 700)
+            }, 850)
+          }, 900)
         }
       }
 
-      timer = setTimeout(typeScene2, 160)
+      timer = setTimeout(typeScene2, 220)
     }
 
     return () => clearTimeout(timer)
@@ -95,7 +99,7 @@ export default function Preloader({ onComplete }) {
     setIsDone(true)
     setTimeout(() => {
       onComplete?.()
-    }, 250)
+    }, 400)
   }
 
   useEffect(() => {
@@ -113,7 +117,11 @@ export default function Preloader({ onComplete }) {
       {!isDone && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, y: -24, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }}
+          exit={{
+            opacity: 0,
+            scale: 1.01,
+            transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
+          }}
           onClick={handleSkip}
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#fbfaf8] dark:bg-[#0a0908] text-zinc-950 dark:text-[#fbfaf8] select-none cursor-pointer px-6 overflow-hidden"
           aria-label="Loading introduction. Click or press Escape to skip."
@@ -135,8 +143,8 @@ export default function Preloader({ onComplete }) {
             {/* Large Caveat Handwriting Display */}
             <div className="min-h-[6.5rem] sm:min-h-[8.5rem] md:min-h-[11rem] flex items-center justify-center w-full px-2">
               <div
-                className={`transition-all duration-350 transform ${
-                  sceneExiting ? 'opacity-0 -translate-y-4 scale-98' : 'opacity-100 translate-y-0 scale-100'
+                className={`transition-all duration-450 transform ${
+                  sceneExiting ? 'opacity-0 -translate-y-3 scale-98' : 'opacity-100 translate-y-0 scale-100'
                 }`}
               >
                 <h1 className="font-caveat text-5xl min-[480px]:text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-semibold text-zinc-900 dark:text-zinc-100 leading-tight tracking-wide">

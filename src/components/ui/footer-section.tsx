@@ -7,7 +7,6 @@ import {
   Linkedin as LinkedinIcon,
   Mail as MailIcon,
   Download as DownloadIcon,
-  Sparkles,
   ArrowUpRight
 } from 'lucide-react';
 import { getAssetUrl } from '@/utils/url';
@@ -71,57 +70,73 @@ export function Footer() {
   ];
 
   return (
-    <footer className="relative w-full border-t border-zinc-200 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-950/80 px-4 sm:px-6 lg:px-8 py-12 lg:py-16 mt-16 backdrop-blur-xl">
+    <footer className="relative w-full border-t border-zinc-200 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-950/80 px-4 sm:px-6 lg:px-8 pt-10 sm:pt-12 lg:pt-16 pb-[calc(2rem+env(safe-area-inset-bottom,0px))] mt-16 backdrop-blur-xl">
       <div className="bg-zinc-400/30 dark:bg-zinc-600/30 absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur-xs" />
 
-      <div className="max-w-7xl mx-auto grid w-full gap-8 xl:grid-cols-3 xl:gap-12">
-        <AnimatedContainer className="space-y-4">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid w-full gap-8 xl:grid-cols-3 xl:gap-12">
+          {/* Brand Info */}
+          <AnimatedContainer className="space-y-4">
+            <a
+              href="#"
+              onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+              className="inline-flex items-center gap-3 text-xl font-extrabold tracking-tight text-zinc-900 dark:text-white hover:opacity-85 transition-opacity"
+              aria-label="Pawarit - Back to top"
+            >
+              <span className="w-2.5 h-2.5 rounded-full bg-zinc-900 dark:bg-[#fbfaf8]"></span>
+              <PawaritLogo className="h-7 sm:h-8 w-auto text-zinc-900 dark:text-white" />
+              <span className="sr-only">{t.hero.name}</span>
+            </a>
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 max-w-sm leading-relaxed">
+              {lang === 'th'
+                ? 'Data Analyst & Business Analyst • เปลี่ยนข้อมูลที่ซับซ้อนให้เป็น Actionable Insights เพื่อขับเคลื่อนการเติบโตของธุรกิจ'
+                : 'Data Analyst & Business Analyst • Transforming complex data into actionable insights to drive strategic business growth'}
+            </p>
+          </AnimatedContainer>
+
+          {/* Links Grid: 2 columns on phones, 2 on tablet, 4 on desktop */}
+          <div className="grid grid-cols-1 min-[360px]:grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-4 xl:col-span-2">
+            {footerLinks.map((section, index) => (
+              <AnimatedContainer key={section.label} delay={0.1 + index * 0.1}>
+                <div>
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100">
+                    {section.label}
+                  </h3>
+                  <ul className="mt-3 sm:mt-4 space-y-1 sm:space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+                    {section.links.map((link) => (
+                      <li key={link.title}>
+                        <a
+                          href={link.href}
+                          target={link.target}
+                          rel={link.target ? 'noopener noreferrer' : undefined}
+                          className="hover:text-zinc-950 dark:hover:text-zinc-100 inline-flex min-h-11 max-w-full items-center gap-1.5 py-1 transition-all duration-200"
+                        >
+                          {link.icon && <link.icon className="size-3.5 shrink-0" />}
+                          <span className="break-words">{link.title}</span>
+                          {link.target === '_blank' && <ArrowUpRight size={12} className="opacity-50 shrink-0" />}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </AnimatedContainer>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom Sub-footer / Copyright Bar with safe-area spacing */}
+        <div className="mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-zinc-200/80 dark:border-zinc-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-400 dark:text-zinc-500">
+          <p className="text-center sm:text-left">
+            &copy; {new Date().getFullYear()} {t.footer.copyright} • {t.footer.builtWith}
+          </p>
           <a
             href="#"
             onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            className="inline-flex items-center gap-3 text-xl font-extrabold tracking-tight text-zinc-900 dark:text-white hover:opacity-85 transition-opacity"
-            aria-label="Pawarit - Back to top"
+            className="inline-flex items-center gap-1.5 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors"
           >
-            <span className="w-2.5 h-2.5 rounded-full bg-zinc-900 dark:bg-[#fbfaf8]"></span>
-            <PawaritLogo className="h-7 sm:h-8 w-auto text-zinc-900 dark:text-white" />
-            <span className="sr-only">{t.hero.name}</span>
+            <span>{lang === 'th' ? 'กลับขึ้นด้านบน' : 'Back to top'}</span>
+            <span aria-hidden="true">&uarr;</span>
           </a>
-          <p className="text-sm text-zinc-600 dark:text-zinc-400 max-w-sm leading-relaxed">
-            {lang === 'th'
-              ? 'Data Analyst & Business Analyst • เปลี่ยนข้อมูลที่ซับซ้อนให้เป็น Actionable Insights เพื่อขับเคลื่อนการเติบโตของธุรกิจ'
-              : 'Data Analyst & Business Analyst • Transforming complex data into actionable insights to drive strategic business growth'}
-          </p>
-          <p className="text-zinc-400 dark:text-zinc-500 text-xs pt-4">
-            &copy; {new Date().getFullYear()} {t.footer.copyright} • {t.footer.builtWith}
-          </p>
-        </AnimatedContainer>
-
-        <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 xl:col-span-2 xl:mt-0">
-          {footerLinks.map((section, index) => (
-            <AnimatedContainer key={section.label} delay={0.1 + index * 0.1}>
-              <div className="mb-8 md:mb-0">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-zinc-900 dark:text-zinc-100">
-                  {section.label}
-                </h3>
-                <ul className="mt-4 space-y-2.5 text-sm text-zinc-600 dark:text-zinc-400">
-                  {section.links.map((link) => (
-                    <li key={link.title}>
-                      <a
-                        href={link.href}
-                        target={link.target}
-                        rel={link.target ? 'noopener noreferrer' : undefined}
-                        className="hover:text-zinc-950 dark:hover:text-zinc-100 inline-flex min-h-11 max-w-full items-center gap-1.5 py-1 transition-all duration-200"
-                      >
-                        {link.icon && <link.icon className="size-3.5" />}
-                        <span className="break-words">{link.title}</span>
-                        {link.target === '_blank' && <ArrowUpRight size={12} className="opacity-50" />}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </AnimatedContainer>
-          ))}
         </div>
       </div>
     </footer>

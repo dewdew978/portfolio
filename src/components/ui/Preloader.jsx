@@ -210,13 +210,22 @@ export default function Preloader({ onComplete }) {
             scale: 1.01,
             transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
           }}
-          onClick={handleSkip}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#fbfaf8] dark:bg-[#0a0908] text-zinc-950 dark:text-[#fbfaf8] select-none cursor-pointer px-6 overflow-hidden"
-          aria-label="Loading introduction. Click or press Escape to skip."
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#fbfaf8] dark:bg-[#0a0908] text-zinc-950 dark:text-[#fbfaf8] select-none px-6 overflow-hidden"
+          aria-label="Loading introduction"
           role="status"
         >
           {/* Subtle noise grain texture */}
           <div className="absolute inset-0 bg-noise opacity-35 pointer-events-none" />
+
+          {/* Top Skip Button */}
+          <button
+            type="button"
+            onClick={handleSkip}
+            className="absolute top-6 right-6 z-20 px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 bg-zinc-200/50 dark:bg-zinc-800/50 hover:bg-zinc-200 dark:hover:bg-zinc-800 backdrop-blur-sm border border-zinc-300/40 dark:border-zinc-700/40 opacity-70 hover:opacity-100 transition-all cursor-pointer"
+            aria-label="Skip intro animation"
+          >
+            Skip ✕
+          </button>
 
           {/* Center Content */}
           <div className="relative z-10 flex flex-col items-center max-w-4xl w-full text-center">

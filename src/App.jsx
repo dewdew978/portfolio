@@ -3,9 +3,17 @@ import { Navigate, Routes, Route } from 'react-router-dom'
 import HomePage from './pages/HomePage'
 import ProjectsPage from './pages/ProjectsPage'
 import Preloader from './components/ui/Preloader'
+import ScrollToTop from './components/ui/ScrollToTop'
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const explicit = localStorage.getItem('pawarit_theme_explicit')
+      if (!explicit) {
+        try { localStorage.setItem('theme', 'light') } catch {}
+        return 'light'
+      }
+    }
     return localStorage.getItem('theme') || 'light'
   })
   const [loading, setLoading] = useState(true)
@@ -34,6 +42,7 @@ export default function App() {
   return (
     <>
       {loading && <Preloader onComplete={() => setLoading(false)} />}
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<HomePage theme={theme} setTheme={setTheme} />} />
         <Route path="/projects" element={<ProjectsPage theme={theme} setTheme={setTheme} />} />

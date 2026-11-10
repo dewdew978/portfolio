@@ -153,7 +153,7 @@ export default function Navbar({ theme, setTheme }) {
 
           {/* Theme Switcher Button */}
           <button
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            onClick={() => { try { localStorage.setItem('pawarit_theme_explicit', 'true'); } catch {} setTheme(theme === 'dark' ? 'light' : 'dark'); }}
             title={theme === 'dark' ? t.nav.toggleThemeLight : t.nav.toggleThemeDark}
             aria-label={theme === 'dark' ? t.nav.toggleThemeLight : t.nav.toggleThemeDark}
             className="min-h-11 min-w-11 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 hover:scale-105 transition-all duration-200 cursor-pointer"

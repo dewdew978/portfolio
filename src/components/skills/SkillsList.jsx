@@ -13,7 +13,7 @@ export default function SkillsList({ items = [] }) {
           </span>
 
           <article className="min-w-0">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-indigo-600 dark:text-indigo-400">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-zinc-500 dark:text-zinc-400">
               {item.badge}
             </p>
             <div className="mt-3 grid gap-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(18rem,1.1fr)] lg:gap-10">

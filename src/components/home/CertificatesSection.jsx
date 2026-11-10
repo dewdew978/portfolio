@@ -70,7 +70,7 @@ export default function CertificatesSection() {
 
                 <div className="flex flex-1 flex-col p-4 sm:p-6">
                   <div className="mb-3 flex flex-wrap gap-2 text-xs font-semibold">
-                    <span className="rounded-full bg-sky-50 px-3 py-1 text-sky-700 ring-1 ring-sky-200 dark:bg-sky-950/60 dark:text-sky-300 dark:ring-sky-800">
+                    <span className="rounded-full bg-zinc-100 dark:bg-zinc-800 px-3 py-1 text-zinc-700 dark:text-zinc-300 ring-1 ring-zinc-200 dark:ring-zinc-700">
                       {content.duration}
                     </span>
                     <span className="rounded-full bg-zinc-100 px-3 py-1 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">

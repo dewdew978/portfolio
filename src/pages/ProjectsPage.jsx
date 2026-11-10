@@ -32,7 +32,7 @@ export default function ProjectsPage({ theme, setTheme }) {
           <ArrowLeft size={17} />
           {lang === 'th' ? 'กลับหน้าหลัก' : 'Back home'}
         </Link>
-        <p className="mt-8 sm:mt-12 text-sm font-bold uppercase tracking-[.2em] text-indigo-600 dark:text-indigo-400">
+        <p className="mt-8 sm:mt-12 text-sm font-bold uppercase tracking-[.2em] text-zinc-500 dark:text-zinc-400">
           {lang === 'th' ? 'โปรเจกต์ทั้งหมด' : 'All projects'}
         </p>
         <h1 className="display-heading mt-4 font-semibold">

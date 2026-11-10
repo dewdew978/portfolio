@@ -44,7 +44,7 @@ export default function ExperienceSection() {
                   {t.experience.eduPeriod}
                 </span>
               </div>
-              <div className="text-base font-semibold text-emerald-600 dark:text-emerald-400 mb-1">
+              <div className="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-1">
                 {t.experience.eduUniversity}
               </div>
               <div className="text-sm text-zinc-500 dark:text-zinc-400 mb-3">

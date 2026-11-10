@@ -91,7 +91,7 @@ export function Footer() {
               ? 'Data Analyst & Business Analyst • เปลี่ยนข้อมูลที่ซับซ้อนให้เป็น Actionable Insights เพื่อขับเคลื่อนการเติบโตของธุรกิจ'
               : 'Data Analyst & Business Analyst • Transforming complex data into actionable insights to drive strategic business growth'}
           </p>
-          <div className="flex items-center gap-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400 pt-2">
+          <div className="flex items-center gap-2 text-xs font-medium text-zinc-600 dark:text-zinc-400 pt-2">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span>Open for Opportunities • Bangkok, Thailand</span>
           </div>
@@ -114,7 +114,7 @@ export function Footer() {
                         href={link.href}
                         target={link.target}
                         rel={link.target ? 'noopener noreferrer' : undefined}
-                        className="hover:text-indigo-600 dark:hover:text-indigo-400 inline-flex min-h-11 max-w-full items-center gap-1.5 py-1 transition-all duration-200"
+                        className="hover:text-zinc-950 dark:hover:text-zinc-100 inline-flex min-h-11 max-w-full items-center gap-1.5 py-1 transition-all duration-200"
                       >
                         {link.icon && <link.icon className="size-3.5" />}
                         <span className="break-words">{link.title}</span>

@@ -44,7 +44,7 @@ export default function ContactSection() {
               rel="noopener noreferrer"
               className="inline-flex w-full sm:w-auto min-h-11 items-center justify-center gap-2 px-5 sm:px-6 py-3 rounded-full text-base font-semibold text-zinc-800 dark:text-zinc-200 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-700 shadow-sm hover:-translate-y-0.5 transition-all"
             >
-              <Linkedin size={18} className="text-indigo-600 dark:text-indigo-400" />
+              <Linkedin size={18} className="text-zinc-700 dark:text-zinc-300" />
               <span>LinkedIn</span>
             </a>
             <button

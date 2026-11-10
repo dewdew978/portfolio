@@ -2,14 +2,14 @@ import React from 'react'
 import { Sparkles, Terminal, TrendingUp, ShieldCheck, Database, Award, Cpu, BarChart3 } from 'lucide-react'
 
 const proofItems = [
-  { text: 'AI Agent & Multi-Stage BI Pipelines', icon: Cpu, color: 'text-indigo-400' },
-  { text: 'Text-to-SQL & MS SQL Server Architecture', icon: Database, color: 'text-purple-400' },
-  { text: 'Capital Market Case Competition 2025 (CMCC)', icon: Award, color: 'text-amber-400' },
-  { text: 'Enterprise Data Sanitization & Guardrails', icon: ShieldCheck, color: 'text-emerald-400' },
-  { text: 'Prescriptive Analytics & ROI Modeling', icon: TrendingUp, color: 'text-pink-400' },
-  { text: 'KMITL • B.Sc. Data Science & Analytics (2027)', icon: Sparkles, color: 'text-indigo-400' },
-  { text: 'Interactive Dashboards (Altair • Recharts • Gradio)', icon: BarChart3, color: 'text-purple-400' },
-  { text: 'Python Data Wrangling & Risk Modeling', icon: Terminal, color: 'text-emerald-400' },
+  { text: 'AI Agent & Multi-Stage BI Pipelines', icon: Cpu, color: 'text-zinc-500 dark:text-zinc-400' },
+  { text: 'Text-to-SQL & MS SQL Server Architecture', icon: Database, color: 'text-zinc-500 dark:text-zinc-400' },
+  { text: 'Capital Market Case Competition 2025 (CMCC)', icon: Award, color: 'text-amber-600/90 dark:text-amber-400/90' },
+  { text: 'Enterprise Data Sanitization & Guardrails', icon: ShieldCheck, color: 'text-zinc-500 dark:text-zinc-400' },
+  { text: 'Prescriptive Analytics & ROI Modeling', icon: TrendingUp, color: 'text-zinc-500 dark:text-zinc-400' },
+  { text: 'KMITL • B.Sc. Data Science & Analytics (2027)', icon: Sparkles, color: 'text-zinc-500 dark:text-zinc-400' },
+  { text: 'Interactive Dashboards (Altair • Recharts • Gradio)', icon: BarChart3, color: 'text-zinc-500 dark:text-zinc-400' },
+  { text: 'Python Data Wrangling & Risk Modeling', icon: Terminal, color: 'text-zinc-500 dark:text-zinc-400' },
 ]
 
 export default function MarqueeProofBar() {
@@ -28,7 +28,7 @@ export default function MarqueeProofBar() {
             return (
               <div
                 key={`p1-${idx}`}
-                className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/80 shadow-xs hover:border-indigo-500/50 transition-colors"
+                className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/80 shadow-xs hover:border-zinc-400 dark:hover:border-zinc-500 hover:text-zinc-950 dark:hover:text-white transition-colors"
               >
                 <Icon size={15} className={`${item.color} shrink-0`} />
                 <span>{item.text}</span>
@@ -44,7 +44,7 @@ export default function MarqueeProofBar() {
             return (
               <div
                 key={`p2-${idx}`}
-                className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/80 shadow-xs hover:border-indigo-500/50 transition-colors"
+                className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/80 shadow-xs hover:border-zinc-400 dark:hover:border-zinc-500 hover:text-zinc-950 dark:hover:text-white transition-colors"
               >
                 <Icon size={15} className={`${item.color} shrink-0`} />
                 <span>{item.text}</span>

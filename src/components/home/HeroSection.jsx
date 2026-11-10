@@ -67,7 +67,7 @@ export default function HeroSection() {
                   href="https://www.linkedin.com/in/pawarit-pansing-5744a435b/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-11 h-11 flex items-center justify-center rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:border-zinc-300 dark:hover:border-zinc-700 hover:-translate-y-0.5 shadow-sm transition-all"
+                  className="w-11 h-11 flex items-center justify-center rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:border-zinc-400 dark:hover:border-zinc-600 hover:-translate-y-0.5 shadow-sm transition-all"
                   title="LinkedIn"
                 >
                   <Linkedin size={20} />
@@ -76,7 +76,7 @@ export default function HeroSection() {
               <li>
                 <a
                   href="mailto:pawaritpansing@gmail.com"
-                  className="w-11 h-11 flex items-center justify-center rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-purple-600 dark:hover:text-purple-400 hover:border-zinc-300 dark:hover:border-zinc-700 hover:-translate-y-0.5 shadow-sm transition-all"
+                  className="w-11 h-11 flex items-center justify-center rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:border-zinc-400 dark:hover:border-zinc-600 hover:-translate-y-0.5 shadow-sm transition-all"
                   title="Email"
                 >
                   <Mail size={20} />
@@ -98,7 +98,7 @@ export default function HeroSection() {
               <div className="absolute inset-4 rounded-full bg-gradient-to-tr from-amber-500/10 to-orange-500/5 blur-3xl"></div>
 
               {/* Avatar Frame */}
-              <div className="relative z-10 p-2.5 rounded-3xl bg-gradient-to-tr from-white/40 to-white/10 dark:from-zinc-800/80 dark:to-zinc-900/80 border border-zinc-200/80 dark:border-zinc-700/80 shadow-2xl backdrop-blur-xl hover:-translate-y-1 transition-all duration-300">
+              <div className="relative z-10 p-2.5 rounded-3xl bg-gradient-to-tr from-white/40 to-white/10 dark:from-zinc-800/80 dark:to-zinc-900/80 border border-zinc-200/90 dark:border-zinc-750/90 shadow-2xl backdrop-blur-xl ring-1 ring-black/5 dark:ring-white/5 hover:-translate-y-1 transition-all duration-300">
                 <img
                   src={getAssetUrl('/profiledew.jpg')}
                   alt="Pawarit Pansing (ปวริศ ปัญสิงห์) – Data & Business Analyst"
@@ -121,10 +121,10 @@ export default function HeroSection() {
         <a
           href="#about"
           aria-label="Scroll down to About section"
-          className="inline-flex flex-col items-center gap-1 text-xs font-semibold text-zinc-600 dark:text-zinc-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors group"
+          className="inline-flex flex-col items-center gap-1 text-xs font-semibold text-zinc-500 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors group"
         >
           <span>{t.hero.scrollDown}</span>
-          <ChevronDown size={16} className="animate-bounce text-indigo-500" />
+          <ChevronDown size={16} className="animate-bounce text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-950 dark:group-hover:text-zinc-100 transition-colors" />
         </a>
       </div>
     </section>

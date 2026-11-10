@@ -80,7 +80,7 @@ export default function Navbar({ theme, setTheme }) {
       <div
         className={`pointer-events-auto flex items-center justify-between w-full max-w-5xl px-3 sm:px-4 py-2 rounded-full backdrop-blur-xl border transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/90 dark:bg-zinc-900/90 border-zinc-300/70 dark:border-zinc-700/80 shadow-2xl shadow-indigo-500/10'
+            ? 'bg-white/90 dark:bg-zinc-900/90 border-zinc-300/70 dark:border-zinc-700/80 shadow-xl shadow-black/5 dark:shadow-black/40'
             : 'bg-white/80 dark:bg-zinc-900/75 border-zinc-200/80 dark:border-zinc-800/80 shadow-xl shadow-black/5 dark:shadow-black/40'
         }`}
       >
@@ -105,7 +105,7 @@ export default function Navbar({ theme, setTheme }) {
             className="hidden min-[360px]:inline-flex items-center cursor-pointer"
             aria-label="Pawarit - Home"
           >
-            <PawaritLogo className="h-6 sm:h-7 w-auto text-zinc-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" />
+            <PawaritLogo className="h-6 sm:h-7 w-auto text-zinc-900 dark:text-white hover:opacity-75 transition-opacity" />
             <span className="sr-only">Pawarit</span>
           </button>
         </div>
@@ -143,7 +143,7 @@ export default function Navbar({ theme, setTheme }) {
               aria-label="เปลี่ยนเป็นภาษาไทย"
               className={`min-h-11 min-w-11 px-2 py-1 rounded-full transition-all cursor-pointer ${
                 lang === 'th'
-                  ? 'bg-white dark:bg-zinc-900 text-indigo-600 dark:text-indigo-400 shadow-xs font-bold'
+                  ? 'bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-100 shadow-xs font-bold'
                   : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
               }`}
             >
@@ -155,7 +155,7 @@ export default function Navbar({ theme, setTheme }) {
               aria-label="Switch to English"
               className={`min-h-11 min-w-11 px-2 py-1 rounded-full transition-all cursor-pointer ${
                 lang === 'en'
-                  ? 'bg-white dark:bg-zinc-900 text-indigo-600 dark:text-indigo-400 shadow-xs font-bold'
+                  ? 'bg-white dark:bg-zinc-900 text-zinc-950 dark:text-zinc-100 shadow-xs font-bold'
                   : 'text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200'
               }`}
             >
@@ -178,7 +178,7 @@ export default function Navbar({ theme, setTheme }) {
             href={getAssetUrl('/assets/Pawarit-Pansing-CV.pdf')}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-md shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all duration-200"
+            className="hidden sm:inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-sm font-semibold whitespace-nowrap text-white dark:text-zinc-950 bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white shadow-xs hover:-translate-y-0.5 transition-all duration-200"
           >
             <Download size={14} />
             <span>{t.nav.resume}</span>
@@ -213,7 +213,7 @@ export default function Navbar({ theme, setTheme }) {
                 }`}
               >
                 <span>{link.label}</span>
-                {activeSection === link.id && <Sparkles size={16} className="text-indigo-500" />}
+                {activeSection === link.id && <Sparkles size={16} className="text-zinc-900 dark:text-zinc-100" />}
               </button>
             </li>
           ))}
@@ -222,7 +222,7 @@ export default function Navbar({ theme, setTheme }) {
               href={getAssetUrl('/assets/Pawarit-Pansing-CV.pdf')}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 shadow-md shadow-indigo-500/25"
+              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl font-semibold text-white dark:text-zinc-950 bg-zinc-900 dark:bg-zinc-100 shadow-xs"
             >
               <Download size={16} />
               <span>{t.nav.resumeDownload}</span>

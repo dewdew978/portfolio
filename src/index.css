@@ -139,3 +139,13 @@ pre, code, kbd, samp, .font-mono {
 }
 
 
+
+::selection {
+  background-color: #211f1c;
+  color: #fbfaf8;
+}
+
+[data-theme="dark"] ::selection {
+  background-color: #f4f0e8;
+  color: #141311;
+}

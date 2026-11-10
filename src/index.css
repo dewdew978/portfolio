@@ -18,7 +18,7 @@
 
 html {
   scroll-behavior: smooth;
-  font-family: "Urbanist", "Sukhumvit Set", "SF Pro TH", "Prompt", "SF Pro Display", "SF Pro Text", "IBM Plex Sans Thai", "Thonburi", "Noto Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-family: "Urbanist", "IBM Plex Sans Thai", "Prompt", "Sukhumvit Set", "SF Pro TH", "Noto Sans Thai", "Thonburi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
 }
 
 html, body, #root {
@@ -31,11 +31,11 @@ body {
 }
 
 *, *::before, *::after {
-  font-family: "Urbanist", "Sukhumvit Set", "SF Pro TH", "Prompt", "SF Pro Display", "SF Pro Text", "IBM Plex Sans Thai", "Thonburi", "Noto Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-family: "Urbanist", "IBM Plex Sans Thai", "Prompt", "Sukhumvit Set", "SF Pro TH", "Noto Sans Thai", "Thonburi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
 }
 
 body, button, input, textarea, select, a, p, span, h1, h2, h3, h4, h5, h6, li, strong, b, em, div, article, section, header, footer {
-  font-family: "Urbanist", "Sukhumvit Set", "SF Pro TH", "Prompt", "SF Pro Display", "SF Pro Text", "IBM Plex Sans Thai", "Thonburi", "Noto Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-family: "Urbanist", "IBM Plex Sans Thai", "Prompt", "Sukhumvit Set", "SF Pro TH", "Noto Sans Thai", "Thonburi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
   letter-spacing: -0.015em;
 }
 
@@ -44,10 +44,24 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
 }
 
+html[lang="th"],
 html[lang="th"] body,
+html[lang="th"] button,
+html[lang="th"] input,
+html[lang="th"] textarea,
+html[lang="th"] select,
+html[lang="th"] a,
+html[lang="th"] p,
+html[lang="th"] span,
 html[lang="th"] h1,
 html[lang="th"] h2,
-html[lang="th"] h3 {
+html[lang="th"] h3,
+html[lang="th"] h4,
+html[lang="th"] h5,
+html[lang="th"] h6,
+html[lang="th"] li,
+html[lang="th"] div {
+  font-family: "Urbanist", "IBM Plex Sans Thai", "Prompt", "Sukhumvit Set", "Noto Sans Thai", sans-serif !important;
   letter-spacing: 0;
 }
 

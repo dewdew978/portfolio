@@ -16,7 +16,7 @@ export default function HeroSection() {
           <div className="md:col-span-7 flex flex-col items-start">
             <h1 className="text-4xl sm:text-5xl md:text-[2.75rem] lg:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-white leading-[1.15] mb-4">
               {lang === 'th' ? 'สวัสดีครับ, ผม' : "Hello, I'm"} <br className="hidden sm:inline" />
-              <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-950 dark:from-[#fbfaf8] dark:via-[#eae6df] dark:to-[#d6d0c7] bg-clip-text text-transparent">
                 {t.hero.name}
               </span>
               {t.hero.nickname && (
@@ -35,14 +35,14 @@ export default function HeroSection() {
                 href={getAssetUrl('/assets/Pawarit-Pansing-CV.pdf')}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-full sm:w-auto min-h-11 items-center justify-center gap-2 px-6 py-3 rounded-full text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all duration-200"
+                className="inline-flex w-full sm:w-auto min-h-11 items-center justify-center gap-2 px-6 py-3 rounded-full text-base font-semibold text-white bg-zinc-900 hover:bg-zinc-800 dark:bg-[#fbfaf8] dark:text-[#0a0908] dark:hover:bg-white shadow-md hover:-translate-y-0.5 transition-all duration-200"
               >
                 <Download size={18} />
                 <span>{t.hero.downloadResume}</span>
               </a>
               <a
                 href="#projects"
-                className="inline-flex w-full sm:w-auto min-h-11 items-center justify-center gap-2 px-6 py-3 rounded-full text-base font-semibold text-zinc-800 dark:text-zinc-200 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 shadow-sm hover:-translate-y-0.5 transition-all duration-200"
+                className="inline-flex w-full sm:w-auto min-h-11 items-center justify-center gap-2 px-6 py-3 rounded-full text-base font-semibold text-zinc-800 dark:text-zinc-200 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 shadow-xs hover:-translate-y-0.5 transition-all duration-200"
               >
                 <span>{t.hero.viewProjects}</span>
                 <ChevronDown size={18} />
@@ -95,7 +95,7 @@ export default function HeroSection() {
               />
 
               {/* Ambient Glow */}
-              <div className="absolute inset-4 rounded-full bg-gradient-to-tr from-indigo-500/25 to-purple-500/25 blur-3xl animate-pulse-glow"></div>
+              <div className="absolute inset-4 rounded-full bg-gradient-to-tr from-amber-500/10 to-orange-500/5 blur-3xl"></div>
 
               {/* Avatar Frame */}
               <div className="relative z-10 p-2.5 rounded-3xl bg-gradient-to-tr from-white/40 to-white/10 dark:from-zinc-800/80 dark:to-zinc-900/80 border border-zinc-200/80 dark:border-zinc-700/80 shadow-2xl backdrop-blur-xl hover:-translate-y-1 transition-all duration-300">

@@ -72,7 +72,7 @@ export function Footer() {
 
   return (
     <footer className="relative w-full border-t border-zinc-200 dark:border-zinc-800/80 bg-white/80 dark:bg-zinc-950/80 px-4 sm:px-6 lg:px-8 py-12 lg:py-16 mt-16 backdrop-blur-xl">
-      <div className="bg-indigo-500/30 absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur-sm" />
+      <div className="bg-zinc-400/30 dark:bg-zinc-600/30 absolute top-0 right-1/2 left-1/2 h-px w-1/3 -translate-x-1/2 -translate-y-1/2 rounded-full blur-xs" />
 
       <div className="max-w-7xl mx-auto grid w-full gap-8 xl:grid-cols-3 xl:gap-12">
         <AnimatedContainer className="space-y-4">
@@ -82,7 +82,7 @@ export function Footer() {
             className="inline-flex items-center gap-3 text-xl font-extrabold tracking-tight text-zinc-900 dark:text-white hover:opacity-85 transition-opacity"
             aria-label="Pawarit - Back to top"
           >
-            <span className="w-3 h-3 rounded-full bg-gradient-to-tr from-indigo-500 to-purple-500 shadow-sm shadow-indigo-500"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-zinc-900 dark:bg-[#fbfaf8]"></span>
             <PawaritLogo className="h-7 sm:h-8 w-auto text-zinc-900 dark:text-white" />
             <span className="sr-only">{t.hero.name}</span>
           </a>

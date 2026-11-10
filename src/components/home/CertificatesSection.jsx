@@ -35,7 +35,7 @@ export default function CertificatesSection() {
     >
       <FadeInSection direction="up" delay={50}>
         <div className="flex flex-col sm:flex-row items-start gap-3 mb-7 sm:mb-8">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-sky-50 text-sky-600 ring-1 ring-sky-200 dark:bg-sky-950/60 dark:text-sky-400 dark:ring-sky-800/70">
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-800 ring-1 ring-zinc-200 dark:bg-zinc-800 dark:text-zinc-200 dark:ring-zinc-700">
             <ShieldCheck className="h-5 w-5" aria-hidden="true" />
           </span>
           <div className="min-w-0">
@@ -56,8 +56,8 @@ export default function CertificatesSection() {
 
           return (
             <FadeInSection key={cert.id} direction="up" delay={100 + index * 100}>
-              <article className="group flex h-full min-w-0 flex-col overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-sky-300 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900/80">
-                <div className="flex min-h-44 sm:min-h-52 items-center justify-center bg-gradient-to-br from-slate-50 via-white to-sky-50 p-5 sm:p-6 dark:from-zinc-900 dark:via-zinc-900 dark:to-sky-950/40">
+              <article className="group flex h-full min-w-0 flex-col overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-zinc-400 dark:hover:border-zinc-600 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900">
+                <div className="flex min-h-44 sm:min-h-52 items-center justify-center bg-gradient-to-br from-zinc-50 via-white to-zinc-100 p-5 sm:p-6 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-850">
                   <img
                     src={getAssetUrl(cert.image)}
                     alt={content.imageAlt}

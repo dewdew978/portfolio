@@ -17,9 +17,9 @@ export default function ContactSection() {
     <section id="contact" className="fullpage-section site-container section-space max-w-4xl scroll-mt-12 justify-center">
       <FadeInSection direction="up" delay={50}>
         <div className="relative p-5 sm:p-12 rounded-3xl bg-gradient-to-b from-white to-zinc-50 dark:from-zinc-900 dark:to-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-2xl text-center overflow-hidden">
-          <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+          <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-zinc-400 dark:via-zinc-600 to-transparent"></div>
 
-          <div className="inline-block px-3.5 py-1 rounded-full text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800/60 mb-4">
+          <div className="inline-block px-3.5 py-1 rounded-full text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 mb-4">
             {t.contact.badge}
           </div>
 
@@ -33,7 +33,7 @@ export default function ContactSection() {
           <div className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-center gap-3 sm:gap-4">
             <a
               href="mailto:pawaritpansing@gmail.com"
-              className="inline-flex w-full sm:w-auto min-h-11 items-center justify-center gap-2 px-5 sm:px-6 py-3 rounded-full text-base font-semibold text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:-translate-y-0.5 transition-all"
+              className="inline-flex w-full sm:w-auto min-h-11 items-center justify-center gap-2 px-5 sm:px-6 py-3 rounded-full text-base font-semibold text-white bg-zinc-900 hover:bg-zinc-800 dark:bg-[#fbfaf8] dark:text-[#0a0908] dark:hover:bg-white shadow-md hover:-translate-y-0.5 transition-all"
             >
               <Mail size={18} />
               <span>{t.footer.emailMe}</span>

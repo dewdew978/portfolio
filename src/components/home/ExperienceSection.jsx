@@ -10,7 +10,7 @@ export default function ExperienceSection() {
     <section id="experience" className="fullpage-section site-container section-space scroll-mt-12 justify-center">
       <FadeInSection direction="up" delay={50}>
         <div className="mb-8 sm:mb-12">
-          <span className="inline-block px-3.5 py-1 rounded-full text-sm font-semibold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 mb-3">
+          <span className="inline-block px-3.5 py-1 rounded-full text-xs font-semibold bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 mb-3">
             {t.experience.badge}
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white mb-4">
@@ -25,7 +25,7 @@ export default function ExperienceSection() {
       <div className="relative pl-5 sm:pl-8 border-l-2 border-zinc-200 dark:border-zinc-800 space-y-7 sm:space-y-10">
         <FadeInSection direction="up" delay={100}>
           <div className="relative">
-            <div className="absolute -left-[27px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-white dark:bg-zinc-950 border-4 border-emerald-600 shadow-md shadow-emerald-500/30"></div>
+            <div className="absolute -left-[27px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-white dark:bg-zinc-950 border-4 border-zinc-700 dark:border-zinc-300 shadow-xs"></div>
             <div className="p-4 sm:p-6 rounded-2xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800/80 shadow-sm">
               <div className="mb-4">
                 <div className="inline-flex items-center px-3 py-2 rounded-xl bg-white border border-zinc-200 dark:border-zinc-700 shadow-sm">

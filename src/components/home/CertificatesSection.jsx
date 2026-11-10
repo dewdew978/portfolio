@@ -1,5 +1,5 @@
 import React from 'react'
-import { ExternalLink, FileText, ShieldCheck } from 'lucide-react'
+import { ExternalLink, FileText } from 'lucide-react'
 import FadeInSection from '@/components/FadeInSection'
 import { getAssetUrl } from '@/utils/url'
 import { useLanguage } from '@/context/LanguageContext'
@@ -34,11 +34,7 @@ export default function CertificatesSection() {
       className="fullpage-section site-container section-space scroll-mt-12 justify-center"
     >
       <FadeInSection direction="up" delay={50}>
-        <div className="flex flex-col sm:flex-row items-start gap-3 mb-7 sm:mb-8">
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-800 ring-1 ring-zinc-200 dark:bg-zinc-800 dark:text-zinc-200 dark:ring-zinc-700">
-            <ShieldCheck className="h-5 w-5" aria-hidden="true" />
-          </span>
-          <div className="min-w-0">
+        <div className="mb-7 sm:mb-8">
             <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-900 dark:text-white">
               {copy.title}
             </h2>
@@ -46,7 +42,6 @@ export default function CertificatesSection() {
               {copy.subtitle}
             </p>
           </div>
-        </div>
       </FadeInSection>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">

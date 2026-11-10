@@ -52,15 +52,38 @@ export default function CertificatesSection() {
           return (
             <FadeInSection key={cert.id} direction="up" delay={100 + index * 100}>
               <article className="group flex h-full min-w-0 flex-col overflow-hidden rounded-3xl border border-zinc-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-zinc-400 dark:hover:border-zinc-600 hover:shadow-xl dark:border-zinc-800 dark:bg-zinc-900">
-                <div className="flex min-h-44 sm:min-h-52 items-center justify-center bg-gradient-to-br from-zinc-50 via-white to-zinc-100 p-5 sm:p-6 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-850">
-                  <img
-                    src={getAssetUrl(cert.image)}
-                    alt={content.imageAlt}
-                    width="320"
-                    height="200"
-                    loading="lazy"
-                    className="h-32 sm:h-40 max-w-full object-contain drop-shadow-lg transition-transform duration-300 group-hover:scale-105"
-                  />
+                <div className="relative flex min-h-44 sm:min-h-52 items-center justify-center bg-gradient-to-br from-zinc-50 via-white to-zinc-100 p-5 sm:p-6 dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-850 overflow-hidden">
+                  {cert.badgeImage ? (
+                    <>
+                      {/* Certificate paper view */}
+                      <img
+                        src={getAssetUrl(cert.image)}
+                        alt={content.imageAlt}
+                        width="320"
+                        height="200"
+                        loading="lazy"
+                        className="h-32 sm:h-40 max-w-full object-contain drop-shadow-lg transition-all duration-300 group-hover:opacity-0 group-hover:scale-95"
+                      />
+                      {/* Hover Badge view */}
+                      <img
+                        src={getAssetUrl(cert.badgeImage)}
+                        alt={`${content.title} Badge`}
+                        width="320"
+                        height="200"
+                        loading="lazy"
+                        className="absolute inset-0 m-auto h-28 sm:h-36 max-w-full object-contain drop-shadow-xl opacity-0 scale-90 transition-all duration-300 group-hover:opacity-100 group-hover:scale-105 pointer-events-none"
+                      />
+                    </>
+                  ) : (
+                    <img
+                      src={getAssetUrl(cert.image)}
+                      alt={content.imageAlt}
+                      width="320"
+                      height="200"
+                      loading="lazy"
+                      className="h-32 sm:h-40 max-w-full object-contain drop-shadow-lg transition-transform duration-300 group-hover:scale-105"
+                    />
+                  )}
                 </div>
 
                 <div className="flex flex-1 flex-col p-4 sm:p-6">

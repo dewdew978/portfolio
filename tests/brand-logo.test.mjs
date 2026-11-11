@@ -38,3 +38,12 @@ test('Navbar and Footer integrate PawaritLogo with accessible fallback text', ()
   assert.match(footer, /import PawaritLogo from '@\/components\/brand\/PawaritLogo'/)
   assert.match(footer, /<PawaritLogo[\s\S]*\/>/)
 })
+
+test('brand logo Caveat typography is preserved when switching to Thai language', () => {
+  const component = read('src/components/brand/PawaritLogo.jsx')
+  const css = read('src/index.css')
+
+  assert.doesNotMatch(component, /useLanguage/)
+  assert.match(css, /html\[lang\] \.font-caveat/)
+  assert.doesNotMatch(css, /^html\[lang="th"\] span\s*[,{]/m)
+})

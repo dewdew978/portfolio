@@ -45,22 +45,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 html[lang="th"],
-html[lang="th"] body,
-html[lang="th"] button,
-html[lang="th"] input,
-html[lang="th"] textarea,
-html[lang="th"] select,
-html[lang="th"] a,
-html[lang="th"] p,
-html[lang="th"] span,
-html[lang="th"] h1,
-html[lang="th"] h2,
-html[lang="th"] h3,
-html[lang="th"] h4,
-html[lang="th"] h5,
-html[lang="th"] h6,
-html[lang="th"] li,
-html[lang="th"] div {
+html[lang="th"] :where(body, button, input, textarea, select, a, p, span, h1, h2, h3, h4, h5, h6, li, div) {
   font-family: "Urbanist", "IBM Plex Sans Thai", "Prompt", "Sukhumvit Set", "Noto Sans Thai", sans-serif !important;
   letter-spacing: 0;
 }
@@ -135,13 +120,18 @@ html[lang="th"] .display-heading {
 .font-caveat,
 .font-caveat *,
 .font-caveat h1,
-.font-caveat span {
+.font-caveat span,
+html[lang] .font-caveat,
+html[lang] .font-caveat *,
+html[lang] .font-caveat h1,
+html[lang] .font-caveat span {
   font-family: 'Caveat', cursive, sans-serif !important;
   letter-spacing: 0.01em !important;
 }
 
 /* Monospace for Code Blocks */
-pre, code, kbd, samp, .font-mono {
+pre, code, kbd, samp, .font-mono,
+html[lang] .font-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
 }
 

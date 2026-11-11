@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import { playWritingStroke, playKeyStroke, resumeAudio } from '../../utils/keyboardAudio'
+import { playWritingStroke, resumeAudio } from '../../utils/keyboardAudio'
 import scene1Svg from '../../assets/handwriting/scene1.svg?raw'
 import scene2Svg from '../../assets/handwriting/scene2.svg?raw'
 
-// Exact stroke begin timestamps & drawing durations (in seconds) synchronized with pen writing sound
+// Exact stroke begin timestamps & drawing durations (in seconds) synchronized with pen writing audio
 const SCENE_1_STROKES = [
   { t: 0, dur: 0.1037, isSpace: false },
   { t: 0.1663, dur: 0.0921, isSpace: false },
@@ -25,26 +25,6 @@ const SCENE_1_STROKES = [
   { t: 2.1825, dur: 0.1317, isSpace: false },
 ]
 
-const SCENE_1_TEXT_BY_STROKE = [
-  'H',
-  'H',
-  'H',
-  'He',
-  'Hel',
-  'Hell',
-  'Hello',
-  'Hello ',
-  'Hello w',
-  'Hello w',
-  'Hello we',
-  'Hello wel',
-  'Hello welc',
-  'Hello welco',
-  'Hello welcom',
-  'Hello welcome',
-  'Hello welcome',
-]
-
 const SCENE_2_STROKES = [
   { t: 0, dur: 0.0642, isSpace: false },
   { t: 0.1267, dur: 0.1367, isSpace: false },
@@ -53,75 +33,153 @@ const SCENE_2_STROKES = [
   { t: 0.6083, dur: 0.0842, isSpace: false },
   { t: 0.7342, dur: 0.0629, isSpace: false },
   { t: 0.8596, dur: 0.0725, isSpace: false },
-  { t: 0.9738, dur: 0.0508, isSpace: true }, // 'Pansing' begins
-  { t: 1.0871, dur: 0.0142, isDot: true, isSpace: false },
+  { t: 0.9738, dur: 0.0508, isSpace: false },
+  { t: 1.0871, dur: 0.0142, isSpace: false },
   { t: 1.1429, dur: 0.005, isDot: true, isSpace: false },
   { t: 1.2104, dur: 0.0296, isSpace: false },
   { t: 1.2817, dur: 0.0833, isSpace: false },
   { t: 1.4275, dur: 0.0392, isSpace: false },
-  { t: 1.5292, dur: 0.0642, isSpace: false },
+  { t: 1.5292, dur: 0.0642, isSpace: true }, // 'Pansing' begins
   { t: 1.6558, dur: 0.1367, isSpace: false },
-  { t: 1.8342, dur: 0.1442, isPunctuation: true }, // comma
-  { t: 2.02, dur: 0.1246, isSpace: true }, // "it's" begins
+  { t: 1.8342, dur: 0.1442, isSpace: false },
+  { t: 2.02, dur: 0.1246, isSpace: false },
   { t: 2.1863, dur: 0.0958, isSpace: false },
   { t: 2.3238, dur: 0.0008, isDot: true, isSpace: false },
-  { t: 2.3871, dur: 0.0346, isPunctuation: true }, // apostrophe
+  { t: 2.3871, dur: 0.0346, isSpace: false },
   { t: 2.4633, dur: 0.1142, isSpace: false },
-  { t: 2.6192, dur: 0.1092, isSpace: true }, // "me" begins
+  { t: 2.6192, dur: 0.1092, isSpace: false },
   { t: 2.7908, dur: 0.0729, isSpace: false },
-  { t: 2.9054, dur: 0.0292, isSpace: false },
-  { t: 2.9971, dur: 0.005, isDot: true, isSpace: false },
-  { t: 3.0646, dur: 0.0308, isSpace: false },
+  { t: 2.9054, dur: 0.0292, isPunctuation: true }, // comma
+  { t: 2.9971, dur: 0.005, isDot: true, isSpace: false }, // "it's" dot
+  { t: 3.0646, dur: 0.0308, isSpace: true }, // "it's" begins
   { t: 3.1371, dur: 0.0987, isSpace: false },
   { t: 3.2983, dur: 0.0308, isSpace: false },
-  { t: 3.3708, dur: 0.0271, isSpace: false },
+  { t: 3.3708, dur: 0.0271, isPunctuation: true }, // apostrophe
   { t: 3.4396, dur: 0.1112, isSpace: false },
-  { t: 3.6133, dur: 0.2137, isSpace: false },
+  { t: 3.6133, dur: 0.2137, isSpace: true }, // "me" begins
+  { t: 3.8687, dur: 0.1229, isSpace: false },
 ]
 
-const SCENE_2_TEXT_BY_STROKE = [
-  'P',
-  'P',
-  'Pa',
-  'Paw',
-  'Paw',
-  'Pawa',
-  'Pawar',
-  'Pawari',
-  'Pawari',
-  'Pawarit',
-  'Pawarit',
-  'Pawarit ',
-  'Pawarit P',
-  'Pawarit P',
-  'Pawarit Pa',
-  'Pawarit Pan',
-  'Pawarit Pans',
-  'Pawarit Pansi',
-  'Pawarit Pansi',
-  'Pawarit Pansin',
-  'Pawarit Pansing',
-  'Pawarit Pansing,',
-  'Pawarit Pansing, ',
-  'Pawarit Pansing, i',
-  'Pawarit Pansing, i',
-  "Pawarit Pansing, i'",
-  "Pawarit Pansing, it'",
-  "Pawarit Pansing, it's",
-  "Pawarit Pansing, it's ",
-  "Pawarit Pansing, it's m",
-  "Pawarit Pansing, it's me",
-]
+// Matches SVG SMIL keySplines="0.3333 0.6667 0.6667 1" (quadratic ease-out)
+function easeOutQuad(t) {
+  const inv = 1 - t
+  return 1 - inv * inv
+}
+
+/**
+ * Strips SMIL <animate>/<set> tags (which stall on mobile WebKit / document timelines),
+ * preserves timing metadata as data-* attributes for deterministic rAF playback,
+ * optionally filters stroke ranges and crops viewBox, and namespaces mask IDs.
+ */
+function prepareHandwritingSvg(
+  rawSvg,
+  { idPrefix, viewBox, minMaskIdx, maxMaskIdx, svgClass }
+) {
+  let svg = rawSvg
+
+  if (minMaskIdx !== undefined || maxMaskIdx !== undefined) {
+    const min = minMaskIdx ?? 0
+    const max = maxMaskIdx ?? Infinity
+    svg = svg.replace(/<mask id="s2-tk-m(\d+)"[\s\S]*?<\/mask>\s*/g, (match, idx) => {
+      const n = Number(idx)
+      return n >= min && n <= max ? match : ''
+    })
+    svg = svg.replace(
+      /<g mask="url\(#s2-tk-m(\d+)\)"[\s\S]*?<\/g>\s*/g,
+      (match, idx) => {
+        const n = Number(idx)
+        return n >= min && n <= max ? match : ''
+      }
+    )
+  }
+
+  // Convert SMIL <animate> on stroke masks into data attributes
+  svg = svg.replace(
+    /<path\b([^>]*)><animate\b([^>]*?)\/?><\/path>/g,
+    (_, pathAttrs, animAttrs) => {
+      const vals = animAttrs.match(/values="([^;]+);([^"]+)"/)
+      const dur = animAttrs.match(/dur="([^"]+)s"/)
+      const begin = animAttrs.match(/begin="([^"]+)s"/)
+      if (!vals || !dur || !begin) return `<path${pathAttrs}></path>`
+      return `<path${pathAttrs} data-from="${vals[1]}" data-to="${vals[2]}" data-begin="${begin[1]}" data-dur="${dur[1]}"></path>`
+    }
+  )
+
+  // Convert SMIL <set> on ink endcaps into data-reveal attribute
+  svg = svg.replace(
+    /<ellipse\b([^>]*)><set\b([^>]*?)\/?><\/ellipse>/g,
+    (_, ellAttrs, setAttrs) => {
+      const begin = setAttrs.match(/begin="([^"]+)s"/)
+      if (!begin) return `<ellipse${ellAttrs}></ellipse>`
+      return `<ellipse${ellAttrs} data-reveal="${begin[1]}"></ellipse>`
+    }
+  )
+
+  // Scope mask IDs so multiple mounted SVGs never share or collide on mask URLs
+  svg = svg.replace(/(<mask\b[^>]*\bid=")([^"]+)(")/g, `$1${idPrefix}-$2$3`)
+  svg = svg.replace(/url\(#([^)]+)\)/g, `url(#${idPrefix}-$1)`)
+
+  if (viewBox) {
+    svg = svg.replace(/viewBox="[^"]+"/, `viewBox="${viewBox}"`)
+  }
+  if (svgClass) {
+    svg = svg.replace(/class="[^"]+"/, `class="${svgClass}"`)
+  }
+
+  return svg
+}
 
 export default function Preloader({ onComplete }) {
   // scene: 1 = "Hello welcome", 2 = "Pawarit Pansing, it's me"
   const [scene, setScene] = useState(1)
-  const [displayText, setDisplayText] = useState('')
   const [sceneExiting, setSceneExiting] = useState(false)
   const [isDone, setIsDone] = useState(false)
   const [isMuted, setIsMuted] = useState(false)
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(max-width: 639px)').matches : false
+  )
+
   const isMutedRef = useRef(false)
   const svgContainerRef = useRef(null)
+  const sceneStartRef = useRef(0)
+  const onCompleteRef = useRef(onComplete)
+  onCompleteRef.current = onComplete
+
+  const preparedMarkups = useMemo(() => {
+    const baseClass = 'w-full h-auto block text-zinc-900 dark:text-zinc-100 select-none'
+    return {
+      scene1: prepareHandwritingSvg(scene1Svg, {
+        idPrefix: 's1',
+        svgClass: baseClass,
+      }),
+      scene2Desktop: prepareHandwritingSvg(scene2Svg, {
+        idPrefix: 's2d',
+        svgClass: baseClass,
+      }),
+      scene2MobileLine1: prepareHandwritingSvg(scene2Svg, {
+        idPrefix: 's2m1',
+        viewBox: '19.13 47.29 580.37 103.88',
+        minMaskIdx: 0,
+        maxMaskIdx: 23,
+        svgClass: baseClass,
+      }),
+      scene2MobileLine2: prepareHandwritingSvg(scene2Svg, {
+        idPrefix: 's2m2',
+        viewBox: '617 47.29 230.57 103.88',
+        minMaskIdx: 24,
+        maxMaskIdx: 31,
+        svgClass: baseClass,
+      }),
+    }
+  }, [])
+
+  // Track responsive layout cleanly so only active SVG DOM nodes are mounted
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 639px)')
+    const onChange = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
 
   // Unlock and resume AudioContext on first user interaction
   useEffect(() => {
@@ -147,28 +205,15 @@ export default function Preloader({ onComplete }) {
     })
   }
 
-  // Handle Scene 1 stroke animation & pen writing audio synchronization
+  // Schedule scene timeline and synchronized pen-on-paper sound
   useEffect(() => {
-    if (scene !== 1) return
-
-    setDisplayText('')
     setSceneExiting(false)
+    sceneStartRef.current = performance.now()
     const timers = []
+    const strokes = scene === 1 ? SCENE_1_STROKES : SCENE_2_STROKES
 
-    // Ensure SVG animation starts cleanly from t=0
-    if (svgContainerRef.current) {
-      const svgEl = svgContainerRef.current.querySelector('svg')
-      if (svgEl?.setCurrentTime) {
-        try {
-          svgEl.setCurrentTime(0)
-        } catch {}
-      }
-    }
-
-    // Schedule synchronized pen on paper writing sound and progressive handwriting reveal
-    SCENE_1_STROKES.forEach((stroke, idx) => {
+    strokes.forEach((stroke) => {
       const timer = setTimeout(() => {
-        setDisplayText(SCENE_1_TEXT_BY_STROKE[idx] || 'Hello welcome')
         if (!isMutedRef.current) {
           playWritingStroke({
             duration: stroke.dur,
@@ -181,70 +226,104 @@ export default function Preloader({ onComplete }) {
       timers.push(timer)
     })
 
-    // Stroke animation takes ~2.32s; hold for ~750ms to read, then fade smoothly to Scene 2
-    const exitTimer = setTimeout(() => {
-      setSceneExiting(true)
-      const nextTimer = setTimeout(() => {
-        setScene(2)
-      }, 450)
-      timers.push(nextTimer)
-    }, 2950)
-    timers.push(exitTimer)
+    if (scene === 1) {
+      // Stroke animation finishes at ~2.32s; hold to read, then transition to Scene 2
+      const exitTimer = setTimeout(() => {
+        setSceneExiting(true)
+        const nextTimer = setTimeout(() => {
+          setScene(2)
+        }, 450)
+        timers.push(nextTimer)
+      }, 3000)
+      timers.push(exitTimer)
+    } else {
+      // Final stroke in scene2.svg ends at ~3.99s; hold ~860ms to read, then exit to portfolio
+      const finishTimer = setTimeout(() => {
+        setIsDone(true)
+        const completeTimer = setTimeout(() => {
+          onCompleteRef.current?.()
+        }, 850)
+        timers.push(completeTimer)
+      }, 4850)
+      timers.push(finishTimer)
+    }
 
     return () => timers.forEach(clearTimeout)
   }, [scene])
 
-  // Handle Scene 2 stroke animation & pen writing audio synchronization
+  // Drive stroke-by-stroke vector masks smoothly via requestAnimationFrame (cross-browser & mobile safe)
   useEffect(() => {
-    if (scene !== 2) return
+    const container = svgContainerRef.current
+    if (!container) return
 
-    setDisplayText('')
-    setSceneExiting(false)
-    const timers = []
+    const strokeTargets = Array.from(container.querySelectorAll('path[data-from]')).map((el) => {
+      const from = parseFloat(el.getAttribute('data-from'))
+      const to = parseFloat(el.getAttribute('data-to'))
+      const begin = parseFloat(el.getAttribute('data-begin'))
+      const dur = parseFloat(el.getAttribute('data-dur'))
+      el.setAttribute('stroke-dashoffset', String(from))
+      el.style.strokeDashoffset = String(from)
+      return { el, from, to, begin, dur, done: false }
+    })
 
-    // Ensure SVG animation starts cleanly from t=0
-    if (svgContainerRef.current) {
-      const svgEl = svgContainerRef.current.querySelector('svg')
-      if (svgEl?.setCurrentTime) {
-        try {
-          svgEl.setCurrentTime(0)
-        } catch {}
+    const dotTargets = Array.from(container.querySelectorAll('ellipse[data-reveal]')).map((el) => {
+      const revealAt = parseFloat(el.getAttribute('data-reveal'))
+      el.setAttribute('opacity', '0')
+      el.style.opacity = '0'
+      return { el, revealAt, done: false }
+    })
+
+    let rafId = 0
+
+    const tick = (now) => {
+      const elapsed = Math.max(0, (now - sceneStartRef.current) / 1000)
+      let allDone = true
+
+      for (const item of strokeTargets) {
+        if (item.done) continue
+        if (elapsed < item.begin) {
+          allDone = false
+          continue
+        }
+        if (item.dur <= 0 || elapsed >= item.begin + item.dur) {
+          const finalOffset = String(item.to)
+          item.el.setAttribute('stroke-dashoffset', finalOffset)
+          item.el.style.strokeDashoffset = finalOffset
+          item.done = true
+          continue
+        }
+        allDone = false
+        const progress = Math.max(0, Math.min(1, (elapsed - item.begin) / item.dur))
+        const eased = easeOutQuad(progress)
+        const offset = (item.from + (item.to - item.from) * eased).toFixed(2)
+        item.el.setAttribute('stroke-dashoffset', offset)
+        item.el.style.strokeDashoffset = offset
+      }
+
+      for (const dot of dotTargets) {
+        if (dot.done) continue
+        if (elapsed >= dot.revealAt) {
+          dot.el.setAttribute('opacity', '1')
+          dot.el.style.opacity = '1'
+          dot.done = true
+        } else {
+          allDone = false
+        }
+      }
+
+      if (!allDone) {
+        rafId = requestAnimationFrame(tick)
       }
     }
 
-    // Schedule synchronized pen on paper writing sound and progressive handwriting reveal
-    SCENE_2_STROKES.forEach((stroke, idx) => {
-      const timer = setTimeout(() => {
-        setDisplayText(SCENE_2_TEXT_BY_STROKE[idx] || "Pawarit Pansing, it's me")
-        if (!isMutedRef.current) {
-          playWritingStroke({
-            duration: stroke.dur,
-            isDot: stroke.isDot || false,
-            isSpace: stroke.isSpace || false,
-            isPunctuation: stroke.isPunctuation || false,
-          })
-        }
-      }, Math.round(stroke.t * 1000))
-      timers.push(timer)
-    })
-
-    // Stroke animation takes ~3.7s; hold for ~850ms to read, then exit to portfolio
-    const finishTimer = setTimeout(() => {
-      setIsDone(true)
-      const completeTimer = setTimeout(() => {
-        onComplete?.()
-      }, 850)
-      timers.push(completeTimer)
-    }, 4550)
-    timers.push(finishTimer)
-
-    return () => timers.forEach(clearTimeout)
-  }, [scene, onComplete])
+    rafId = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(rafId)
+  }, [scene, isMobile])
 
   const handleSkip = () => {
     setIsDone(true)
     setTimeout(() => {
-      onComplete?.()
+      onCompleteRef.current?.()
     }, 400)
   }
 
@@ -268,7 +347,7 @@ export default function Preloader({ onComplete }) {
             scale: 1.01,
             transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] },
           }}
-          className="fixed inset-0 z-[100] h-[100dvh] min-h-[100dvh] flex flex-col items-center justify-center bg-[#fbfaf8] dark:bg-[#0a0908] text-zinc-950 dark:text-[#fbfaf8] select-none px-4 sm:px-6 overflow-hidden"
+          className="fixed inset-0 z-[100] h-[100dvh] min-h-[100dvh] flex flex-col items-center justify-center bg-[#fbfaf8] dark:bg-[#0a0908] text-zinc-950 dark:text-[#fbfaf8] select-none px-3 sm:px-6 overflow-hidden"
           aria-label="Loading introduction"
           role="status"
         >
@@ -289,12 +368,14 @@ export default function Preloader({ onComplete }) {
             Skip ✕
           </button>
 
-          {/* Center Content: Fluid responsive Caveat handwriting display */}
-          <div className="relative z-10 flex flex-col items-center max-w-4xl w-full text-center px-2">
-            <div className="min-h-[6.5rem] sm:min-h-[8.5rem] md:min-h-[11rem] flex items-center justify-center w-full">
+          {/* Center Content: Responsive stroke-by-stroke SVG handwriting */}
+          <div className="relative z-10 flex flex-col items-center max-w-4xl w-full text-center px-1 sm:px-2">
+            <div className="min-h-[7rem] sm:min-h-[8.5rem] md:min-h-[11rem] flex items-center justify-center w-full">
               <div
-                className={`w-full transition-all duration-450 transform ${
-                  sceneExiting ? 'opacity-0 -translate-y-3 scale-98' : 'opacity-100 translate-y-0 scale-100'
+                ref={svgContainerRef}
+                key={`handwriting-scene-${scene}-${isMobile ? 'mobile' : 'desktop'}`}
+                className={`w-full transition-opacity duration-450 ${
+                  sceneExiting ? 'opacity-0' : 'opacity-100'
                 }`}
               >
                 {/* Accessible text for screen readers */}
@@ -302,68 +383,34 @@ export default function Preloader({ onComplete }) {
                   {scene === 1 ? 'Hello welcome' : "Pawarit Pansing, it's me"}
                 </h1>
 
-                {/* Visible Handwriting Typography */}
                 {scene === 1 ? (
-                  <h1
-                    className="font-caveat font-bold tracking-normal leading-tight text-zinc-900 dark:text-zinc-100 select-none text-center"
-                    style={{ fontSize: 'clamp(2.1rem, 7.5vw, 5.25rem)' }}
+                  <div
+                    className="w-full max-w-[380px] sm:max-w-2xl mx-auto"
+                    aria-hidden="true"
+                    dangerouslySetInnerHTML={{ __html: preparedMarkups.scene1 }}
+                  />
+                ) : isMobile ? (
+                  <div
+                    className="flex flex-col items-center gap-2 sm:gap-3 w-full max-w-[390px] mx-auto"
+                    aria-hidden="true"
                   >
-                    <span className="font-caveat">{displayText}</span>
-                    <span
-                      className="inline-block w-[2.5px] sm:w-[3.5px] h-[0.9em] ml-1 bg-zinc-800 dark:bg-zinc-200 align-baseline animate-pulse"
-                      aria-hidden="true"
+                    <div
+                      className="w-full"
+                      dangerouslySetInnerHTML={{ __html: preparedMarkups.scene2MobileLine1 }}
                     />
-                  </h1>
+                    <div
+                      className="mx-auto"
+                      style={{ width: '43%', minWidth: '145px', maxWidth: '180px' }}
+                      dangerouslySetInnerHTML={{ __html: preparedMarkups.scene2MobileLine2 }}
+                    />
+                  </div>
                 ) : (
-                  <h1
-                    className="font-caveat font-bold tracking-normal leading-tight text-zinc-900 dark:text-zinc-100 select-none text-center"
-                    style={{ fontSize: 'clamp(1.75rem, 5.8vw, 4.25rem)' }}
-                  >
-                    <span className="font-caveat">
-                      {displayText.includes('Pawarit Pansing,') ? (
-                        <>
-                          <span className="block sm:inline">
-                            Pawarit Pansing,
-                            {!displayText.slice('Pawarit Pansing,'.length).trim() && (
-                              <span
-                                className="inline-block w-[2.5px] sm:w-[3.5px] h-[0.9em] ml-1 bg-zinc-800 dark:bg-zinc-200 align-baseline animate-pulse"
-                                aria-hidden="true"
-                              />
-                            )}
-                          </span>
-                          {displayText.slice('Pawarit Pansing,'.length).trim() && (
-                            <span className="block sm:inline sm:ml-2.5 text-zinc-600 dark:text-zinc-400">
-                              {displayText.slice('Pawarit Pansing,'.length).trimStart()}
-                              <span
-                                className="inline-block w-[2.5px] sm:w-[3.5px] h-[0.9em] ml-1 bg-zinc-800 dark:bg-zinc-200 align-baseline animate-pulse"
-                                aria-hidden="true"
-                              />
-                            </span>
-                          )}
-                        </>
-                      ) : (
-                        <>
-                          <span>{displayText}</span>
-                          <span
-                            className="inline-block w-[2.5px] sm:w-[3.5px] h-[0.9em] ml-1 bg-zinc-800 dark:bg-zinc-200 align-baseline animate-pulse"
-                            aria-hidden="true"
-                          />
-                        </>
-                      )}
-                    </span>
-                  </h1>
+                  <div
+                    className="w-full max-w-4xl mx-auto"
+                    aria-hidden="true"
+                    dangerouslySetInnerHTML={{ __html: preparedMarkups.scene2Desktop }}
+                  />
                 )}
-
-                {/* Animated Handwriting SVG (integrated for vectorized engine compatibility) */}
-                <div
-                  ref={svgContainerRef}
-                  key={`handwriting-scene-${scene}`}
-                  className="sr-only"
-                  aria-hidden="true"
-                  dangerouslySetInnerHTML={{
-                    __html: scene === 1 ? scene1Svg : scene2Svg,
-                  }}
-                />
               </div>
             </div>
           </div>

@@ -125,7 +125,16 @@ html[lang] .font-caveat,
 html[lang] .font-caveat *,
 html[lang] .font-caveat h1,
 html[lang] .font-caveat span {
-  font-family: 'Caveat', cursive, sans-serif !important;
+  font-family: 'Caveat', 'Sriracha', cursive, sans-serif !important;
+  letter-spacing: 0.01em !important;
+}
+
+.font-handwriting-th,
+.font-handwriting-th *,
+html[lang] .font-handwriting-th,
+html[lang] .font-handwriting-th * {
+  font-family: 'Sriracha', 'Caveat', cursive, sans-serif !important;
+  font-weight: 400 !important;
   letter-spacing: 0.01em !important;
 }
 

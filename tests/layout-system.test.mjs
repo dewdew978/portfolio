@@ -66,6 +66,12 @@ test('contact badge uses Caveat handwriting font matching preloader hello typogr
 
 test('hero nickname uses Caveat handwriting font matching hello typography', () => {
   const hero = read('src/components/home/HeroSection.jsx')
+  const css = read('src/index.css')
+  const html = read('index.html')
+
   assert.match(hero, /font-caveat/)
+  assert.match(hero, /font-handwriting-th/)
   assert.match(hero, /t\.hero\.nickname/)
+  assert.match(css, /\.font-handwriting-th[\s\S]*Sriracha/)
+  assert.match(html, /family=Sriracha/)
 })

@@ -20,7 +20,11 @@ export default function HeroSection() {
                 {t.hero.name}
               </span>
               {t.hero.nickname && (
-                <span className="font-caveat font-bold text-3xl sm:text-4xl md:text-5xl text-zinc-500 dark:text-zinc-400 ml-2.5 sm:ml-3 inline-block align-baseline tracking-normal">
+                <span
+                  className={`${
+                    lang === 'th' ? 'font-handwriting-th' : 'font-caveat font-bold'
+                  } text-3xl sm:text-4xl md:text-5xl text-zinc-500 dark:text-zinc-400 ml-2.5 sm:ml-3 inline-block align-baseline tracking-normal`}
+                >
                   {t.hero.nickname}
                 </span>
               )}

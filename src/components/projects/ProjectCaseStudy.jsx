@@ -1,8 +1,12 @@
 import React, { useEffect, useRef } from 'react'
-import { ArrowLeft, ArrowUpRight, Github, ExternalLink, ChevronRight, ChevronLeft } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight, Github, ChevronRight, ChevronLeft, TrendingUp } from 'lucide-react'
+import Navbar from '@/components/Navbar'
 import { useLanguage } from '@/context/LanguageContext'
 
-export default function ProjectCaseStudy({ project, onClose, onSelectProject, allProjects = [] }) {
+// Only link to real repositories, not a bare profile URL
+const isRepoUrl = (url) => /^https:\/\/github\.com\/[^/]+\/[^/]+/.test(url || '')
+
+export default function ProjectCaseStudy({ project, onClose, onSelectProject, allProjects = [], theme, setTheme }) {
   const { t, lang } = useLanguage()
   const topRef = useRef(null)
 
@@ -24,9 +28,12 @@ export default function ProjectCaseStudy({ project, onClose, onSelectProject, al
   }, [onClose])
 
   // Calculate next and previous project
+  // Wrap around so every case study offers both a previous and a next project
   const currentIndex = allProjects.findIndex(([_, p]) => p.title === project.title)
-  const prevProject = currentIndex > 0 ? allProjects[currentIndex - 1]?.[1] : null
-  const nextProject = currentIndex >= 0 && currentIndex < allProjects.length - 1 ? allProjects[currentIndex + 1]?.[1] : null
+  const total = allProjects.length
+  const hasSiblings = currentIndex >= 0 && total > 1
+  const prevProject = hasSiblings ? allProjects[(currentIndex - 1 + total) % total][1] : null
+  const nextProject = hasSiblings ? allProjects[(currentIndex + 1) % total][1] : null
 
   const getRole = () => {
     if (project.category === 'business') return lang === 'th' ? 'การประเมินมูลค่าและกลยุทธ์ธุรกิจ' : 'Business Strategy & Valuation'
@@ -39,15 +46,17 @@ export default function ProjectCaseStudy({ project, onClose, onSelectProject, al
   }
 
   const getTools = () => {
-    return project.badges?.slice(1).join(', ') || 'Python, SQL, Analytics'
+    return (project.stack || project.badges?.slice(1) || []).join(', ')
   }
 
   return (
     <div ref={topRef} className="min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
+      <Navbar theme={theme} setTheme={setTheme} />
+
       <div className="flex flex-col lg:flex-row min-h-screen">
         
         {/* LEFT COLUMN: Sticky Project Identity & Specs (Gil Huybrecht Style) */}
-        <aside className="w-full lg:w-[40%] xl:w-[35%] lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto border-b lg:border-b-0 lg:border-r border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/95 dark:bg-zinc-950/95 backdrop-blur-md p-6 sm:p-10 lg:p-12 flex flex-col justify-between z-20">
+        <aside className="w-full lg:w-[40%] xl:w-[35%] lg:sticky lg:top-0 lg:h-screen lg:overflow-y-auto border-b lg:border-b-0 lg:border-r border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/95 dark:bg-zinc-950/95 backdrop-blur-md px-6 sm:px-10 lg:px-12 pt-28 sm:pt-32 pb-8 lg:pb-12 flex flex-col justify-between z-20">
           <div>
             {/* Back Button */}
             <div className="mb-8 lg:mb-12">
@@ -63,32 +72,20 @@ export default function ProjectCaseStudy({ project, onClose, onSelectProject, al
 
             {/* Project Title & Live Links */}
             <div className="mb-6">
-              <div className="flex items-center justify-between gap-4 mb-3">
-                <span className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
-                  {project.category}
-                </span>
-                {project.liveUrl && (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-zinc-900 dark:text-white hover:opacity-75 underline underline-offset-4"
-                  >
-                    <span>{lang === 'th' ? 'เปิดดูเว็บจริง' : 'See Live Site'}</span>
-                    <ArrowUpRight size={14} />
-                  </a>
-                )}
-              </div>
+              <span className="block mb-3 text-xs font-mono font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
+                {getClientOrCategory()}{project.year ? ` · ${project.year}` : ''}
+              </span>
 
               <h1 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-extrabold tracking-tight text-zinc-950 dark:text-white leading-[1.1] mb-4">
                 {project.title}
               </h1>
 
-              
-
-              <p className="text-sm sm:text-base leading-relaxed text-zinc-600 dark:text-zinc-400 mb-8 font-normal">
-                {project.overview}
-              </p>
+              {project.impactSuffix && (
+                <div className="mb-8 flex items-start gap-3 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 px-4 py-3">
+                  <TrendingUp size={18} className="mt-0.5 shrink-0 text-emerald-600 dark:text-emerald-400" aria-hidden="true" />
+                  <p className="text-sm sm:text-base font-semibold leading-snug text-zinc-900 dark:text-zinc-100">{project.impactSuffix}</p>
+                </div>
+              )}
             </div>
 
             {/* Gil Huybrecht Numbered Specs Table (1, 2, 3, 4) */}
@@ -99,49 +96,48 @@ export default function ProjectCaseStudy({ project, onClose, onSelectProject, al
               </div>
 
               <div className="grid grid-cols-12 gap-2 py-1.5 border-b border-zinc-100 dark:border-zinc-900/60">
-                <span className="col-span-4 text-zinc-500 uppercase tracking-wider font-semibold">{lang === 'th' ? 'หมวดหมู่' : 'Category'}</span>
-                <span className="col-span-8 font-sans font-medium text-zinc-900 dark:text-zinc-200">{getClientOrCategory()}</span>
-              </div>
-
-              <div className="grid grid-cols-12 gap-2 py-1.5 border-b border-zinc-100 dark:border-zinc-900/60">
                 <span className="col-span-4 text-zinc-500 uppercase tracking-wider font-semibold">{lang === 'th' ? 'เครื่องมือ' : 'Tools'}</span>
                 <span className="col-span-8 font-sans font-medium text-zinc-900 dark:text-zinc-200">{getTools()}</span>
               </div>
 
               <div className="grid grid-cols-12 gap-2 py-1.5">
                 <span className="col-span-4 text-zinc-500 uppercase tracking-wider font-semibold">{lang === 'th' ? 'ปี' : 'Year'}</span>
-                <span className="col-span-8 font-sans font-medium text-zinc-900 dark:text-zinc-200">2025 - 2026</span>
+                <span className="col-span-8 font-sans font-medium text-zinc-900 dark:text-zinc-200">{project.year || '2025–2026'}</span>
               </div>
             </div>
           </div>
 
-          {/* Bottom Action in Left Column */}
-          <div className="pt-8 mt-6 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
-            <button
-              type="button"
-              onClick={onClose}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 hover:opacity-90 transition-opacity cursor-pointer shadow-sm"
-            >
-              <ArrowLeft size={14} />
-              <span>{lang === 'th' ? 'ย้อนกลับ' : 'Back'}</span>
-            </button>
-
-            {project.gitHubUrl && (
-              <a
-                href={project.gitHubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
-              >
-                <Github size={15} />
-                <span>Source Code</span>
-              </a>
-            )}
-          </div>
+          {/* Primary actions: open the real thing */}
+          {(project.liveUrl || isRepoUrl(project.gitHubUrl)) && (
+            <div className="pt-8 mt-6 border-t border-zinc-200 dark:border-zinc-800 flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-2">
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 px-5 text-sm font-semibold hover:opacity-90 transition-opacity"
+                >
+                  <span>{project.liveLabel || (lang === 'th' ? 'เปิดดูเว็บจริง' : 'See live site')}</span>
+                  <ArrowUpRight size={16} />
+                </a>
+              )}
+              {isRepoUrl(project.gitHubUrl) && (
+                <a
+                  href={project.gitHubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-zinc-300 dark:border-zinc-700 px-5 text-sm font-semibold text-zinc-900 dark:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                >
+                  <Github size={16} />
+                  <span>{lang === 'th' ? 'ซอร์สโค้ด' : 'Source code'}</span>
+                </a>
+              )}
+            </div>
+          )}
         </aside>
 
         {/* RIGHT COLUMN: Vertically Scrollable Editorial Case Study */}
-        <main className="w-full lg:w-[60%] xl:w-[65%] p-6 sm:p-12 lg:p-16 space-y-16 lg:space-y-24">
+        <main className="w-full lg:w-[60%] xl:w-[65%] px-6 sm:px-12 lg:px-16 pt-8 sm:pt-12 lg:pt-28 pb-6 space-y-16 lg:space-y-24">
           
           {/* Full-bleed Hero Visual */}
           {project.image && (
@@ -241,7 +237,7 @@ export default function ProjectCaseStudy({ project, onClose, onSelectProject, al
               </h2>
               <div className="p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-zinc-100 to-zinc-200/50 dark:from-zinc-900 dark:to-zinc-900/40 border border-zinc-300 dark:border-zinc-700/60">
                 <p className="text-lg sm:text-xl font-medium leading-relaxed text-zinc-900 dark:text-white">
-                  "{project.impact}"
+                  {project.impact}
                 </p>
               </div>
             </section>

@@ -51,7 +51,7 @@ export default function ProjectsPage({ theme, setTheme }) {
     canonicalPath: selectedProject ? `projects?id=${matchedEntry?.[0] || ''}` : 'projects',
   })
 
-  // If a project is selected, render the Gil Huybrecht Split-Screen Case Study View!
+  // A selected project renders as a full case-study page
   if (selectedProject) {
     return (
       <ProjectCaseStudy
@@ -59,6 +59,8 @@ export default function ProjectsPage({ theme, setTheme }) {
         onClose={handleCloseProject}
         onSelectProject={handleSelectProject}
         allProjects={projects}
+        theme={theme}
+        setTheme={setTheme}
       />
     )
   }
@@ -94,16 +96,11 @@ export default function ProjectsPage({ theme, setTheme }) {
           </p>
         </div>
 
-        {/* Gil Huybrecht Gallery / Grid Showcase */}
+        {/* Project list */}
         <ProjectGrid projects={projects} t={t} onSelectProject={handleSelectProject} />
       </main>
 
       <Footer />
-
-      {/* Hidden fallback to satisfy tests checking ProjectModal reference */}
-      <div className="hidden" aria-hidden="true">
-        {selectedProject && <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />}
-      </div>
     </div>
   )
 }

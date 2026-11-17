@@ -20,14 +20,15 @@ test('home project showcase is draggable, accessible, and links to all projects'
   assert.match(read('src/components/projects/ProjectShowcaseCard.jsx'), /onMouseMove/)
 })
 
-test('projects page route uses shared localized project data and existing modal', () => {
+test('projects page route uses shared localized project data and the case study view', () => {
   const app = read('src/App.jsx')
   const page = read('src/pages/ProjectsPage.jsx')
   const grid = read('src/components/projects/ProjectGrid.jsx')
   const helper = read('src/utils/projects.js')
   assert.match(app, /path="\/projects"/)
   assert.match(page, /getLocalizedProjects/)
-  assert.match(page, /ProjectModal/)
+  assert.match(page, /ProjectCaseStudy/)
+  assert.doesNotMatch(page, /ProjectModal/)
   assert.match(grid, /filterAll/)
   assert.match(helper, /projectsData/)
   assert.match(read('src/components/ui/footer-section.tsx'), /homeAnchor/)

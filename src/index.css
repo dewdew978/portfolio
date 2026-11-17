@@ -180,3 +180,9 @@ html[lang] .font-mono {
   background-color: #f4f0e8;
   color: #141311;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

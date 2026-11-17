@@ -12,6 +12,13 @@ export const FULLPAGE_SECTIONS = [
 
 const getSectionTop = (element) => element.getBoundingClientRect().top + window.scrollY
 
+// Users who ask the OS for reduced motion get native scrolling and instant jumps
+export const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
+  Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches)
+
+const scrollBehavior = () => (prefersReducedMotion() ? 'auto' : 'smooth')
+
 export function useFullpageScroll(isModalOpen = false) {
   const [activeIdx, setActiveIdx] = useState(0)
   const [scrollProgress, setScrollProgress] = useState(0)
@@ -29,7 +36,7 @@ export function useFullpageScroll(isModalOpen = false) {
     const targetTop = getSectionTop(el)
     window.scrollTo({
       top: targetTop,
-      behavior: 'smooth'
+      behavior: scrollBehavior()
     })
 
     setTimeout(() => {
@@ -101,7 +108,7 @@ export function useFullpageScroll(isModalOpen = false) {
     const target = Math.max(prevTop, prevTop + prev.offsetHeight - vh)
     isTransitioningRef.current = true
     setActiveIdx(idx - 1)
-    window.scrollTo({ top: target, behavior: 'smooth' })
+    window.scrollTo({ top: target, behavior: scrollBehavior() })
     setTimeout(() => {
       isTransitioningRef.current = false
     }, 750)
@@ -112,6 +119,7 @@ export function useFullpageScroll(isModalOpen = false) {
   useEffect(() => {
     const handleWheel = (e) => {
       if (isModalOpen) return // Allow standard scroll inside modal
+      if (prefersReducedMotion()) return // Native scrolling, no section snapping
 
       // Don't intercept if wheel delta is very small or if we are actively transitioning
       if (Math.abs(e.deltaY) < 30) return
@@ -126,6 +134,7 @@ export function useFullpageScroll(isModalOpen = false) {
 
     const handleKeyDown = (e) => {
       if (isModalOpen) return
+      if (prefersReducedMotion()) return
       if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return
 
       if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {

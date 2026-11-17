@@ -18,8 +18,7 @@ test('primary actions adapt safely across phone widths', () => {
   const modal = read('src/components/home/ProjectModal.jsx')
   const grid = read('src/components/projects/ProjectGrid.jsx')
 
-  assert.match(certificate, /grid grid-cols-1 sm:grid-cols-2/)
-  assert.match(certificate, /w-full sm:w-auto/)
+  assert.match(certificate, /inline-flex w-full min-h-11/)
   assert.match(contact, /flex flex-col sm:flex-row/)
   assert.match(contact, /w-full sm:w-auto/)
   assert.match(modal, /flex flex-wrap items-center/)

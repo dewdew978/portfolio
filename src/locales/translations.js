@@ -220,7 +220,6 @@ export const translations = {
       awsCertifications: {
         title: 'Certificate',
         subtitle: 'ผ่านการอบรมและรับรองสมรรถนะด้านระบบคลาวด์และ Cybersecurity จากสถาบันชั้นนำ',
-        viewCertificate: 'ดูใบรับรอง PDF',
         verifyCredential: 'ตรวจสอบ Credential',
         items: [
           {
@@ -488,7 +487,6 @@ export const translations = {
       awsCertifications: {
         title: 'Certificate',
         subtitle: 'Verified credentials across cloud architecture and cybersecurity fundamentals',
-        viewCertificate: 'View PDF Certificate',
         verifyCredential: 'Verify Credential',
         items: [
           {

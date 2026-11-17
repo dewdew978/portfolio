@@ -48,8 +48,8 @@ test('renders accessible credential links and responsive 3-column layout', () =>
   assert.match(certificatesSource, /rel="noopener noreferrer"/)
   assert.match(certificatesSource, /lg:grid-cols-3/)
 
-  // Local PDF rendering must be conditional on cert.certificate
-  assert.match(certificatesSource, /cert\.certificate/)
+  // Certificates link out to the issuer's verification page only (no PDF button)
+  assert.doesNotMatch(certificatesSource, /cert\.certificate|viewCertificate/)
 
   for (const credential of credentials) {
     assert.match(certificatesSource, new RegExp(credential.credentialUrl.replaceAll('/', '\\/').replaceAll('.', '\\.')))

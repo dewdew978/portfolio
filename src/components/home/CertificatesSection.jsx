@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { ExternalLink, FileText, ArrowLeftRight } from 'lucide-react'
+import { ExternalLink, ArrowLeftRight } from 'lucide-react'
 import FadeInSection from '@/components/FadeInSection'
 import { getAssetUrl } from '@/utils/url'
 import { useLanguage } from '@/context/LanguageContext'
@@ -10,7 +10,6 @@ const CERTIFICATIONS = [
     badgeImage: '/assets/certificates/aws-cloud-foundations.png',
     certImage: '/assets/certificates/aws-cloud-foundations-cert.png',
     image: '/assets/certificates/aws-cloud-foundations.png',
-    certificate: '/assets/certificates/aws-cloud-foundations.pdf',
     credentialUrl: 'https://www.credly.com/go/ZDQCsvZy',
   },
   {
@@ -18,7 +17,6 @@ const CERTIFICATIONS = [
     badgeImage: '/assets/certificates/aws-cloud-architecting.png',
     certImage: '/assets/certificates/aws-cloud-architecting-cert.png',
     image: '/assets/certificates/aws-cloud-architecting.png',
-    certificate: '/assets/certificates/aws-cloud-architecting.pdf',
     credentialUrl: 'https://www.credly.com/go/BbT284Yr',
   },
   {
@@ -141,40 +139,17 @@ export default function CertificatesSection() {
                     {content.description}
                   </p>
 
-                  {cert.certificate ? (
-                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      <a
-                        href={getAssetUrl(cert.certificate)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex w-full sm:w-auto min-h-11 items-center justify-center gap-2 rounded-xl bg-zinc-900 px-4 py-2.5 text-center text-sm font-semibold text-white dark:bg-white dark:text-zinc-900"
-                      >
-                        <FileText className="h-4 w-4 shrink-0" />
-                        {copy.viewCertificate}
-                      </a>
-                      <a
-                        href={cert.credentialUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex w-full sm:w-auto min-h-11 items-center justify-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-center text-sm font-semibold dark:border-zinc-700"
-                      >
-                        {copy.verifyCredential}
-                        <ExternalLink className="h-4 w-4 shrink-0" />
-                      </a>
-                    </div>
-                  ) : (
-                    <div className="mt-6">
-                      <a
-                        href={cert.credentialUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex w-full min-h-11 items-center justify-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-center text-sm font-semibold dark:border-zinc-700"
-                      >
-                        {copy.verifyCredential}
-                        <ExternalLink className="h-4 w-4 shrink-0" />
-                      </a>
-                    </div>
-                  )}
+                  <div className="mt-auto pt-6">
+                    <a
+                      href={cert.credentialUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-full min-h-11 items-center justify-center gap-2 rounded-xl border border-zinc-300 px-4 py-2.5 text-center text-sm font-semibold dark:border-zinc-700"
+                    >
+                      {copy.verifyCredential}
+                      <ExternalLink className="h-4 w-4 shrink-0" />
+                    </a>
+                  </div>
                 </div>
               </article>
             </FadeInSection>

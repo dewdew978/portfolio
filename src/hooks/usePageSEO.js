@@ -33,7 +33,7 @@ export function usePageSEO({ title, description, canonicalPath }) {
     if (canonicalPath !== undefined) {
       const canonicalTag = document.querySelector('link[rel="canonical"]')
       if (canonicalTag) {
-        const baseUrl = 'https://dewdew978.github.io/portfolio'
+        const baseUrl = 'https://pawarit.tech'
         const fullUrl = canonicalPath ? `${baseUrl}/${canonicalPath.replace(/^\//, '')}` : `${baseUrl}/`
         canonicalTag.setAttribute('href', fullUrl)
       }

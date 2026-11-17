@@ -17,7 +17,7 @@ test('index.html contains comprehensive SEO tags for personal branding', () => {
   assert.match(html, /<meta name="google-site-verification" content="y2G3DkCRNnwlofSIuaDwhAGATrReT9b4MJpwYIIUCVY"\s*\/?>/)
 
   // Canonical tag
-  assert.match(html, /<link rel="canonical" href="https:\/\/dewdew978\.github\.io\/portfolio\/"\s*\/?>/)
+  assert.match(html, /<link rel="canonical" href="https:\/\/pawarit\.tech\/"\s*\/?>/)
 
   // Meta author & robots
   assert.match(html, /<meta name="author" content="Pawarit Pansing[^"]*"\s*\/?>/)
@@ -35,15 +35,15 @@ test('index.html contains comprehensive SEO tags for personal branding', () => {
   // Open Graph
   assert.match(html, /<meta property="og:title"/)
   assert.match(html, /<meta property="og:description"/)
-  assert.match(html, /<meta property="og:url" content="https:\/\/dewdew978\.github\.io\/portfolio\/"\s*\/?>/)
-  assert.match(html, /<meta property="og:image" content="https:\/\/dewdew978\.github\.io\/portfolio\/og-image\.jpg"\s*\/?>/)
+  assert.match(html, /<meta property="og:url" content="https:\/\/pawarit\.tech\/"\s*\/?>/)
+  assert.match(html, /<meta property="og:image" content="https:\/\/pawarit\.tech\/og-image\.jpg"\s*\/?>/)
   assert.match(html, /<meta property="og:site_name" content="Pawarit Pansing[^"]*Portfolio"\s*\/?>/)
 
   // Twitter cards
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"\s*\/?>/)
   assert.match(html, /<meta name="twitter:title"/)
   assert.match(html, /<meta name="twitter:description"/)
-  assert.match(html, /<meta name="twitter:image" content="https:\/\/dewdew978\.github\.io\/portfolio\/og-image\.jpg"\s*\/?>/)
+  assert.match(html, /<meta name="twitter:image" content="https:\/\/pawarit\.tech\/og-image\.jpg"\s*\/?>/)
 
   // JSON-LD Structured Data
   assert.match(html, /<script type="application\/ld\+json">/)
@@ -78,15 +78,15 @@ test('public/robots.txt exists and allows indexing with sitemap reference', () =
   const robots = read('public/robots.txt')
   assert.match(robots, /User-agent:\s*\*/)
   assert.match(robots, /Allow:\s*\//)
-  assert.match(robots, /Sitemap:\s*https:\/\/dewdew978\.github\.io\/portfolio\/sitemap\.xml/)
+  assert.match(robots, /Sitemap:\s*https:\/\/pawarit\.tech\/sitemap\.xml/)
 })
 
 test('public/sitemap.xml exists and defines routes', () => {
   assert.ok(existsSync(new URL('../public/sitemap.xml', import.meta.url)))
   const sitemap = read('public/sitemap.xml')
   assert.match(sitemap, /<urlset\s+xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9"/)
-  assert.match(sitemap, /<loc>https:\/\/dewdew978\.github\.io\/portfolio\/<\/loc>/)
-  assert.match(sitemap, /<loc>https:\/\/dewdew978\.github\.io\/portfolio\/projects<\/loc>/)
+  assert.match(sitemap, /<loc>https:\/\/pawarit\.tech\/<\/loc>/)
+  assert.match(sitemap, /<loc>https:\/\/pawarit\.tech\/projects<\/loc>/)
 })
 
 test('pages use usePageSEO hook for dynamic titles and meta descriptions', () => {
@@ -95,4 +95,13 @@ test('pages use usePageSEO hook for dynamic titles and meta descriptions', () =>
   const projectsPage = read('src/pages/ProjectsPage.jsx')
   assert.match(homePage, /usePageSEO/)
   assert.match(projectsPage, /usePageSEO/)
+})
+
+test('site is built for the root of the pawarit.tech custom domain', () => {
+  assert.match(read('vite.config.js'), /base: '\/'/)
+  assert.equal(read('public/CNAME').trim(), 'pawarit.tech')
+  assert.match(read('public/robots.txt'), /Sitemap: https:\/\/pawarit\.tech\/sitemap\.xml/)
+  for (const file of ['index.html', 'public/sitemap.xml', 'public/robots.txt', 'src/hooks/usePageSEO.js']) {
+    assert.doesNotMatch(read(file), /dewdew978\.github\.io\/portfolio/, file)
+  }
 })

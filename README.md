@@ -6,7 +6,7 @@
 ---
 
 ## 🚀 Live Demo & Links
-- **Portfolio Website:** [dewdew978.github.io/portfolio](https://dewdew978.github.io/portfolio/)
+- **Portfolio Website:** [pawarit.tech](https://pawarit.tech/)
 - **GitHub Repository:** [github.com/dewdew978/portfolio](https://github.com/dewdew978/portfolio)
 - **LinkedIn Profile:** [linkedin.com/in/pawarit-pansing-5744a435b](https://www.linkedin.com/in/pawarit-pansing-5744a435b/)
 
@@ -17,7 +17,7 @@
 ```bash
 npm install
 npm run dev          # local dev server at http://localhost:5173/
-npm run build        # production build → dist/ (base path /portfolio/)
+npm run build        # production build → dist/ (served from the domain root)
 npm run preview      # serve the production build locally
 ```
 
@@ -54,7 +54,7 @@ WEB_PORT/
 │   └── main.jsx                  # Entry: ErrorBoundary → Router → LanguageProvider
 ├── legacy/                       # Archived pre-React static site
 ├── index.html
-└── vite.config.js                # base = /portfolio/ in production, @ → src alias
+└── vite.config.js                # base = / (custom domain root), @ → src alias
 ```
 
 ---
@@ -70,9 +70,11 @@ WEB_PORT/
 
 ## 🚢 Deployment
 
-The site is deployed to **GitHub Pages** at `/portfolio/` by `.github/workflows/deploy.yml` on every push to `main`.
+The site is deployed to **GitHub Pages** on the custom domain **pawarit.tech** by `.github/workflows/deploy.yml` on every push to `main`.
 
-- `vite.config.js` sets `base: '/portfolio/'` for production builds, and the router uses `import.meta.env.BASE_URL` as its basename.
+- `vite.config.js` sets `base: '/'`, and the router uses `import.meta.env.BASE_URL` as its basename.
+- The custom domain is configured in the repository's Pages settings; `public/CNAME` records it too.
+- DNS at name.com: four `A` records on the apex to GitHub Pages (185.199.108–111.153) and a `CNAME` for `www` → `dewdew978.github.io`.
 - Always reference files in `public/` through `getAssetUrl('/path')` so they resolve under the base path.
 - `scripts/postbuild.js` copies `index.html` to `404.html` for GitHub Pages SPA fallback support.
 

@@ -1,7 +1,7 @@
 /**
  * Resolves a public asset path with Vite's base URL
  * @param {string} path - e.g. '/profiledew.jpg' or 'profiledew.jpg'
- * @returns {string} - e.g. '/portfolio/profiledew.jpg'
+ * @returns {string} - e.g. '/profiledew.jpg' (prefixed with the base path when one is set)
  */
 export function getAssetUrl(path) {
   if (!path) return ''

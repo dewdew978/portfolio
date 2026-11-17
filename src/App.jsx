@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage'
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'))
 const Preloader = lazy(() => import('./components/ui/Preloader'))
 import ScrollToTop from './components/ui/ScrollToTop'
+import PageViewTracker from './components/PageViewTracker'
 
 const PRELOADER_SEEN_KEY = 'pawarit_has_seen_preloader'
 
@@ -55,6 +56,7 @@ export default function App() {
         </Suspense>
       )}
       <ScrollToTop />
+      <PageViewTracker />
       <Routes>
         <Route path="/" element={<HomePage theme={theme} setTheme={setTheme} />} />
         <Route path="/projects" element={<Suspense fallback={<div className="min-h-screen bg-zinc-50 dark:bg-zinc-950" />}><ProjectsPage theme={theme} setTheme={setTheme} /></Suspense>} />

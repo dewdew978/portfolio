@@ -81,12 +81,32 @@ test('public/robots.txt exists and allows indexing with sitemap reference', () =
   assert.match(robots, /Sitemap:\s*https:\/\/pawarit\.tech\/sitemap\.xml/)
 })
 
-test('public/sitemap.xml exists and defines routes', () => {
-  assert.ok(existsSync(new URL('../public/sitemap.xml', import.meta.url)))
-  const sitemap = read('public/sitemap.xml')
-  assert.match(sitemap, /<urlset\s+xmlns="http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9"/)
-  assert.match(sitemap, /<loc>https:\/\/pawarit\.tech\/<\/loc>/)
-  assert.match(sitemap, /<loc>https:\/\/pawarit\.tech\/projects<\/loc>/)
+test('sitemap.xml is generated at build time with every route', () => {
+  const postbuild = read('scripts/postbuild.js')
+  assert.match(postbuild, /http:\/\/www\.sitemaps\.org\/schemas\/sitemap\/0\.9/)
+  assert.match(postbuild, /\$\{SITE_URL\}\/projects\/\$\{key\}\//)
+  assert.match(postbuild, /lastmod/)
+  assert.ok(!existsSync(new URL('../public/sitemap.xml', import.meta.url)), 'static sitemap would go stale')
+})
+
+test('build writes a real HTML file for each route so crawlers get HTTP 200', () => {
+  const postbuild = read('scripts/postbuild.js')
+  assert.match(postbuild, /writeRoute\(\s*'projects'/)
+  assert.match(postbuild, /writeRoute\(\s*`projects\/\$\{key\}`/)
+  assert.match(postbuild, /404\.html/)
+  for (const tag of ['canonical', 'og:url', 'og:title', 'og:description', 'twitter:title', 'twitter:description']) {
+    assert.ok(postbuild.includes(tag), tag)
+  }
+})
+
+test('case studies use clean /projects/<id> URLs and old ?id links redirect', () => {
+  const app = read('src/App.jsx')
+  const page = read('src/pages/ProjectsPage.jsx')
+  assert.match(app, /path="\/projects\/:projectId"/)
+  assert.match(page, /navigate\(`\/projects\/\$\{entry\[0\]\}\/`\)/)
+  assert.match(page, /<Navigate to=\{`\/projects\/\$\{legacyProjectId\}\/`\} replace \/>/)
+  assert.match(page, /canonicalPath: selectedProject \? `projects\/\$\{/)
+  assert.doesNotMatch(page, /setSearchParams|`projects\?id=/)
 })
 
 test('pages use usePageSEO hook for dynamic titles and meta descriptions', () => {
@@ -101,7 +121,7 @@ test('site is built for the root of the pawarit.tech custom domain', () => {
   assert.match(read('vite.config.js'), /base: '\/'/)
   assert.equal(read('public/CNAME').trim(), 'pawarit.tech')
   assert.match(read('public/robots.txt'), /Sitemap: https:\/\/pawarit\.tech\/sitemap\.xml/)
-  for (const file of ['index.html', 'public/sitemap.xml', 'public/robots.txt', 'src/hooks/usePageSEO.js']) {
+  for (const file of ['index.html', 'public/robots.txt', 'src/hooks/usePageSEO.js', 'scripts/postbuild.js']) {
     assert.doesNotMatch(read(file), /dewdew978\.github\.io\/portfolio/, file)
   }
 })

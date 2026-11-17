@@ -17,7 +17,7 @@
 ```bash
 npm install
 npm run dev          # local dev server at http://localhost:5173/
-npm run build        # production build → dist/ (served from the domain root)
+npm run build        # production build → dist/, then scripts/postbuild.js writes per-route HTML + sitemap.xml
 npm run preview      # serve the production build locally
 ```
 

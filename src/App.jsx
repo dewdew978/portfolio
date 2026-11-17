@@ -60,6 +60,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage theme={theme} setTheme={setTheme} />} />
         <Route path="/projects" element={<Suspense fallback={<div className="min-h-screen bg-zinc-50 dark:bg-zinc-950" />}><ProjectsPage theme={theme} setTheme={setTheme} /></Suspense>} />
+        <Route path="/projects/:projectId" element={<Suspense fallback={<div className="min-h-screen bg-zinc-50 dark:bg-zinc-950" />}><ProjectsPage theme={theme} setTheme={setTheme} /></Suspense>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>

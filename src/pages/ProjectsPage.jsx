@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, Navigate, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import ProjectGrid from '@/components/projects/ProjectGrid'
@@ -11,10 +11,14 @@ import { usePageSEO } from '@/hooks/usePageSEO'
 
 export default function ProjectsPage({ theme, setTheme }) {
   const { t, lang } = useLanguage()
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
+  const { projectId: routeProjectId } = useParams()
+  const navigate = useNavigate()
   const projects = getLocalizedProjects(t)
 
-  const projectId = searchParams.get('id')
+  // Case studies live at /projects/<id>; the old /projects?id=<id> links still work
+  const legacyProjectId = searchParams.get('id')
+  const projectId = routeProjectId || null
   const matchedEntry = projectId
     ? projects.find(([key, p]) => key === projectId || p.id === projectId)
     : null
@@ -23,12 +27,12 @@ export default function ProjectsPage({ theme, setTheme }) {
   const handleSelectProject = (p) => {
     const entry = projects.find(([_, item]) => item.title === p.title)
     if (entry) {
-      setSearchParams({ id: entry[0] })
+      navigate(`/projects/${entry[0]}/`)
     }
   }
 
   const handleCloseProject = () => {
-    setSearchParams({})
+    navigate('/projects/')
   }
 
   React.useEffect(() => {
@@ -48,8 +52,17 @@ export default function ProjectsPage({ theme, setTheme }) {
       : lang === 'th'
       ? `รวมผลงานและเคสศึกษาการวิเคราะห์ข้อมูล ${projects.length} โปรเจกต์ของ ดิว - ปวริศ ปัญสิงห์ (Pawarit Pansing / ปวริศ / ปัญสิงห์)`
       : `Explore ${projects.length} data analytics and business strategy projects by Pawarit Pansing (ปวริศ ปัญสิงห์ - Dew).`,
-    canonicalPath: selectedProject ? `projects?id=${matchedEntry?.[0] || ''}` : 'projects',
+    canonicalPath: selectedProject ? `projects/${matchedEntry?.[0] || ''}/` : 'projects/',
   })
+
+  if (!routeProjectId && legacyProjectId) {
+    return <Navigate to={`/projects/${legacyProjectId}/`} replace />
+  }
+
+  // Unknown project ids fall back to the project list
+  if (routeProjectId && !selectedProject) {
+    return <Navigate to="/projects/" replace />
+  }
 
   // A selected project renders as a full case-study page
   if (selectedProject) {

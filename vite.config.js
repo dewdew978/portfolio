@@ -16,4 +16,15 @@ export default defineConfig(({ mode }) => ({
     },
   },
   assetsInclude: ['**/*.glb'],
+  build: {
+    rollupOptions: {
+      output: {
+        // Long-lived vendor chunks so a content update doesn't bust the library cache
+        manualChunks: {
+          react: ['react', 'react-dom', 'react-router-dom'],
+          motion: ['motion', 'motion/react'],
+        },
+      },
+    },
+  },
 }))

@@ -91,10 +91,10 @@ export default function Navbar({ theme, setTheme }) {
             if (location.pathname !== '/') navigate('/')
             window.scrollTo({ top: 0, behavior: 'smooth' })
           }}
-          className="flex min-h-11 min-w-11 shrink-0 items-center text-lg font-extrabold tracking-tight text-zinc-900 dark:text-white hover:opacity-80 transition-opacity cursor-pointer"
+          className="group/logo flex min-h-11 min-w-11 shrink-0 items-center text-lg font-extrabold tracking-tight text-zinc-900 dark:text-white cursor-pointer"
           aria-label="Pawarit - Home"
         >
-          <PawaritLogo className="text-2xl sm:text-3xl text-zinc-900 dark:text-white" />
+          <PawaritLogo className="text-2xl sm:text-3xl text-zinc-900 dark:text-white transition-colors duration-200 group-hover/logo:text-zinc-500 dark:group-hover/logo:text-zinc-400" />
           <span className="sr-only">Pawarit</span>
         </button>
 

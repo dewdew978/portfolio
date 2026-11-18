@@ -8,22 +8,22 @@ const CERTIFICATIONS = [
   {
     id: 'cloud-foundations',
     badgeImage: '/assets/certificates/aws-cloud-foundations.png',
-    certImage: '/assets/certificates/aws-cloud-foundations-cert.png',
+    certImage: '/assets/certificates/aws-cloud-foundations-cert.webp',
     image: '/assets/certificates/aws-cloud-foundations.png',
     credentialUrl: 'https://www.credly.com/go/ZDQCsvZy',
   },
   {
     id: 'cloud-architecting',
     badgeImage: '/assets/certificates/aws-cloud-architecting.png',
-    certImage: '/assets/certificates/aws-cloud-architecting-cert.png',
+    certImage: '/assets/certificates/aws-cloud-architecting-cert.webp',
     image: '/assets/certificates/aws-cloud-architecting.png',
     credentialUrl: 'https://www.credly.com/go/BbT284Yr',
   },
   {
     id: 'opswat-cybersecurity-fundamentals-associate',
-    badgeImage: '/assets/certificates/opswat-cybersecurity-fundamentals-associate-ocfa.png',
-    certImage: '/assets/certificates/opswat-cybersecurity-fundamentals-associate.png',
-    image: '/assets/certificates/opswat-cybersecurity-fundamentals-associate.png',
+    badgeImage: '/assets/certificates/opswat-cybersecurity-fundamentals-associate-ocfa.webp',
+    certImage: '/assets/certificates/opswat-cybersecurity-fundamentals-associate.webp',
+    image: '/assets/certificates/opswat-cybersecurity-fundamentals-associate.webp',
     credentialUrl: 'https://learn.opswatacademy.com/certificate/I6qeVClKjA',
   },
 ]

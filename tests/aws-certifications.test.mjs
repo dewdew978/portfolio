@@ -24,7 +24,7 @@ const credentials = [
   },
   {
     id: 'opswat-cybersecurity-fundamentals-associate',
-    image: 'public/assets/certificates/opswat-cybersecurity-fundamentals-associate.png',
+    image: 'public/assets/certificates/opswat-cybersecurity-fundamentals-associate.webp',
     pdf: null,
     title: 'OPSWAT Cybersecurity Fundamentals Associate',
     credentialUrl: 'https://learn.opswatacademy.com/certificate/I6qeVClKjA',

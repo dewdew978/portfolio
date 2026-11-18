@@ -8,7 +8,7 @@ export const projectsData = {
     stack: ['JavaScript', 'Recharts', 'JSON Pipelines', 'Vercel'],
     year: '2025–2026',
     badges: ['Web Platform', 'EdTech', 'Analytics', 'Vercel'],
-    image: getAssetUrl('/ExamHubpage.png'),
+    image: getAssetUrl('/ExamHubpage.webp'),
     overview: 'แพลตฟอร์มคลังข้อสอบและจัดการการสอบออนไลน์ ออกแบบมาเพื่อสนับสนุนการเรียนรู้ในระดับอุดมศึกษา รองรับมากกว่า 20+ สาขาวิชาในหมวด Computer Science และ Data Science พร้อมระบบตรวจคำตอบและการวิเคราะห์คะแนนแบบเรียลไทม์',
     architecture: 'สถาปัตยกรรม Full-Stack Web Application บน Vercel Cloud Platform พัฒนาด้วย JavaScript ที่เน้นความเร็วและ Accessibility เชื่อมต่อระบบ Admin CMS จัดการข้อมูลข้อสอบแบบ JSON Pipelines และสร้างระบบวิเคราะห์ข้อมูลคะแนนด้วย Recharts Data Visualizer',
     features: [
@@ -29,7 +29,7 @@ export const projectsData = {
     stack: ['Financial Modeling', 'Valuation', 'Quarto'],
     year: '2025',
     badges: ['Business Strategy', 'Financial Valuation', 'Capital Market', 'Quarto'],
-    image: getAssetUrl('/cmcc.png'),
+    image: getAssetUrl('/cmcc.webp'),
     overview: 'โครงการแข่งขันวิเคราะห์เคสตลาดทุนระดับประเทศ Capital Market Case Competition 2025 สำหรับ Plan B Media เพื่อค้นหาโอกาสทางธุรกิจใหม่และวางแผนกลยุทธ์เชิงรุกสำหรับสื่อนอกบ้าน (Out-of-Home Media) ในยุคดิจิทัล',
     architecture: 'การวิเคราะห์เชิงยุทธศาสตร์ผสมผสานการสร้างแบบจำลองทางการเงิน (Financial Modeling) และการประเมินมูลค่ากิจการ (Enterprise Valuation) พร้อมนำเสนอด้วย Interactive Presentation Deck ที่พัฒนาผ่าน Quarto Framework',
     features: [
@@ -50,7 +50,7 @@ export const projectsData = {
     stack: ['Python', 'OCR', 'SQLite', 'FastAPI', 'Local LLM'],
     year: '2025–2026',
     badges: ['Intelligent System', 'OCR', 'Text-to-SQL', 'Python'],
-    image: getAssetUrl('/assets/projects/intelligent-curriculum-system.png'),
+    image: getAssetUrl('/assets/projects/intelligent-curriculum-system.webp'),
     overview: 'ระบบผู้ช่วยค้นหาข้อมูลหลักสูตรที่สกัดข้อมูลจากเอกสาร มคอ.2 ครอบคลุมหลักสูตร AIT, IT, DSBA และ BIT แล้วเปิดให้ถามตอบข้อมูลด้วยภาษาธรรมชาติ',
     architecture: 'Python OCR pipeline เปรียบเทียบหลาย OCR engines ก่อนจัดโครงสร้างข้อมูลลง SQLite และให้บริการเว็บผ่าน FastAPI โดยใช้ Local LLM แปลงคำถามเป็น SQL และสังเคราะห์คำตอบจากข้อมูลที่ตรวจสอบได้',
     features: [
@@ -71,7 +71,7 @@ export const projectsData = {
     stack: ['React', 'AWS Lambda', 'API Gateway', 'RDS PostgreSQL', 'DynamoDB'],
     year: '2025–2026',
     badges: ['Cloud Platform', 'AWS', 'PostgreSQL', 'React'],
-    image: getAssetUrl('/assets/projects/cloud-sql-playground.png'),
+    image: getAssetUrl('/assets/projects/cloud-sql-playground.webp'),
     overview: 'ต้นแบบพื้นที่ฝึกเขียนและทดลอง SQL บน PostgreSQL โดยไม่ต้องติดตั้งฐานข้อมูล ออกแบบให้ผู้ใช้แต่ละคนมีพื้นที่แบบแยก schema พร้อมชุดข้อมูลและโจทย์ฝึกสำหรับเรียนรู้ผ่านเว็บ โดยหน้าเว็บยังไม่ได้เปิดใช้งานสาธารณะ',
     architecture: 'ต้นแบบ React และ Monaco Editor เชื่อมต่อ API Gateway กับ AWS Lambda ภายใน VPC ใช้ RDS PostgreSQL 16 เป็นฐานข้อมูล พร้อม DynamoDB, Secrets Manager, S3 และ EventBridge โดยบางส่วนยังรอการ deploy และทดสอบกับ API จริง',
     features: [
@@ -92,7 +92,7 @@ export const projectsData = {
     stack: ['Python', 'Pandas', 'NumPy', 'EDA'],
     year: '2025–2026',
     badges: ['Data Analytics', 'Python', 'Pandas', 'EDA', 'Data Viz'],
-    image: getAssetUrl('/assets/images/1.png'),
+    image: getAssetUrl('/assets/images/1.webp'),
     overview: 'โครงการวิเคราะห์ชุดข้อมูลอุบัติเหตุจราจรในสหรัฐอเมริกาขนาดใหญ่ (US Accidents Dataset หลายล้านเรคคอร์ด) เพื่อค้นหาความสัมพันธ์ ปัจจัยเสี่ยง และสร้างโมเดลความรุนแรงของอุบัติเหตุในแต่ละพื้นที่',
     architecture: 'Data Pipeline พัฒนาด้วย Python (Pandas, NumPy) สำหรับการทำ Data Cleansing, Outlier Detection, Feature Engineering และสร้างรายงานข้อมูลเชิงลึกแบบ Interactive Web Report',
     features: [

@@ -19,8 +19,8 @@ test('both repository projects are shared by Featured and All Projects', () => {
 })
 
 test('new project covers are local and new project copy avoids em dashes', () => {
-  assert.equal(existsSync(new URL('../public/assets/projects/intelligent-curriculum-system.png', import.meta.url)), true)
-  assert.equal(existsSync(new URL('../public/assets/projects/cloud-sql-playground.png', import.meta.url)), true)
+  assert.equal(existsSync(new URL('../public/assets/projects/intelligent-curriculum-system.webp', import.meta.url)), true)
+  assert.equal(existsSync(new URL('../public/assets/projects/cloud-sql-playground.webp', import.meta.url)), true)
 
   const projects = read('src/data/projectsData.js')
   const translations = read('src/locales/translations.js')

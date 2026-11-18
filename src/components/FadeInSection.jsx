@@ -72,7 +72,7 @@ export default function FadeInSection({
         transitionDuration: `${duration}ms`,
         transitionDelay: `${delay}ms`,
         transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-        willChange: 'opacity, transform'
+        willChange: isVisible ? 'auto' : 'opacity, transform'
       }}
     >
       {children}

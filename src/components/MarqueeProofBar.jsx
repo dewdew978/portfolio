@@ -14,7 +14,11 @@ const proofItems = [
 
 export default function MarqueeProofBar() {
   return (
-    <div className="relative w-full overflow-hidden py-4 border-y border-zinc-200/70 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-zinc-900/40 backdrop-blur-md">
+    <div
+      role="region"
+      aria-label="Highlights and focus areas"
+      className="relative w-full overflow-hidden py-4 border-y border-zinc-200/70 dark:border-zinc-800/80 bg-zinc-100/50 dark:bg-zinc-900/40 backdrop-blur-md"
+    >
       {/* Left and Right Fade Gradients */}
       <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-zinc-50 dark:from-zinc-950 to-transparent z-10"></div>
       <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-zinc-50 dark:from-zinc-950 to-transparent z-10"></div>

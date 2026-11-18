@@ -62,6 +62,7 @@ export default function HeroSection() {
                   rel="noopener noreferrer"
                   className="w-11 h-11 flex items-center justify-center rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:border-zinc-300 dark:hover:border-zinc-700 hover:-translate-y-0.5 shadow-sm transition-all"
                   title="GitHub"
+                  aria-label="GitHub"
                 >
                   <Github size={20} />
                 </a>
@@ -73,6 +74,7 @@ export default function HeroSection() {
                   rel="noopener noreferrer"
                   className="w-11 h-11 flex items-center justify-center rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:border-zinc-400 dark:hover:border-zinc-600 hover:-translate-y-0.5 shadow-sm transition-all"
                   title="LinkedIn"
+                  aria-label="LinkedIn"
                 >
                   <Linkedin size={20} />
                 </a>
@@ -82,6 +84,7 @@ export default function HeroSection() {
                   href="mailto:pawaritpansing@gmail.com"
                   className="w-11 h-11 flex items-center justify-center rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white hover:border-zinc-400 dark:hover:border-zinc-600 hover:-translate-y-0.5 shadow-sm transition-all"
                   title="Email"
+                  aria-label="Email"
                 >
                   <Mail size={20} />
                 </a>

@@ -8,10 +8,16 @@ export default function ContactSection() {
   const [copiedEmail, setCopiedEmail] = useState(false)
   const { t } = useLanguage()
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText('pawaritpansing@gmail.com')
-    setCopiedEmail(true)
-    setTimeout(() => setCopiedEmail(false), 2000)
+  const handleCopyEmail = async () => {
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText('pawaritpansing@gmail.com')
+        setCopiedEmail(true)
+        setTimeout(() => setCopiedEmail(false), 2000)
+      }
+    } catch (e) {
+      console.warn('Clipboard write failed:', e)
+    }
   }
 
   return (

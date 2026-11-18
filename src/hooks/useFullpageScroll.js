@@ -135,9 +135,9 @@ export function useFullpageScroll(isModalOpen = false) {
     const handleKeyDown = (e) => {
       if (isModalOpen) return
       if (prefersReducedMotion()) return
-      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA')) return
+      if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'BUTTON' || e.target.tagName === 'A' || e.target.isContentEditable)) return
 
-      if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
         if (snapInDirection(1)) e.preventDefault()
       } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
         if (snapInDirection(-1)) e.preventDefault()

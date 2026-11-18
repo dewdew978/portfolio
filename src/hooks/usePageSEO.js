@@ -31,12 +31,16 @@ export function usePageSEO({ title, description, canonicalPath }) {
     }
 
     if (canonicalPath !== undefined) {
+      const baseUrl = 'https://pawarit.tech'
+      const fullUrl = canonicalPath ? `${baseUrl}/${canonicalPath.replace(/^\//, '')}` : `${baseUrl}/`
       const canonicalTag = document.querySelector('link[rel="canonical"]')
       if (canonicalTag) {
-        const baseUrl = 'https://pawarit.tech'
-        const fullUrl = canonicalPath ? `${baseUrl}/${canonicalPath.replace(/^\//, '')}` : `${baseUrl}/`
         canonicalTag.setAttribute('href', fullUrl)
       }
+      const ogUrlTag = document.querySelector('meta[property="og:url"]')
+      if (ogUrlTag) ogUrlTag.setAttribute('content', fullUrl)
+      const twitterUrlTag = document.querySelector('meta[name="twitter:url"]')
+      if (twitterUrlTag) twitterUrlTag.setAttribute('content', fullUrl)
     }
   }, [title, description, canonicalPath])
 }

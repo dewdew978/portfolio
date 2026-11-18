@@ -17,6 +17,9 @@ export default function ProjectModal({ project, onClose }) {
   const closeButtonRef = useRef(null)
 
   useEffect(() => {
+    const originalOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
     const previousActiveElement = document.activeElement
     closeButtonRef.current?.focus()
 
@@ -47,6 +50,7 @@ export default function ProjectModal({ project, onClose }) {
 
     document.addEventListener('keydown', handleKeyDown)
     return () => {
+      document.body.style.overflow = originalOverflow
       document.removeEventListener('keydown', handleKeyDown)
       previousActiveElement?.focus?.()
     }
@@ -113,15 +117,17 @@ export default function ProjectModal({ project, onClose }) {
         </div>
 
         <footer className="flex flex-wrap items-center gap-x-6 gap-y-1 border-t border-zinc-200 px-5 py-4 sm:px-8 dark:border-zinc-800">
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-zinc-950 underline decoration-zinc-300 underline-offset-4 transition hover:decoration-zinc-950 dark:text-white dark:decoration-zinc-700 dark:hover:decoration-white"
-          >
-            {project.liveLabel || t.projects.modal.launchDemo}
-            <ExternalLink size={14} />
-          </a>
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-zinc-950 underline decoration-zinc-300 underline-offset-4 transition hover:decoration-zinc-950 dark:text-white dark:decoration-zinc-700 dark:hover:decoration-white"
+            >
+              {project.liveLabel || t.projects.modal.launchDemo}
+              <ExternalLink size={14} />
+            </a>
+          )}
           {project.gitHubUrl && (
             <a
               href={project.gitHubUrl}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ChevronUp } from 'lucide-react'
 import { FULLPAGE_SECTIONS } from '../hooks/useFullpageScroll'
+import { useLanguage } from '@/context/LanguageContext'
 
 export default function FullpageNavigator({
   activeIdx = 0,
@@ -8,6 +9,7 @@ export default function FullpageNavigator({
   scrollProgress = 0,
   sections = FULLPAGE_SECTIONS
 }) {
+  const { lang } = useLanguage()
   const [showBackToTop, setShowBackToTop] = useState(false)
 
   useEffect(() => {
@@ -70,7 +72,7 @@ export default function FullpageNavigator({
                 }`}
               >
                 
-                <span>{sec.thai}</span>
+                <span>{lang === 'th' ? sec.thai : sec.label}</span>
               </span>
 
               {/* Indicator Dot / Pill */}

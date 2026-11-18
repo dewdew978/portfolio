@@ -54,7 +54,7 @@ export default function Navbar({ theme, setTheme }) {
         const element = document.getElementById(id)
         if (element) {
           const navHeight = 90
-          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY
           window.scrollTo({
             top: elementPosition - navHeight,
             behavior: 'smooth'
@@ -67,7 +67,7 @@ export default function Navbar({ theme, setTheme }) {
     const element = document.getElementById(id)
     if (element) {
       const navHeight = 90
-      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY
       window.scrollTo({
         top: elementPosition - navHeight,
         behavior: 'smooth'
@@ -175,7 +175,8 @@ export default function Navbar({ theme, setTheme }) {
           {/* Mobile Hamburger Button */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="เมนูนำทาง"
+            aria-label={lang === 'th' ? 'เมนูนำทาง' : 'Navigation menu'}
+            aria-expanded={menuOpen}
             className="flex lg:hidden min-h-11 min-w-11 items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-800/80 text-zinc-700 dark:text-zinc-200 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors"
           >
             {menuOpen ? <X size={18} /> : <Menu size={18} />}

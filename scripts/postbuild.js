@@ -19,7 +19,7 @@ const indexPath = path.join(distDir, 'index.html')
 
 const SITE_URL = 'https://pawarit.tech'
 const DEFAULT_LANG = 'th'
-const NAME = 'Pawarit Pansing (ปวริศ ปัญสิงห์ - ดิว)'
+const NAME = 'Pawarit Pansing (ดิว)'
 
 const escapeAttr = (value) =>
   String(value)

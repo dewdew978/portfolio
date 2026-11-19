@@ -43,10 +43,10 @@ export default function ProjectsPage({ theme, setTheme }) {
 
   usePageSEO({
     title: selectedProject
-      ? `${selectedProject.title} | Pawarit Pansing (ปวริศ ปัญสิงห์ - ดิว)`
+      ? `${selectedProject.title} | Pawarit Pansing (${lang === 'th' ? 'ดิว' : 'Dew'})`
       : lang === 'th'
-      ? 'ผลงานและโปรเจกต์ทั้งหมด (Projects) | Pawarit Pansing (ปวริศ ปัญสิงห์ - ดิว)'
-      : 'All Projects & Case Studies | Pawarit Pansing (ปวริศ ปัญสิงห์ - Dew)',
+      ? 'ผลงานและโปรเจกต์ทั้งหมด (Projects) | Pawarit Pansing (ดิว)'
+      : 'All Projects & Case Studies | Pawarit Pansing (Dew)',
     description: selectedProject
       ? `${selectedProject.title}: ${selectedProject.overview}`
       : lang === 'th'

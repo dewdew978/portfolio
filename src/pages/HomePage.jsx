@@ -21,8 +21,8 @@ export default function HomePage({ theme, setTheme }) {
 
   usePageSEO({
     title: lang === 'th'
-      ? 'Pawarit Pansing (ปวริศ ปัญสิงห์ - ดิว) | พอร์ตโฟลิโอ Data & Business Analyst'
-      : 'Pawarit Pansing (ปวริศ ปัญสิงห์ - Dew) | Data & Business Analyst Portfolio',
+      ? 'Pawarit Pansing (ดิว) | พอร์ตโฟลิโอ Data & Business Analyst'
+      : 'Pawarit Pansing (Dew) | Data & Business Analyst Portfolio',
     description: lang === 'th'
       ? 'พอร์ตโฟลิโอทางการของ ดิว - ปวริศ ปัญสิงห์ (Pawarit Pansing / Pawarit / ปวริศ / ปัญสิงห์) – Data Analyst & Business Analyst KMITL รวมผลงานวิเคราะห์ข้อมูล แดชบอร์ด Power BI, SQL, Python'
       : 'Official portfolio of Pawarit Pansing (ปวริศ ปัญสิงห์ / Dew) – Data Analyst & Business Analyst showcasing data analytics, Power BI dashboards, SQL, and business insights.',
